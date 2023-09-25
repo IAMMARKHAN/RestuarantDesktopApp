@@ -36,6 +36,7 @@ namespace Restuarant_App
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //Code Logic
             int entered = int.Parse(textBox2.Text);
             if(entered==code)
             {
