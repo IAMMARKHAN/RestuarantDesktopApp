@@ -23,11 +23,12 @@ namespace Restuarant_App
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
+            //Graphs Implemented Below
+
             // Line Chart (chartLine)
             chartLine.Titles.Add("Line Graph");
             chartLine.ChartAreas[0].AxisX.Title = "Days";
             chartLine.ChartAreas[0].AxisY.Title = "Table Reservation";
-
             Series seriesLine = chartLine.Series.Add("Reservation");
             seriesLine.Points.AddXY("Point 1", 10);
             seriesLine.Points.AddXY("Point 2", 20);
@@ -39,7 +40,6 @@ namespace Restuarant_App
             chartBar.Titles.Add("Area Chart");
             chartBar.ChartAreas[0].AxisX.Title = "Days";
             chartBar.ChartAreas[0].AxisY.Title = "Orders Count";
-
             Series seriesBar = chartBar.Series.Add("Orders");
             seriesBar.Points.AddXY("Category 1", 10);
             seriesBar.Points.AddXY("Category 2", 20);
@@ -64,8 +64,8 @@ namespace Restuarant_App
                 var con = Configuration.getInstance().getConnection();
                 string query = "SELECT COUNT(*) FROM dbo.[tables]"; // Replace 'user' with your table name
                 SqlCommand command = new SqlCommand(query, con);
-                    int userCount = Convert.ToInt32(command.ExecuteScalar());
-                    return userCount;
+                int userCount = Convert.ToInt32(command.ExecuteScalar());
+                return userCount;
                 
             
         }
@@ -74,17 +74,6 @@ namespace Restuarant_App
 
             var con = Configuration.getInstance().getConnection();
             string query = "SELECT COUNT(*) FROM dbo.[categories]"; // Replace 'user' with your table name
-            SqlCommand command = new SqlCommand(query, con);
-            int userCount = Convert.ToInt32(command.ExecuteScalar());
-            return userCount;
-
-
-        }
-        public int GetOrdersCount()
-        {
-
-            var con = Configuration.getInstance().getConnection();
-            string query = "SELECT COUNT(*) FROM dbo.[orders]"; // Replace 'user' with your table name
             SqlCommand command = new SqlCommand(query, con);
             int userCount = Convert.ToInt32(command.ExecuteScalar());
             return userCount;
@@ -103,6 +92,17 @@ namespace Restuarant_App
 
         }
 
+        public int GetOrdersCount()
+        {
+
+            var con = Configuration.getInstance().getConnection();
+            string query = "SELECT COUNT(*) FROM dbo.[orders]"; // Replace 'user' with your table name
+            SqlCommand command = new SqlCommand(query, con);
+            int userCount = Convert.ToInt32(command.ExecuteScalar());
+            return userCount;
+
+
+        }
         private void label8_Click(object sender, EventArgs e)
         {
 
