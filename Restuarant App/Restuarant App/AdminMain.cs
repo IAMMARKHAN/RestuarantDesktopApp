@@ -26,6 +26,7 @@ namespace Restuarant_App
 
         private void AdminMain_Load(object sender, EventArgs e)
         {
+            //Remove Borders of the Buttons
             button2.FlatAppearance.BorderSize = 0;
             button3.FlatAppearance.BorderSize = 0;
             button4.FlatAppearance.BorderSize = 0;
@@ -49,6 +50,11 @@ namespace Restuarant_App
 
 
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            addControls(new Dashboard());
+            label3.Text = "Dashboard";
+        }
         public void addControls(Form F)
         {
             centerPanel.Controls.Clear();
@@ -58,11 +64,6 @@ namespace Restuarant_App
             F.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            addControls(new Dashboard());
-            label3.Text = "Dashboard";
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
