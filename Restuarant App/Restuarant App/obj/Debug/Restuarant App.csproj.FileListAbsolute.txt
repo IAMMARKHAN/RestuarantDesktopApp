@@ -1,0 +1,47 @@
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\bin\Debug\Restuarant App.exe.config
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\bin\Debug\Restuarant App.exe
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\bin\Debug\Restuarant App.pdb
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant App.csproj.AssemblyReference.cache
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant App.csproj.SuggestedBindingRedirects.cache
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.ForgotPassword.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Login.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Properties.Resources.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.SignUp.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant App.csproj.GenerateResource.cache
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant App.csproj.CoreCompileInputs.cache
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant App.exe
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant App.pdb
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.RecoverPassword.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.ResetPassword.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.AdminMain.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CustomerMain.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Dashboard.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Categories.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CDeals.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CMenu.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Menu.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Orders.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Pos.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Profile.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Reports.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Staff.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Tables.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CCart.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.COrders.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CProfile.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CReserve.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CSuggestion.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Home.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.NewCategory.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.EditCategory.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.NewTable.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.EditTable.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.EditStaff.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.NewStaff.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.EditMenu.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.NewMenu.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Account.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\bin\Debug\BouncyCastle.Crypto.dll
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\bin\Debug\itextsharp.dll
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\bin\Debug\itextsharp.xml
+D:\SEMESTER 5\SE LAB\Developer\Project\Restuarant App\Restuarant App\obj\Debug\Restuarant App.csproj.CopyComplete
