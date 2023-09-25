@@ -14,6 +14,7 @@ namespace Restuarant_App
 {
     public partial class Pos : Form
     {
+        public string orderType="";
         public Pos()
         {
             InitializeComponent();
@@ -225,6 +226,73 @@ namespace Restuarant_App
             label5.Text = "0";
             label7.Text = "0";
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            orderType = "Dine In";
+            button2.BackColor = Color.White;
+            button2.ForeColor = Color.FromArgb(50, 55, 130);
+
+            // Reset the appearance of the other buttons
+            // Reset the appearance of the other buttons
+            button1.BackColor = Color.FromArgb(50, 55, 130); ;
+            button1.ForeColor = Color.White;
+            button3.BackColor = Color.FromArgb(50, 55, 130); ;
+            button3.ForeColor = Color.White;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            orderType = "Delivery";
+            button1.BackColor = Color.White;
+            button1.ForeColor = Color.FromArgb(50, 55, 130);
+
+            // Reset the appearance of the other buttons
+            // Reset the appearance of the other buttons
+            button2.BackColor = Color.FromArgb(50, 55, 130); ;
+            button2.ForeColor = Color.White;
+            button3.BackColor = Color.FromArgb(50, 55, 130); ;
+            button3.ForeColor = Color.White;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            orderType = "Take Away";
+            button3.BackColor = Color.White;
+            button3.ForeColor = Color.FromArgb(50, 55, 130);
+
+            // Reset the appearance of the other buttons
+            button1.BackColor = Color.FromArgb(50, 55, 130); ;
+            button1.ForeColor = Color.White;
+            button2.BackColor = Color.FromArgb(50, 55, 130); ;
+            button2.ForeColor = Color.White;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if(orderType=="")
+            {
+                MessageBox.Show("Please select the order type !");
+            }
+            if (textBox1.Text == "" || textBox1.Text=="Enter Customer Name")
+            {
+                MessageBox.Show("Enter name of customer !");
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar))
+            {
+                // Check if the entered character is not an alphabet
+                if (!char.IsLetter(e.KeyChar))
+                {
+                    e.Handled = true; // Block the character if it's not an alphabet
+                }
+            }
         }
     }
 }
