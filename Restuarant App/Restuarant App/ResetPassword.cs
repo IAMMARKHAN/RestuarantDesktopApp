@@ -33,6 +33,7 @@ namespace Restuarant_App
         }
         private void button3_Click(object sender, EventArgs e)
         {
+            //All Login
             if(textBox2.Text !="")
             {
                 string updateCommandText = "UPDATE dbo.[user] SET password = @NewPassword WHERE email = @Email";
