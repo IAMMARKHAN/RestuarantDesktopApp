@@ -287,7 +287,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 44);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Restuarant Management System";
+            this.label1.Text = "Restuarant Management Application";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
