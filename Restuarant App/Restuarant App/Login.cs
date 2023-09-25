@@ -40,6 +40,7 @@ namespace Restuarant_App
             this.Hide();
             ForgotPassword S = new ForgotPassword();
             S.Show();
+            //Screen Show
         }
 
         private void button4_Click(object sender, EventArgs e)
