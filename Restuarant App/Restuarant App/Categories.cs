@@ -75,15 +75,15 @@ namespace Restuarant_App
 
         }
       
-        private void button5_Click_1(object sender, EventArgs e)
-        {
-            NewCategory S = new NewCategory();
-            S.ShowDialog();
-        }
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            NewCategory S = new NewCategory();
+            S.ShowDialog();
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -108,7 +108,6 @@ namespace Restuarant_App
                         if (rowsAffected > 0)
                         {
                             // Successfully deleted from the database
-                            // You can also remove the row from the DataGridView if needed
                             dataGridView1.Rows.RemoveAt(rowIndex);
                         }
                         else
@@ -119,7 +118,6 @@ namespace Restuarant_App
                     }
                     catch (Exception ex)
                     {
-                        // Handle any exceptions that may occur during the database operation
                         MessageBox.Show("Error: " + ex.Message);
                     }
                     
