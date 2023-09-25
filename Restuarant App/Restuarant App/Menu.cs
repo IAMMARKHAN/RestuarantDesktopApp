@@ -20,16 +20,17 @@ namespace Restuarant_App
             InitializeComponent();
         }
 
+        private void Menu_Load(object sender, EventArgs e)
+        {
+            //To View All In DataGridView
+            PopulateDataGridView();
+
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
             NewMenu M = new NewMenu();
             M.ShowDialog();
-        }
-
-        private void Menu_Load(object sender, EventArgs e)
-        {
-            PopulateDataGridView();
-
         }
         public void PopulateDataGridView()
         {
