@@ -56,8 +56,6 @@ namespace Restuarant_App
 
         public void PopulateDataGridView1(string name)
         {
-            // Replace with your connection string
-
             try
             {
                 var con = Configuration.getInstance().getConnection();
@@ -190,16 +188,10 @@ namespace Restuarant_App
             {
                 int rowIndex = e.RowIndex; // Get the clicked row index
                 int idToDelete = Convert.ToInt32(dataGridView2.Rows[rowIndex].Cells["Id"].Value);
-
-                // Ask for confirmation
                 DialogResult result = MessageBox.Show("Add This Item ? ", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-
-                    // Assuming you have a method to retrieve data from the menu table based on 'idToDelete'
-                    // Replace 'YourDatabaseMethod' with your actual database method
                     var itemData = FindMethod(idToDelete);
-
                     if (itemData.Name != null)
                     {
                         string itemName = itemData.Name;
@@ -225,6 +217,25 @@ namespace Restuarant_App
             dataGridView1.Rows.Clear();
             label5.Text = "0";
             label7.Text = "0";
+
+        }
+        public void Populate(string name)
+        {
+            try
+            {
+                var con = Configuration.getInstance().getConnection();
+                string query = "SELECT Id,Name,Category,Price,Size FROM menu Where Category=@a";
+                SqlCommand command = new SqlCommand(query, con);
+                command.Parameters.AddWithValue("@a", name);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                dataGridView2.DataSource = dataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
 
         }
 
@@ -277,7 +288,11 @@ namespace Restuarant_App
             {
                 MessageBox.Show("Please select the order type !");
             }
-            if (textBox1.Text == "" || textBox1.Text=="Enter Customer Name")
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Enter name of customer !");
+            }
+            if (textBox1.Text == "Enter Customer Name")
             {
                 MessageBox.Show("Enter name of customer !");
             }
