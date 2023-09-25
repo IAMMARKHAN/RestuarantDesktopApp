@@ -35,6 +35,7 @@ namespace Restuarant_App
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //From Textboxes Into Variables
             string name = textBox2.Text.Trim();
             string email = textBox1.Text.Trim();
             string password = textBox4.Text;
