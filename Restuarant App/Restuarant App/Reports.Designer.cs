@@ -93,8 +93,8 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.077994F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 71.03064F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.89137F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.14484F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.05571F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(800, 359);
             this.tableLayoutPanel2.TabIndex = 2;
             this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
@@ -115,7 +115,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(794, 248);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(794, 252);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // button4
@@ -126,9 +126,9 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(3, 127);
+            this.button4.Location = new System.Drawing.Point(3, 129);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(389, 118);
+            this.button4.Size = new System.Drawing.Size(389, 120);
             this.button4.TabIndex = 10;
             this.button4.TabStop = false;
             this.button4.Text = "Menu List Report";
@@ -143,9 +143,9 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(398, 127);
+            this.button2.Location = new System.Drawing.Point(398, 129);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(393, 118);
+            this.button2.Size = new System.Drawing.Size(393, 120);
             this.button2.TabIndex = 8;
             this.button2.TabStop = false;
             this.button2.Text = "Dine In Orders Report";
@@ -162,7 +162,7 @@
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(389, 118);
+            this.button1.Size = new System.Drawing.Size(389, 120);
             this.button1.TabIndex = 7;
             this.button1.TabStop = false;
             this.button1.Text = "Orders History Report";
@@ -179,7 +179,7 @@
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button3.Location = new System.Drawing.Point(398, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(393, 118);
+            this.button3.Size = new System.Drawing.Size(393, 120);
             this.button3.TabIndex = 9;
             this.button3.TabStop = false;
             this.button3.Text = "Total Staff Report";
