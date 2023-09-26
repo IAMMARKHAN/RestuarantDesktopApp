@@ -91,8 +91,8 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 91);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.68731F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.31269F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.46518F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.53482F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(800, 359);
             this.tableLayoutPanel2.TabIndex = 5;
             // 
@@ -107,7 +107,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(794, 305);
+            this.dataGridView1.Size = new System.Drawing.Size(794, 308);
             this.dataGridView1.TabIndex = 10;
             // 
             // DELETE
