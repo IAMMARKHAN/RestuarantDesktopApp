@@ -21,10 +21,10 @@ namespace Restuarant_App
 
         private void Orders_Load(object sender, EventArgs e)
         {
-            PopulateDataGridView();
+            PopulateGrid();
 
         }
-        public void PopulateDataGridView()
+        public void PopulateGrid()
         {
             // Replace with your connection string
 
