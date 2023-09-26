@@ -21,9 +21,9 @@ namespace Restuarant_App
 
         private void Staff_Load(object sender, EventArgs e)
         {
-            PopulateDataGridView();
+            PopulateGridView();
         }
-        public void PopulateDataGridView()
+        public void PopulateGridView()
         {
             // Replace with your connection string
 
