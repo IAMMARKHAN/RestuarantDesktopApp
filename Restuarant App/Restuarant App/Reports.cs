@@ -85,10 +85,7 @@ namespace Restuarant_App
                     }
                 }
             }
-            else
-            {
-                // User clicked "No" or closed the message box
-            }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -225,8 +222,6 @@ namespace Restuarant_App
         {
             // Display a confirmation message box
             DialogResult result = MessageBox.Show("Are you sure you want to print this report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            // Check if the user clicked "Yes"
             if (result == DialogResult.Yes)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
