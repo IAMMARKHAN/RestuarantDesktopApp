@@ -130,10 +130,7 @@ namespace Restuarant_App
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            // Set the initial directory (optional)
             openFileDialog.InitialDirectory = @"C:\Users\YourUsername\Desktop";
-
-            // Filter to only show image files
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
