@@ -36,9 +36,9 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -140,6 +140,16 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "LOGIN";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Restuarant_App.Properties.Resources.pngwing_com;
+            this.pictureBox1.Location = new System.Drawing.Point(77, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(142, 138);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -159,22 +169,12 @@
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button4.Location = new System.Drawing.Point(43, 352);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(211, 33);
+            this.button4.Size = new System.Drawing.Size(211, 35);
             this.button4.TabIndex = 18;
             this.button4.TabStop = false;
             this.button4.Text = "Login";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Restuarant_App.Properties.Resources.pngwing_com;
-            this.pictureBox1.Location = new System.Drawing.Point(77, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(142, 138);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // Login
             // 
