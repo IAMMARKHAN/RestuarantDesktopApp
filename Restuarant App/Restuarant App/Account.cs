@@ -32,18 +32,18 @@ namespace Restuarant_App
             }
         }
 
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            
+
+        }
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            
-
         }
         private int InsertUserData(string name, string email, string password, string address, string contact)
         {
@@ -75,7 +75,6 @@ namespace Restuarant_App
 
         private bool IsValidEmail(string email)
         {
-            // Use a regular expression to validate the email address
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             return Regex.IsMatch(email, pattern);
         }
