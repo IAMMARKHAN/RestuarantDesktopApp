@@ -28,12 +28,12 @@ namespace Restuarant_App
         {
         }
 
+        private void label8_Click(object sender, EventArgs e)
+        {
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             
-        }
-        private void label8_Click(object sender, EventArgs e)
-        {
         }
         private void tableLayoutPanel5_Paint(object sender, PaintEventArgs e)
         {
@@ -52,7 +52,7 @@ namespace Restuarant_App
         {
             foreach (Form openForm in Application.OpenForms)
             {
-                if (openForm != this) // Exclude the current form (the one with the button)
+                if (openForm != this) 
                 {
                     openForm.Hide();
                 }
