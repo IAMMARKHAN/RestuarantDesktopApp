@@ -24,13 +24,7 @@ namespace Restuarant_App
             this.Hide();
         }
 
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+       
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -73,6 +67,14 @@ namespace Restuarant_App
                 return 0;
             }
 
+
+        }
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
