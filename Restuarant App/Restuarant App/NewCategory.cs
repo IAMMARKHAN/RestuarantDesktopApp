@@ -69,7 +69,7 @@ namespace Restuarant_App
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)Keys.Space && e.KeyChar != (char)Keys.Back)
             {
-                e.Handled = true; // Block the input
+                e.Handled = true;
             }
         }
 
