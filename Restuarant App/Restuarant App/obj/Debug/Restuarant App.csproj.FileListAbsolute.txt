@@ -92,3 +92,5 @@ D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\itextsharp.dll
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\itextsharp.xml
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant App.csproj.CopyComplete
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.DeliveryRequirements.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.DineInRequirements.resources

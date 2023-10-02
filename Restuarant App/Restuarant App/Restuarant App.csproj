@@ -126,6 +126,18 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeliveryRequirements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeliveryRequirements.Designer.cs">
+      <DependentUpon>DeliveryRequirements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DineInRequirements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DineInRequirements.Designer.cs">
+      <DependentUpon>DineInRequirements.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditCategory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -289,6 +301,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeliveryRequirements.resx">
+      <DependentUpon>DeliveryRequirements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DineInRequirements.resx">
+      <DependentUpon>DineInRequirements.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditCategory.resx">
       <DependentUpon>EditCategory.cs</DependentUpon>

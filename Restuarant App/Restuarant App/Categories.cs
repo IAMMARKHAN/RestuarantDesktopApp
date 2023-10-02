@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -45,9 +46,58 @@ namespace Restuarant_App
                 }
                 catch (Exception ex)
                 {
+                LogExceptionToDatabase(ex);
                     MessageBox.Show("Error: " + ex.Message);
                 }
             
+        }
+        private void LogExceptionToDatabase(Exception ex)
+        {
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
+            command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
+            command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
+            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@LogTime", DateTime.Now);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception logEx)
+            {
+                // Handle any exceptions that may occur during the logging operation (optional)
+                Console.WriteLine("Error while logging exception: " + logEx.Message);
+            }
+        }
+
+        // Helper function to extract calling method name from stack trace
+        private string GetCallingMethodName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                return frames[3].GetMethod().Name;
+            }
+            return "Unknown";
+        }
+
+        // Helper function to extract file name from stack trace
+        private string GetFileName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                var fileName = frames[3].GetFileName();
+                if (fileName != null)
+                {
+                    return System.IO.Path.GetFileName(fileName);
+                }
+            }
+            return "Unknown";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -95,32 +145,36 @@ namespace Restuarant_App
                 int idToDelete = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["Id"].Value);
 
                 // Ask for confirmation
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this record?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Are you sure you want to in-active this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
                     var con = Configuration.getInstance().getConnection();
-                    SqlCommand command = new SqlCommand("DELETE FROM categories WHERE ID = @ID", con);
+                    SqlCommand command = new SqlCommand("UPDATE categories SET Active = 0, UpdatedAt = @f WHERE ID = @ID", con); // Set Active to false (0) and UpdatedAt to current time
                     command.Parameters.AddWithValue("@ID", idToDelete);
+                    command.Parameters.AddWithValue("@f", DateTime.Now);
                     try
                     {
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            // Successfully deleted from the database
-                            dataGridView1.Rows.RemoveAt(rowIndex);
+                            // Successfully updated the Active column and UpdatedAt column in the database
+                            // You can handle the UI update logic here if necessary
                         }
                         else
                         {
                             // Handle the case where the record was not found in the database
-                            MessageBox.Show("Record Not Found or Not Deleted.");
+                            MessageBox.Show("Record Not Found or Not Updated.");
                         }
                     }
                     catch (Exception ex)
                     {
+                        LogExceptionToDatabase(ex);
                         MessageBox.Show("Error: " + ex.Message);
                     }
-                    
+
+
+
                 }
             }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -74,20 +75,81 @@ namespace Restuarant_App
                 MessageBox.Show("Error Updating Data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } 
         }
-        private int UpdateUserData(string name,string type,double cont)
+        private void LogExceptionToDatabase(Exception ex)
         {
             var con = Configuration.getInstance().getConnection();
-            SqlCommand command = new SqlCommand("UPDATE staff SET Name = @NewName, Type = @NewType,Contact=@Con WHERE Id = @Id", con);
+            SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
+            command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
+            command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
+            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@LogTime", DateTime.Now);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception logEx)
+            {
+                // Handle any exceptions that may occur during the logging operation (optional)
+                Console.WriteLine("Error while logging exception: " + logEx.Message);
+            }
+        }
+
+        // Helper function to extract calling method name from stack trace
+        private string GetCallingMethodName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                return frames[3].GetMethod().Name;
+            }
+            return "Unknown";
+        }
+
+        // Helper function to extract file name from stack trace
+        private string GetFileName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                var fileName = frames[3].GetFileName();
+                if (fileName != null)
+                {
+                    return System.IO.Path.GetFileName(fileName);
+                }
+            }
+            return "Unknown";
+        }
+        private int UpdateUserData(string name,string type,double cont)
+        {
+            try
+            {
+
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand command = new SqlCommand("UPDATE staff SET Name = @NewName, Type = @NewType,Contact=@Con,UpdatedAt=@CC,Active=@ff WHERE Id = @Id", con);
             command.Parameters.AddWithValue("@NewName", name);
             command.Parameters.AddWithValue("@NewType", type);
             command.Parameters.AddWithValue("@Con", cont);
             command.Parameters.AddWithValue("@Id", id);
+            command.Parameters.AddWithValue("@CC", DateTime.Now);
+            command.Parameters.AddWithValue("@ff", true);
+
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
                 return 1;
             }
             return 0;
+            }
+            catch(Exception E)
+            {
+                LogExceptionToDatabase(E);
+                MessageBox.Show(E.Message);
+                return 0;
+            }
 
         }
 

@@ -97,7 +97,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.77543F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.70013F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.37158F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 52F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel2.Controls.Add(this.button5, 2, 5);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.textBox2, 2, 0);
@@ -134,7 +134,7 @@
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button5.Location = new System.Drawing.Point(156, 184);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(588, 35);
+            this.button5.Size = new System.Drawing.Size(587, 35);
             this.button5.TabIndex = 7;
             this.button5.Text = "Save";
             this.button5.UseVisualStyleBackColor = false;
@@ -157,7 +157,7 @@
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox2.Location = new System.Drawing.Point(156, 3);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(588, 20);
+            this.textBox2.Size = new System.Drawing.Size(587, 20);
             this.textBox2.TabIndex = 10;
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
@@ -166,7 +166,7 @@
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.Location = new System.Drawing.Point(156, 39);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(588, 20);
+            this.textBox1.Size = new System.Drawing.Size(587, 20);
             this.textBox1.TabIndex = 11;
             // 
             // textBox3
@@ -174,7 +174,8 @@
             this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox3.Location = new System.Drawing.Point(156, 73);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(588, 20);
+            this.textBox3.PasswordChar = '*';
+            this.textBox3.Size = new System.Drawing.Size(587, 20);
             this.textBox3.TabIndex = 12;
             // 
             // textBox4
@@ -182,7 +183,7 @@
             this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox4.Location = new System.Drawing.Point(156, 112);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(588, 20);
+            this.textBox4.Size = new System.Drawing.Size(587, 20);
             this.textBox4.TabIndex = 13;
             // 
             // textBox5
@@ -190,7 +191,7 @@
             this.textBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox5.Location = new System.Drawing.Point(156, 149);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(588, 20);
+            this.textBox5.Size = new System.Drawing.Size(587, 20);
             this.textBox5.TabIndex = 14;
             this.textBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox5_KeyPress);
             // 

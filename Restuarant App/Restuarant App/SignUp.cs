@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -79,7 +80,7 @@ namespace Restuarant_App
                 {
                     return -1; 
                 }
-                string insertQuery = "INSERT INTO dbo.[user] (name, email, password, address, contact, role) VALUES (@Name, @Email, @Password, @Address, @Contact, @Role)";
+                string insertQuery = "INSERT INTO dbo.[user] (name, email, password, address, contact, role,active,createdAt,updatedAt) VALUES (@Name, @Email, @Password, @Address, @Contact, @Role,@F,@G,@H)";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(insertQuery, con);
                 command.Parameters.AddWithValue("@Name", name);
@@ -87,17 +88,70 @@ namespace Restuarant_App
                 command.Parameters.AddWithValue("@Password", password);
                 command.Parameters.AddWithValue("@Address", address);
                 command.Parameters.AddWithValue("@Contact", contact);
+                command.Parameters.AddWithValue("@F", true);
+                command.Parameters.AddWithValue("@G", DateTime.Now);
+                command.Parameters.AddWithValue("@H", DateTime.Now);
+
                 command.Parameters.AddWithValue("@Role", "customer");
                 int rowsAffected = command.ExecuteNonQuery();
                 return rowsAffected ;
             }
             catch (Exception ex)
             {
+                LogExceptionToDatabase(ex);
                 return 0;
             }
 
         }
 
+        private void LogExceptionToDatabase(Exception ex)
+        {
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
+            command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
+            command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
+            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@LogTime", DateTime.Now);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception logEx)
+            {
+                // Handle any exceptions that may occur during the logging operation (optional)
+                Console.WriteLine("Error while logging exception: " + logEx.Message);
+            }
+        }
+
+        // Helper function to extract calling method name from stack trace
+        private string GetCallingMethodName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                return frames[3].GetMethod().Name;
+            }
+            return "Unknown";
+        }
+
+        // Helper function to extract file name from stack trace
+        private string GetFileName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                var fileName = frames[3].GetFileName();
+                if (fileName != null)
+                {
+                    return System.IO.Path.GetFileName(fileName);
+                }
+            }
+            return "Unknown";
+        }
         private bool IsValidEmail(string email)
         {
             // Use a regular expression to validate the email address
@@ -118,6 +172,7 @@ namespace Restuarant_App
             catch (Exception ex)
             {
                 // Handle exceptions here, e.g., log the error
+                LogExceptionToDatabase(ex);
                 return false;
             }
         }

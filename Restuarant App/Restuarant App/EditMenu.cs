@@ -18,7 +18,8 @@ namespace Restuarant_App
 {
     public partial class EditMenu : Form
     {
-        string name, category, size;
+        string name, size;
+        int category;
         public byte[] imgData;
 
         private void button1_Click(object sender, EventArgs e)
@@ -110,6 +111,54 @@ namespace Restuarant_App
 
         }
 
+        private void LogExceptionToDatabase(Exception ex)
+        {
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
+            command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
+            command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
+            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@LogTime", DateTime.Now);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception logEx)
+            {
+                // Handle any exceptions that may occur during the logging operation (optional)
+                Console.WriteLine("Error while logging exception: " + logEx.Message);
+            }
+        }
+
+        // Helper function to extract calling method name from stack trace
+        private string GetCallingMethodName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                return frames[3].GetMethod().Name;
+            }
+            return "Unknown";
+        }
+
+        // Helper function to extract file name from stack trace
+        private string GetFileName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                var fileName = frames[3].GetFileName();
+                if (fileName != null)
+                {
+                    return System.IO.Path.GetFileName(fileName);
+                }
+            }
+            return "Unknown";
+        }
         private void button5_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBox2.Text.ToString()) || string.IsNullOrEmpty(textBox3.Text.ToString()) || comboBox2.SelectedIndex == -1 || comboBox1.SelectedIndex == -1 || textBox1.Text == "")
@@ -130,25 +179,45 @@ namespace Restuarant_App
         }
         private int UpdateUserData(string name, string type,int price,string size, byte[] img)
         {
+            try
+            {
+
             var con = Configuration.getInstance().getConnection();
-            SqlCommand command = new SqlCommand("UPDATE menu SET Name = @NewName, Category = @NewType,Price=@Con ,Size=@Con1 ,Image=@Con2 WHERE Id = @Id", con);
+
+            // Find CategoryId based on type from categories table
+            SqlCommand findCategoryIdCommand = new SqlCommand("SELECT Id FROM categories WHERE Name = @Type", con);
+            findCategoryIdCommand.Parameters.AddWithValue("@Type", type);
+            int categoryId = (int)findCategoryIdCommand.ExecuteScalar();
+
+            // Update menu table with the found CategoryId
+            SqlCommand command = new SqlCommand("UPDATE menu SET Name = @NewName, CategoryId = @CategoryId, Price = @Price, Size = @Size, Image = @Image, Active = @Active, UpdatedAt = @UpdatedAt WHERE Id = @Id", con);
             command.Parameters.AddWithValue("@NewName", name);
-            command.Parameters.AddWithValue("@NewType", type);
-            command.Parameters.AddWithValue("@Con", price);
-            command.Parameters.AddWithValue("@Con1", size);
-            command.Parameters.AddWithValue("@Con2", img);
+            command.Parameters.AddWithValue("@CategoryId", categoryId); // Set CategoryId here
+            command.Parameters.AddWithValue("@Price", price);
+            command.Parameters.AddWithValue("@Size", size);
+            command.Parameters.AddWithValue("@Image", img);
+            command.Parameters.AddWithValue("@Active", true); // Assuming Active is a boolean column
+            command.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
             command.Parameters.AddWithValue("@Id", id);
+
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)
             {
                 return 1;
             }
             return 0;
+            }
+            catch(Exception E)
+            {
+                LogExceptionToDatabase(E);
+                MessageBox.Show(E.Message);
+                return 0;
+            }
 
         }
 
         int price, id;
-        public EditMenu(string name,string category,int id,int price,string size)
+        public EditMenu(string name,int category,int id,int price,string size)
         {
             InitializeComponent();
             this.name = name;

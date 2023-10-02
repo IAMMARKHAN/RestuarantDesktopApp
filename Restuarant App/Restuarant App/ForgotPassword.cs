@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using db2021finalprojectg_9;
+using System.Diagnostics;
 
 namespace Restuarant_App
 {
@@ -81,6 +82,7 @@ namespace Restuarant_App
                 }
                 catch (Exception ex)
                 {
+                    LogExceptionToDatabase(ex);
                     MessageBox.Show($"Error Sending Email: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -94,23 +96,79 @@ namespace Restuarant_App
             
     
         }
+        private void LogExceptionToDatabase(Exception ex)
+        {
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
+            command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
+            command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
+            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@LogTime", DateTime.Now);
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception logEx)
+            {
+                // Handle any exceptions that may occur during the logging operation (optional)
+                Console.WriteLine("Error while logging exception: " + logEx.Message);
+            }
+        }
+
+        // Helper function to extract calling method name from stack trace
+        private string GetCallingMethodName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                return frames[3].GetMethod().Name;
+            }
+            return "Unknown";
+        }
+
+        // Helper function to extract file name from stack trace
+        private string GetFileName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                var fileName = frames[3].GetFileName();
+                if (fileName != null)
+                {
+                    return System.IO.Path.GetFileName(fileName);
+                }
+            }
+            return "Unknown";
+        }
         private void SendEmail(string to, string code)
         {
-            string smtpServer = "smtp.gmail.com"; // Replace with your SMTP server
-            string smtpUsername = "ammariftikhar666@gmail.com";   // Replace with your SMTP username
-            string smtpPassword = "mflyhbbpugjtypad\r\n";   // Replace with your SMTP password
-            int smtpPort = 587; // Replace with your SMTP port (e.g., 587 for TLS)
-            using (SmtpClient client = new SmtpClient(smtpServer))
+            try
             {
-                client.Port = smtpPort;
-                client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-                client.EnableSsl = true;
-                using (MailMessage message = new MailMessage(smtpUsername, to))
+                string smtpServer = "smtp.gmail.com"; // Replace with your SMTP server
+                string smtpUsername = "ammariftikhar666@gmail.com";   // Replace with your SMTP username
+                string smtpPassword = "mflyhbbpugjtypad\r\n";   // Replace with your SMTP password
+                int smtpPort = 587; // Replace with your SMTP port (e.g., 587 for TLS)
+                using (SmtpClient client = new SmtpClient(smtpServer))
                 {
-                    message.Subject = "Verification Code";
-                    message.Body = $"Your Verification Code Is: {code}";
-                    client.Send(message);
+                    client.Port = smtpPort;
+                    client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                    client.EnableSsl = true;
+                    using (MailMessage message = new MailMessage(smtpUsername, to))
+                    {
+                        message.Subject = "Verification Code";
+                        message.Body = $"Your Verification Code Is: {code}";
+                        client.Send(message);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                LogExceptionToDatabase(ex);
+                MessageBox.Show(ex.Message);
             }
         }
 

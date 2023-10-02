@@ -12,6 +12,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Diagnostics;
 
 namespace Restuarant_App
 {
@@ -37,21 +38,31 @@ namespace Restuarant_App
 
             try
             {
-                string insertQuery = "INSERT INTO dbo.[menu] (Name,Category,Price,Size,Image) VALUES (@Name, @Email,@Con,@A,@B)";
+                // Find CategoryId based on type from categories table
                 var con = Configuration.getInstance().getConnection();
+                SqlCommand findCategoryIdCommand = new SqlCommand("SELECT d FROM categories WHERE Name = @Type", con);
+                findCategoryIdCommand.Parameters.AddWithValue("@Type", type);
+                int categoryId = (int)findCategoryIdCommand.ExecuteScalar();
+
+                // Insert data into menu table with the correct CategoryId
+                string insertQuery = "INSERT INTO dbo.[menu] (Name, CategoryId, Price, Size, Image, Active, CreatedAt, UpdatedAt) VALUES (@Name, @CategoryId, @Con, @A, @B, @Ac, @Cr, @Ur)";
                 SqlCommand command = new SqlCommand(insertQuery, con);
                 command.Parameters.AddWithValue("@Name", name);
-                command.Parameters.AddWithValue("@Email",type);
+                command.Parameters.AddWithValue("@CategoryId", categoryId); // Set CategoryId here
                 command.Parameters.AddWithValue("@Con", price);
                 command.Parameters.AddWithValue("@A", size);
                 command.Parameters.AddWithValue("@B", img);
+                command.Parameters.AddWithValue("@Ac", true);
+                command.Parameters.AddWithValue("@Cr", DateTime.Now);
+                command.Parameters.AddWithValue("@Ur", DateTime.Now);
                 int rowsAffected = command.ExecuteNonQuery();
                 return rowsAffected;
             }
             catch (Exception ex)
             {
+                LogExceptionToDatabase(ex);
                 MessageBox.Show(ex.Message);
-                return 0; 
+                return 0;
             }
         }
 
@@ -101,7 +112,54 @@ namespace Restuarant_App
         {
             this.Hide();
         }
+        private void LogExceptionToDatabase(Exception ex)
+        {
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
+            command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
+            command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
+            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@LogTime", DateTime.Now);
 
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception logEx)
+            {
+                // Handle any exceptions that may occur during the logging operation (optional)
+                Console.WriteLine("Error while logging exception: " + logEx.Message);
+            }
+        }
+
+        // Helper function to extract calling method name from stack trace
+        private string GetCallingMethodName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                return frames[3].GetMethod().Name;
+            }
+            return "Unknown";
+        }
+
+        // Helper function to extract file name from stack trace
+        private string GetFileName()
+        {
+            var frames = new StackTrace(true).GetFrames();
+            if (frames != null && frames.Length >= 3)
+            {
+                // Index 3 represents the calling method in the stack trace
+                var fileName = frames[3].GetFileName();
+                if (fileName != null)
+                {
+                    return System.IO.Path.GetFileName(fileName);
+                }
+            }
+            return "Unknown";
+        }
         private void button5_Click_1(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBox2.Text) || comboBox1.SelectedIndex == -1 || textBox1.Text == "" || textBox3.Text == "" || comboBox2.SelectedIndex == -1)
@@ -153,6 +211,7 @@ namespace Restuarant_App
                 catch (Exception ex)
                 {
                     // Handle any exceptions that may occur during file reading
+                    LogExceptionToDatabase(ex);
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
@@ -175,6 +234,11 @@ namespace Restuarant_App
             {
                 e.Handled = true;
             }
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
