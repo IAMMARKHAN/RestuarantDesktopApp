@@ -16,6 +16,7 @@ using System.Diagnostics;
 
 using System.Windows.Forms;
 using iTextSharp.text;
+using Org.BouncyCastle.Math;
 
 namespace Restuarant_App
 {
@@ -24,7 +25,9 @@ namespace Restuarant_App
         public string orderType="";
         public string waiter = "";
         public string delivery = "";
-        public int table;
+        public int tableId=0;
+        public int staffId=0;
+
 
 
 
@@ -52,9 +55,10 @@ namespace Restuarant_App
 
             try
             {
-                string query = "SELECT Id, Name, CategoryId, Price, Size, Active FROM menu";
+                string query = "SELECT Id, Name, CategoryId, Price, Size, Active FROM menu Where Active=@A";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(query, con);
+                command.Parameters.AddWithValue("@A", true);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
@@ -69,15 +73,15 @@ namespace Restuarant_App
 
         }
         
-
         public void PopulateDataGridView1(int name)
         {
             try
             {
                 var con = Configuration.getInstance().getConnection();
-                string query = "SELECT Id,Name,CategoryId,Price,Size, Active FROM menu Where CategoryId=@a";
+                string query = "SELECT Id,Name,CategoryId,Price,Size, Active FROM menu Where CategoryId=@a And Active=@V";
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@a", name);
+                command.Parameters.AddWithValue("@V", true);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
@@ -192,7 +196,9 @@ namespace Restuarant_App
                 string query = "SELECT Id FROM categories WHERE Name = @categoryName";
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@categoryName", buttonText);
-                object result = command.ExecuteScalar(); // Retrieve a single value (the ID)
+            command.Parameters.AddWithValue("@B", true);
+
+            object result = command.ExecuteScalar(); // Retrieve a single value (the ID)
                 if (result != null)
                 {
                     int categoryId = Convert.ToInt32(result); // Convert the result to an integer
@@ -267,8 +273,16 @@ namespace Restuarant_App
         private void button6_Click(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
+            button2.BackColor = Color.FromArgb(50, 55, 130); ;
+            button2.ForeColor = Color.White;
+            button1.BackColor = Color.FromArgb(50, 55, 130); ;
+            button1.ForeColor = Color.White;
+            button3.BackColor = Color.FromArgb(50, 55, 130); ;
+            button3.ForeColor = Color.White;
             label5.Text = "0";
             label7.Text = "0";
+            orderType = "";
+            textBox1.Text = "";
 
         }
         public void Populate(string name)
@@ -296,20 +310,11 @@ namespace Restuarant_App
         {
             button2.BackColor = Color.White;
             button2.ForeColor = Color.FromArgb(50, 55, 130);
-
-            // Reset the appearance of the other buttons
-            // Reset the appearance of the other buttons
             button1.BackColor = Color.FromArgb(50, 55, 130); ;
             button1.ForeColor = Color.White;
             button3.BackColor = Color.FromArgb(50, 55, 130); ;
             button3.ForeColor = Color.White;
-            DineInRequirements D = new DineInRequirements();
-            D.ShowDialog();
-            if(table!=0 && waiter!="")
-            {
-
             orderType = "Dine In";
-            }    
 
         }
 
@@ -325,12 +330,7 @@ namespace Restuarant_App
             button2.ForeColor = Color.White;
             button3.BackColor = Color.FromArgb(50, 55, 130); ;
             button3.ForeColor = Color.White;
-            DeliveryRequirements D = new DeliveryRequirements();
-            D.ShowDialog();
-            if(delivery!="")
-            {
             orderType = "Delivery";
-            }
         }
 
 
@@ -425,8 +425,6 @@ namespace Restuarant_App
             {
                 DialogResult result = MessageBox.Show("Printing Bill ! Is Is Paid ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-
-
                 // Check if the user clicked "Yes"
                 if (result == DialogResult.Yes)
                 {
@@ -457,10 +455,10 @@ namespace Restuarant_App
                                 document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
                                 document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
                                 document.Add(new Paragraph("Report Type: Bill"));
+                                document.Add(new Paragraph("Status: Paid"));
                                 document.Add(new Paragraph("Printed By: Manager"));
 
                                 document.Add(new Paragraph("\n"));
-
                                 // Create a table for the DataGridView content
                                 PdfPTable table = new PdfPTable(dataGridView1.Columns.Count);
                                 for (int i = 0; i < dataGridView1.Columns.Count; i++)
@@ -488,21 +486,164 @@ namespace Restuarant_App
                                 // Add total, tax, and net total information to the PDF
                                 document.Add(new Paragraph("\n"));
                                 Paragraph P = new Paragraph($"Total: {label5.Text}");
-                                P.Alignment = Element.ALIGN_RIGHT;
                                 document.Add(P);
                                 Paragraph P1 = new Paragraph("Tax: 16%");
-                                P1.Alignment = Element.ALIGN_RIGHT;
                                 document.Add(P1);
                                 Paragraph P2 = new Paragraph($"Net Total: {label7.Text}");
-                                P2.Alignment = Element.ALIGN_RIGHT;
                                 document.Add(P2);
                                 document.Close();
 
-                                MessageBox.Show("Bill saved successfully !");
+                                MessageBox.Show("Order punched and Bill saved successfully !");
                             }
                         }
                         catch (Exception ex)
                         {
+                            MessageBox.Show(ex.Message);
+                        }
+
+                        try
+                        {
+                            var con = Configuration.getInstance().getConnection();
+                            
+
+                            // Insert data into menu table with the correct CategoryId
+                            string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I)";
+                            SqlCommand command = new SqlCommand(insertQuery, con);
+                            command.Parameters.AddWithValue("@A", dataGridView1.Rows.Count);
+                            command.Parameters.AddWithValue("@B", orderType); // Set CategoryId here
+                            command.Parameters.AddWithValue("@C", label7.Text);
+                            if(orderType=="Dine In")
+                            {
+                            command.Parameters.AddWithValue("@D", "Waiter");
+                            }
+                            else if(orderType=="Delivery")
+                            {
+                                command.Parameters.AddWithValue("@D", "Delivery Boy");
+                            }
+                            else
+                            {
+                                command.Parameters.AddWithValue("@D", "Self Service");
+
+                            }
+                            command.Parameters.AddWithValue("@E", "Paid");
+                            command.Parameters.AddWithValue("@F", false);
+                            command.Parameters.AddWithValue("@G", DateTime.Now);
+                            command.Parameters.AddWithValue("@H", DateTime.Now);
+                            command.Parameters.AddWithValue("@I",textBox1.Text.ToString());
+                            int rowsAffected = command.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            LogExceptionToDatabase(ex);
+                            MessageBox.Show(ex.Message);
+                        }
+
+
+                    }
+
+
+                }
+                else
+                {
+                    string savePath;
+
+                    // Show the Save File Dialog to get the file path
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                    {
+                        saveFileDialog.Filter = "PDF Files|*.pdf";
+                        try
+                        {
+                            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                            {
+                                savePath = saveFileDialog.FileName;
+                                // Get the desktop directory path
+                                Document document = new Document();
+                                // Create a PDF document
+                                PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
+                                document.Open();
+                                // Add header information to the PDF
+                                Paragraph title = new Paragraph("Restaurant Management System");
+                                title.Alignment = Element.ALIGN_CENTER;
+                                document.Add(title);
+                                document.Add(new Paragraph("\n"));
+                                document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
+                                document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
+                                document.Add(new Paragraph("Report Type: Bill"));
+                                document.Add(new Paragraph("Status: UnPaid"));
+                                document.Add(new Paragraph("Printed By: Manager"));
+                                document.Add(new Paragraph("\n"));
+                                // Create a table for the DataGridView content
+                                PdfPTable table = new PdfPTable(dataGridView1.Columns.Count);
+                                for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                                {
+                                    table.AddCell(new PdfPCell(new Phrase(dataGridView1.Columns[i].HeaderText))
+                                    {
+                                        HorizontalAlignment = Element.ALIGN_CENTER
+                                    });
+                                }
+                                // Add DataGridView content to the table
+                                foreach (DataGridViewRow row in dataGridView1.Rows)
+                                {
+                                    for (int i = 0; i < dataGridView1.Columns.Count; i++)
+                                    {
+                                        table.AddCell(new PdfPCell(new Phrase(row.Cells[i].Value.ToString()))
+                                        {
+                                            HorizontalAlignment = Element.ALIGN_CENTER
+                                        });
+                                    }
+                                }
+                                // Add the table to the PDF document
+                                document.Add(table);
+                                // Add total, tax, and net total information to the PDF
+                                document.Add(new Paragraph("\n"));
+                                Paragraph P = new Paragraph($"Total: {label5.Text}");
+                                document.Add(P);
+                                Paragraph P1 = new Paragraph("Tax: 16%");
+                                document.Add(P1);
+                                Paragraph P2 = new Paragraph($"Net Total: {label7.Text}");
+                                document.Add(P2);
+                                document.Close();
+                                MessageBox.Show("Order Punched and Bill saved successfully !");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                        try
+                        {
+                            var con = Configuration.getInstance().getConnection();
+
+
+                            // Insert data into menu table with the correct CategoryId
+                            string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I)";
+                            SqlCommand command = new SqlCommand(insertQuery, con);
+                            command.Parameters.AddWithValue("@A", dataGridView1.Rows.Count);
+                            command.Parameters.AddWithValue("@B", orderType); // Set CategoryId here
+                            command.Parameters.AddWithValue("@C", label7.Text);
+                            if (orderType == "Dine In")
+                            {
+                                command.Parameters.AddWithValue("@D", "Waiter");
+                            }
+                            else if (orderType == "Delivery")
+                            {
+                                command.Parameters.AddWithValue("@D", "Delivery Boy");
+                            }
+                            else
+                            {
+                                command.Parameters.AddWithValue("@D", "Self Service");
+
+                            }
+                            command.Parameters.AddWithValue("@E", "Unpaid");
+                            command.Parameters.AddWithValue("@F", true);
+                            command.Parameters.AddWithValue("@G", DateTime.Now);
+                            command.Parameters.AddWithValue("@H", DateTime.Now);
+                            command.Parameters.AddWithValue("@I", textBox1.Text.ToString());
+                            int rowsAffected = command.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            LogExceptionToDatabase(ex);
                             MessageBox.Show(ex.Message);
                         }
                     }
@@ -533,6 +674,11 @@ namespace Restuarant_App
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+           
         }
     }
 }
