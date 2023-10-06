@@ -32,11 +32,11 @@ namespace Restuarant_App
         {
             NewMenu M = new NewMenu();
             M.ShowDialog();
+            PopulateDataGridView();
         }
         public void PopulateDataGridView()
         {
-            // Replace with your connection string
-
+            dataGridView1.DataSource = null;
             try
             {
                 string query = "SELECT * FROM menu";
@@ -130,8 +130,7 @@ namespace Restuarant_App
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            // Successfully updated the Active column in the database
-                            // You can handle the UI update logic here if necessary
+                            PopulateDataGridView();
                         }
                         else
                         {
@@ -160,6 +159,7 @@ namespace Restuarant_App
                 string size = Convert.ToString(dataGridView1.Rows[rowIndex].Cells["Size"].Value);
                 EditMenu E = new EditMenu(name, category, id,price,size);
                 E.ShowDialog();
+                PopulateDataGridView();
             }
         }
 

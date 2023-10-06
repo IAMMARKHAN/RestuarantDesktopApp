@@ -109,7 +109,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(211, 45);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(211, 44);
             this.tableLayoutPanel2.TabIndex = 19;
             // 
             // button1

@@ -40,7 +40,7 @@ namespace Restuarant_App
             {
                 // Find CategoryId based on type from categories table
                 var con = Configuration.getInstance().getConnection();
-                SqlCommand findCategoryIdCommand = new SqlCommand("SELECT d FROM categories WHERE Name = @Type", con);
+                SqlCommand findCategoryIdCommand = new SqlCommand("SELECT Id FROM categories WHERE Name = @Type", con);
                 findCategoryIdCommand.Parameters.AddWithValue("@Type", type);
                 int categoryId = (int)findCategoryIdCommand.ExecuteScalar();
 

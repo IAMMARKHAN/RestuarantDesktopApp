@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Restuarant_App
 {
@@ -43,35 +44,37 @@ namespace Restuarant_App
             try
             {
 
-            string query = "SELECT Id FROM dbo.[tables]";
-            var con = Configuration.getInstance().getConnection();
-            SqlCommand command = new SqlCommand(query, con);
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                // Clear existing items in the ComboBox
-                comboBox1.Items.Clear();
-
-                // Loop through the result set and add items to the ComboBox
-                while (reader.Read())
+                string query = "SELECT Id FROM dbo.[tables]";
+                var con = Configuration.getInstance().getConnection();
+                SqlCommand command = new SqlCommand(query, con);
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    comboBox1.Items.Add(reader["Name"].ToString());
+                    // Clear existing items in the ComboBox
+                    comboBox1.Items.Clear();
+
+                    // Loop through the result set and add items to the ComboBox
+                    while (reader.Read())
+                    {
+                        comboBox1.Items.Add(reader["Id"].ToString());
+                    }
                 }
-            }
 
-            string query2 = "SELECT Name FROM dbo.[staff] Where Type=@c";
-            var con2 = Configuration.getInstance().getConnection();
-            SqlCommand command2 = new SqlCommand(query2, con2);
-            command2.Parameters.AddWithValue("@c","Waiter");
-            using (SqlDataReader reader2 = command2.ExecuteReader())
-            {
-                // Clear existing items in the ComboBox
-                comboBox2.Items.Clear();
-
-                while (reader2.Read())
+                string query2 = "SELECT Name FROM dbo.[staff] Where Type=@c";
+                var con2 = Configuration.getInstance().getConnection();
+                SqlCommand command2 = new SqlCommand(query2, con2);
+                command2.Parameters.AddWithValue("@c", "Waiter");
+                using (SqlDataReader reader2 = command2.ExecuteReader())
                 {
-                    comboBox2.Items.Add(reader2["Name"].ToString());
+                    // Clear existing items in the ComboBox
+                    comboBox2.Items.Clear();
+
+                    while (reader2.Read())
+                    {
+                        {
+                            comboBox2.Items.Add(reader2["Name"].ToString());
+                        }
+                    }
                 }
-            }
             }
             catch (Exception ex)
             {
@@ -141,7 +144,10 @@ namespace Restuarant_App
             {
                 Pos P = new Pos();
                 P.waiter = comboBox2.SelectedItem.ToString();
-                P.table=int.Parse(comboBox1.SelectedItem.ToString());
+                P.tableId=int.Parse(comboBox1.SelectedItem.ToString());
+                P.orderType = "Dine In";
+                P.delivery = "";
+                this.Hide();
 
             }
 
@@ -155,6 +161,11 @@ namespace Restuarant_App
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

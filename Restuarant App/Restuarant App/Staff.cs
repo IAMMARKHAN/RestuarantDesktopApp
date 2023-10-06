@@ -26,8 +26,7 @@ namespace Restuarant_App
         }
         public void PopulateGridView()
         {
-            // Replace with your connection string
-
+            dataGridView1.DataSource = null;
             try
             {
                 string query = "SELECT * FROM staff";
@@ -74,8 +73,7 @@ namespace Restuarant_App
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            // Successfully updated the Active column in the database
-                            // You can handle the UI update logic here if necessary
+                            PopulateGridView();
                         }
                         else
                         {
@@ -103,6 +101,7 @@ namespace Restuarant_App
                 double contact = Convert.ToDouble(dataGridView1.Rows[rowIndex].Cells["Contact"].Value);
                 EditStaff E = new EditStaff(name,type,id,contact);
                 E.ShowDialog();
+                PopulateGridView();
             }
         }
 
@@ -158,6 +157,7 @@ namespace Restuarant_App
         {
             NewStaff S=new NewStaff();
             S.ShowDialog();
+            PopulateGridView();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

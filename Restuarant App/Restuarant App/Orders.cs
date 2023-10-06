@@ -27,8 +27,7 @@ namespace Restuarant_App
         }
         public void PopulateGrid()
         {
-            // Replace with your connection string
-
+            dataGridView1.DataSource = null;
             try
             {
                 string query = "SELECT * FROM orders";
@@ -37,6 +36,7 @@ namespace Restuarant_App
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
+            
                 dataGridView1.DataSource = dataTable;
             }
             catch (Exception ex)
@@ -45,7 +45,10 @@ namespace Restuarant_App
                 MessageBox.Show("Error: " + ex.Message);
             }
 
+
+
         }
+        
         private void LogExceptionToDatabase(Exception ex)
         {
             var con = Configuration.getInstance().getConnection();
@@ -95,6 +98,47 @@ namespace Restuarant_App
             return "Unknown";
         }
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+       
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "Pay")
+            {
+                int rowIndex = e.RowIndex; // Get the clicked row index
+                int id = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["Id"].Value);
+                Update(id);
+            }
+        }
+        void Update(int id)
+        {
+            try
+            {
+                var con = Configuration.getInstance().getConnection();
+
+                // SQL update query to toggle "Active" and update "Status" accordingly based on the current value of "Active" column
+                string updateQuery = "UPDATE orders SET Active = CASE WHEN Active = 1 THEN 0 ELSE 1 END, Status = CASE WHEN Active = 1 THEN 'Paid' ELSE 'Unpaid' END WHERE Id = @OrderID";
+
+                SqlCommand updateCommand = new SqlCommand(updateQuery, con);
+
+                updateCommand.Parameters.AddWithValue("@OrderID", id);
+                updateCommand.ExecuteNonQuery();
+                MessageBox.Show("Order payment status updated !");
+                PopulateGrid();
+            }
+            catch (Exception ex)
+            {
+                // Handle any database update errors and log them
+                LogExceptionToDatabase(ex);
+                MessageBox.Show("Error updating status ! " + ex.Message);
+            }
+        }
+
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

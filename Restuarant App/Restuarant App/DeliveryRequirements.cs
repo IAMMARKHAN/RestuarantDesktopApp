@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Restuarant_App
@@ -113,6 +114,10 @@ namespace Restuarant_App
             {
                 Pos P = new Pos();
                 P.delivery=comboBox1.SelectedItem.ToString();
+                P.orderType = "Delivery";
+                P.waiter = "";
+                P.tableId = 0;
+                this.Hide();
 
             }
         }

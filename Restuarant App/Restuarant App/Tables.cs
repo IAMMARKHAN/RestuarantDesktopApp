@@ -29,6 +29,7 @@ namespace Restuarant_App
         {
             NewTable newTable = new NewTable(); 
             newTable.ShowDialog();
+            PopulateGridView();
         }
 
         private void Tables_Load(object sender, EventArgs e)
@@ -37,8 +38,7 @@ namespace Restuarant_App
         }
         public void PopulateGridView()
         {
-            // Replace with your connection string
-
+            dataGridView1.DataSource = null;
             try
             {
 
@@ -131,8 +131,7 @@ namespace Restuarant_App
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            // Successfully updated the Active column in the database
-                            // You can handle the UI update logic here if necessary
+                            PopulateGridView();
                         }
                         else
                         {
@@ -161,6 +160,7 @@ namespace Restuarant_App
                 int id = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["Id"].Value);
                 EditTable E = new EditTable(seats,located,id);
                 E.ShowDialog();
+                PopulateGridView();
             }
         }
 

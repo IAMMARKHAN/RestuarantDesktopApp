@@ -28,9 +28,7 @@ namespace Restuarant_App
         }
         public void PopulateDataGridView()
         {
-            // Replace with your connection string
-
-            
+            dataGridView1.DataSource = null;   
                 try
                 {
 
@@ -134,6 +132,7 @@ namespace Restuarant_App
         {
             NewCategory S = new NewCategory();
             S.ShowDialog();
+            PopulateDataGridView();
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -158,8 +157,7 @@ namespace Restuarant_App
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            // Successfully updated the Active column and UpdatedAt column in the database
-                            // You can handle the UI update logic here if necessary
+                            PopulateDataGridView();
                         }
                         else
                         {
@@ -189,6 +187,7 @@ namespace Restuarant_App
 
                 EditCategory E = new EditCategory(name,type,id);
                 E.ShowDialog();
+                PopulateDataGridView();
             }
 
         }

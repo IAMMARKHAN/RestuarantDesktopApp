@@ -33,7 +33,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.DELETE = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Pay = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -102,24 +102,23 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DELETE});
+            this.Pay});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(794, 308);
             this.dataGridView1.TabIndex = 10;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // DELETE
+            // Pay
             // 
-            this.DELETE.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.DELETE.HeaderText = "Print Bill";
-            this.DELETE.Name = "DELETE";
-            this.DELETE.ReadOnly = true;
-            this.DELETE.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DELETE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.DELETE.Text = "Print Bill";
-            this.DELETE.UseColumnTextForButtonValue = true;
+            this.Pay.HeaderText = "Pay";
+            this.Pay.Name = "Pay";
+            this.Pay.ReadOnly = true;
+            this.Pay.Text = "Change Status";
+            this.Pay.UseColumnTextForButtonValue = true;
             // 
             // Orders
             // 
@@ -148,6 +147,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewButtonColumn DELETE;
+        private System.Windows.Forms.DataGridViewButtonColumn Pay;
     }
 }
