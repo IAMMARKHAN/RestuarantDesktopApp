@@ -494,6 +494,8 @@ namespace Restuarant_App
                                 document.Close();
 
                                 MessageBox.Show("Order punched and Bill saved successfully !");
+                                button6_Click(null, null);
+
                             }
                         }
                         catch (Exception ex)
@@ -604,6 +606,8 @@ namespace Restuarant_App
                                 document.Add(P2);
                                 document.Close();
                                 MessageBox.Show("Order Punched and Bill saved successfully !");
+                                button6_Click(null, null);
+
                             }
                         }
                         catch (Exception ex)
@@ -679,6 +683,18 @@ namespace Restuarant_App
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void textBox1_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar))
+            {
+                // Check if the entered character is not an alphabet
+                if (!char.IsLetter(e.KeyChar))
+                {
+                    e.Handled = true; // Block the character if it's not an alphabet
+                }
+            }
         }
     }
 }
