@@ -12,9 +12,13 @@ namespace Restuarant_App
 {
     public partial class CProfile : Form
     {
-        public CProfile()
+    public string time;
+    public string name;
+        public CProfile(string tiime, string name)
         {
             InitializeComponent();
+            this.time = tiime;
+            this.name = name;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,6 +32,13 @@ namespace Restuarant_App
             }
             Login L = new Login();
             L.Show();
+        }
+
+        private void CProfile_Load(object sender, EventArgs e)
+        {
+            button1.FlatAppearance.BorderSize = 0;
+            label3.Text = time;
+            label8.Text = name;
         }
     }
 }
