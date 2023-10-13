@@ -16,15 +16,17 @@ namespace Restuarant_App
     public partial class CSuggestion : Form
     {
         public int cid;
-        public CSuggestion(int cid)
+        public string name;
+        public CSuggestion(int cid,string name)
         {
             InitializeComponent();
             this.cid = cid;
+            this.name = name;
         }
 
         private void CSuggestion_Load(object sender, EventArgs e)
         {
-
+            label1.Text = "Hey " + name + " "+ "! We Appreciate Your Suggestions";
         }
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
@@ -45,6 +47,7 @@ namespace Restuarant_App
                 command.Parameters.AddWithValue("@UpdatedAt", DateTime.Now); // replace with the name of your password input textbox
                 command.ExecuteNonQuery();
                 MessageBox.Show("Thank You ! Your Suggestion Recorded !");
+                richTextBox1.Text = "";
 
             }
             else
@@ -53,5 +56,10 @@ namespace Restuarant_App
             MessageBox.Show("Enter Suggestion First !");
         }
             }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
