@@ -40,5 +40,10 @@ namespace Restuarant_App
             label3.Text = time;
             label8.Text = name;
         }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
