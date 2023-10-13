@@ -17,6 +17,7 @@ namespace Restuarant_App
     {
         public int cid;
         public string name;
+        public int btnClick=0;
         public CSuggestion(int cid,string name)
         {
             InitializeComponent();
@@ -60,6 +61,56 @@ namespace Restuarant_App
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("We are really sorry to hear this ! Give us another chance");
+            btnClick = 1;
+            timer1.Interval = 100; // You can adjust the interval as needed
+            timer1.Start();
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Thang You ! We will try to improve");
+            btnClick = 1;
+            timer1.Interval = 100; // You can adjust the interval as needed
+            timer1.Start();
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Thang You ! Good to know this");
+            btnClick = 1;
+            timer1.Interval = 100; // You can adjust the interval as needed
+            timer1.Start();
+
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Thank you ! We are glad to serve you ");
+            btnClick = 1;
+            timer1.Interval = 100; // You can adjust the interval as needed
+            timer1.Start();
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            if (btnClick == 1)
+            {
+                tableLayoutPanel3.Controls.Clear();
+                timer1.Stop();
+                timer1.Dispose();
+                tableLayoutPanel3.BackColor = Color.Transparent ;
+            }
         }
     }
 }
