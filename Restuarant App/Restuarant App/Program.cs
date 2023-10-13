@@ -16,7 +16,7 @@ namespace Restuarant_App
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AdminMain("","")) ;
+            Application.Run(new CustomerMain("","",0)) ;
         }
     }
 }

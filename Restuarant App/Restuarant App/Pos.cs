@@ -197,12 +197,10 @@ namespace Restuarant_App
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@categoryName", buttonText);
             command.Parameters.AddWithValue("@B", true);
-
             object result = command.ExecuteScalar(); // Retrieve a single value (the ID)
                 if (result != null)
                 {
                     int categoryId = Convert.ToInt32(result); // Convert the result to an integer
-                                                              // You can use the categoryId for further processing
                     PopulateDataGridView1(categoryId);
                 }
               

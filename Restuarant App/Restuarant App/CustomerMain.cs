@@ -12,9 +12,17 @@ namespace Restuarant_App
 {
     public partial class CustomerMain : Form
     {
-        public CustomerMain()
+        public string loginTime;
+        public string name;
+        public int cid;
+
+
+        public CustomerMain(string time,string name,int cid)
         {
             InitializeComponent();
+            this.loginTime = time;
+            this.name = name;
+            this.cid= cid;
         }
         public void addControls(Form F)
         {
@@ -40,6 +48,7 @@ namespace Restuarant_App
         private void button1_Click(object sender, EventArgs e)
         {
             addControls(new CMenu());
+            label3.Text = "Main Menu";
 
         }
 
@@ -51,7 +60,8 @@ namespace Restuarant_App
 
         private void button3_Click(object sender, EventArgs e)
         {
-            addControls(new CReserve());
+            addControls(new CReserve(name,cid));
+            label3.Text = "Table Reservation";
 
         }
 
@@ -63,7 +73,9 @@ namespace Restuarant_App
 
         private void button5_Click(object sender, EventArgs e)
         {
-            addControls(new CSuggestion());
+            addControls(new CSuggestion(cid,name));
+            label3.Text = "Suggestion";
+
 
         }
 
@@ -75,7 +87,8 @@ namespace Restuarant_App
 
         private void button7_Click(object sender, EventArgs e)
         {
-            addControls(new CProfile());
+            addControls(new CProfile(loginTime,name));
+            label3.Text = "My Profile";
 
         }
 
@@ -87,6 +100,7 @@ namespace Restuarant_App
         private void button10_Click(object sender, EventArgs e)
         {
             addControls(new Home());
+            label3.Text= "Home";
         }
     }
 }

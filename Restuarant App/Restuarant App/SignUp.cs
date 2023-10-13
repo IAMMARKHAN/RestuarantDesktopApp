@@ -203,14 +203,7 @@ namespace Restuarant_App
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar))
-            {
-                // Check if the entered character is not an alphabet
-                if (!char.IsLetter(e.KeyChar))
-                {
-                    e.Handled = true; // Block the character if it's not an alphabet
-                }
-            }
+           
         }
     }
 }

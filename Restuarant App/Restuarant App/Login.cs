@@ -78,21 +78,26 @@ namespace Restuarant_App
                                 {
                                     this.Hide();
                                     DateTime now = DateTime.Now;
-                                    loginTime = now.ToString("hh:mm:ss tt");
-
+                                    string loginTime = now.ToString("hh:mm:ss tt");
                                     AdminMain A = new AdminMain(loginTime, userName);
                                     A.Show();
                                 }
                                 else
                                 {
+                                    reader.Close();
+                                    string query3 = "SELECT id FROM dbo.[user] WHERE email = @Email ";
+                                    var con3 = Configuration.getInstance().getConnection();
+                                    SqlCommand command3 = new SqlCommand(query3, con3);
+                                    command3.Parameters.AddWithValue("@Email", email); // replace with the name of your username input textbox
+                                    int count3 = (int)command3.ExecuteScalar();
+                                    DateTime now = DateTime.Now;
+                                    string loginTime = now.ToString("hh:mm:ss tt");
                                     this.Hide();
-                                    CustomerMain A = new CustomerMain();
+                                    CustomerMain A = new CustomerMain(loginTime, userName, count3);
                                     A.Show();
                                 }
                             }
                         }
-
-                        
                     }
                     else
                     {
@@ -103,13 +108,13 @@ namespace Restuarant_App
                 {
                     LogExceptionToDatabase(ex);
                     MessageBox.Show("An Error Occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 }
             }
             else
             {
                 MessageBox.Show("Enter All Fields!");
             }
+
         }
         private void LogExceptionToDatabase(Exception ex)
         {

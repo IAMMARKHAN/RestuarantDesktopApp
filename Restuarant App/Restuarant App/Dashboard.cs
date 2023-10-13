@@ -24,29 +24,79 @@ namespace Restuarant_App
 
         private void Dashboard_Load(object sender, EventArgs e)
         {
-            //Graphs Implemented Below
-
             // Line Chart (chartLine)
-            chartLine.Titles.Add("Line Graph");
-            chartLine.ChartAreas[0].AxisX.Title = "Days";
-            chartLine.ChartAreas[0].AxisY.Title = "Table Reservation";
+            chartLine.Titles.Add("Table Reservation");
+            chartLine.ChartAreas[0].AxisX.Title = "Reservation Date";
+            chartLine.ChartAreas[0].AxisY.Title = "Total Reserved Table";
             Series seriesLine = chartLine.Series.Add("Reservation");
-            seriesLine.Points.AddXY("Point 1", 10);
-            seriesLine.Points.AddXY("Point 2", 20);
-            seriesLine.Points.AddXY("Point 3", 15);
-            seriesLine.Points.AddXY("Point 4", 25);
-            seriesLine.ChartType = SeriesChartType.Line;
+            seriesLine.ChartType = SeriesChartType.Bubble; // Change to Area
 
-            // Bar Chart (chartBar)
-            chartBar.Titles.Add("Area Chart");
-            chartBar.ChartAreas[0].AxisX.Title = "Days";
-            chartBar.ChartAreas[0].AxisY.Title = "Orders Count";
-            Series seriesBar = chartBar.Series.Add("Orders");
-            seriesBar.Points.AddXY("Category 1", 10);
-            seriesBar.Points.AddXY("Category 2", 20);
-            seriesBar.Points.AddXY("Category 3", 15);
-            seriesBar.Points.AddXY("Category 4", 25);
-            seriesBar.ChartType = SeriesChartType.Area;
+            // Database connection
+            var con2 = Configuration.getInstance().getConnection();
+
+            string sqlQuery1 = "SELECT CreatedAt, COUNT(*) AS ReservationCount FROM tableReservation GROUP BY CreatedAt ORDER BY CreatedAt";
+
+            // Create a SqlCommand and execute the query
+            SqlCommand cmd2 = new SqlCommand(sqlQuery1, con2);
+
+            try
+            {
+                SqlDataReader reader = cmd2.ExecuteReader();
+
+                // Populate the chart with data from the database
+                while (reader.Read())
+                {
+                    DateTime date = reader.GetDateTime(0);
+                    int reservationCount = reader.GetInt32(1);
+                    seriesLine.Points.AddXY(date.ToShortDateString(), reservationCount);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions here
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            // Database connection
+            var con = Configuration.getInstance().getConnection();
+
+            string sqlQuery = "SELECT CONVERT(DATE, CreatedAt) AS OrderDate, COUNT(*) AS OrderCount FROM orders GROUP BY CONVERT(DATE, CreatedAt) ORDER BY OrderDate";
+
+            // Create a SqlCommand and execute the query
+            SqlCommand cmd = new SqlCommand(sqlQuery, con);
+
+            try
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                // Bar Chart (chartBar)
+                chartBar.Titles.Add("Orders Per Day");
+                chartBar.ChartAreas[0].AxisX.Title = "Order Punch Date";
+                chartBar.ChartAreas[0].AxisY.Title = "Orders Count";
+                Series seriesBar = chartBar.Series.Add("Orders");
+                seriesBar.ChartType = SeriesChartType.Area;
+
+                // Populate the chart with data from the database
+                while (reader.Read())
+                {
+                    DateTime date = reader.GetDateTime(0);
+                    int orderCount = reader.GetInt32(1);
+
+                    seriesBar.Points.AddXY(date.ToShortDateString(), orderCount);
+                }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions here
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+
+
             staff = GetStaffCount();
             order = GetOrdersCount();
             table=GetTableCount();

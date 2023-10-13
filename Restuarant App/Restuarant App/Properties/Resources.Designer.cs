@@ -63,6 +63,16 @@ namespace Restuarant_App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _142655_picture_feedback_free_download_png_hd {
+            get {
+                object obj = ResourceManager.GetObject("142655-picture-feedback-free-download-png-hd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _298756_dashboard_icon {
             get {
                 object obj = ResourceManager.GetObject("298756_dashboard_icon", resourceCulture);
@@ -86,6 +96,16 @@ namespace Restuarant_App.Properties {
         internal static System.Drawing.Bitmap _298756_dashboard_icon1 {
             get {
                 object obj = ResourceManager.GetObject("298756_dashboard_icon1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _5a8302ebabc3d121aba7121f {
+            get {
+                object obj = ResourceManager.GetObject("5a8302ebabc3d121aba7121f", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -259,6 +279,16 @@ namespace Restuarant_App.Properties {
             get {
                 object obj = ResourceManager.GetObject("png-transparent-food-icon-restaurant-logo-icon-design-cdr-chef-drawing-cartoon-th" +
                         "umbnail-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngegg {
+            get {
+                object obj = ResourceManager.GetObject("pngegg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
