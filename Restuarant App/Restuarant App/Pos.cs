@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using iTextSharp.text;
 using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Crypto.Engines;
 
 namespace Restuarant_App
 {
@@ -91,7 +92,6 @@ namespace Restuarant_App
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
-
         }
         public (string Name, int Price) FindMethod(int id)
         {
@@ -247,7 +247,6 @@ namespace Restuarant_App
                 {
                     var itemData = FindMethod(idToDelete);
                     var cat = FindMethod1(category);
-
                     if (itemData.Name != null)
                     {
                         string itemName = itemData.Name;
@@ -256,7 +255,6 @@ namespace Restuarant_App
                         label5.Text = (int.Parse(label5.Text) + itemPrice).ToString();
                         decimal tax = (decimal.Parse(label5.Text) ) * 0.16m;
                         label7.Text = (int.Parse(label5.Text) + tax).ToString();
-
                     }
 
                 }
@@ -280,7 +278,9 @@ namespace Restuarant_App
             label5.Text = "0";
             label7.Text = "0";
             orderType = "";
-            textBox1.Text = "";
+            txtAddress.Text = "";
+            txtName.Text = "";
+
 
         }
         public void Populate(string name)
@@ -394,41 +394,41 @@ namespace Restuarant_App
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            bool c1=false, c2=false, c3=false;
+            bool c1 =false, c2=false, c3=false;
             if (orderType == "")
             {
-                MessageBox.Show("Please select the order type !");
+                MessageBox.Show("Please Select The Order Type !");
             }
             else
             {
                 c1= true;
             }
-            if (textBox1.Text == "" || textBox1.Text == "Enter Customer Name")
+        
+            if (txtName.Text == "" || txtAddress.Text=="")
             {
-                MessageBox.Show("Enter valid customer name  !");
+                MessageBox.Show("Enter Customer Information !");
             }
             else
             {
-                c2=true;
+                c2 = true;
             }
             if (dataGridView1.Rows.Count==0)
             {
-                MessageBox.Show("Add any item first !");
+                MessageBox.Show("Add Any Item Into Cart First !");
             }
             else
             {
                 c3 = true;
             }
+    
             if (c1 == true && c2 == true && c3 == true)
             {
-                DialogResult result = MessageBox.Show("Printing Bill ! Is Is Paid ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Printing Bill ! Is It Paid ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                // Check if the user clicked "Yes"
                 if (result == DialogResult.Yes)
                 {
                     string savePath;
 
-                    // Show the Save File Dialog to get the file path
                     using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
                         saveFileDialog.Filter = "PDF Files|*.pdf";
@@ -437,14 +437,11 @@ namespace Restuarant_App
                             if (saveFileDialog.ShowDialog() == DialogResult.OK)
                             {
                                 savePath = saveFileDialog.FileName;
-
                                 // Get the desktop directory path
                                 Document document = new Document();
-
                                 // Create a PDF document
                                 PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                                 document.Open();
-
                                 // Add header information to the PDF
                                 Paragraph title = new Paragraph("Restaurant Management System");
                                 title.Alignment = Element.ALIGN_CENTER;
@@ -492,7 +489,6 @@ namespace Restuarant_App
                                 document.Close();
 
                                 MessageBox.Show("Order punched and Bill saved successfully !");
-                                button6_Click(null, null);
 
                             }
                         }
@@ -504,10 +500,10 @@ namespace Restuarant_App
                         try
                         {
                             var con = Configuration.getInstance().getConnection();
-                            
+                           
 
                             // Insert data into menu table with the correct CategoryId
-                            string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I)";
+                            string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer,Address,Items) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I,@J,@K)";
                             SqlCommand command = new SqlCommand(insertQuery, con);
                             command.Parameters.AddWithValue("@A", dataGridView1.Rows.Count);
                             command.Parameters.AddWithValue("@B", orderType); // Set CategoryId here
@@ -515,22 +511,31 @@ namespace Restuarant_App
                             if(orderType=="Dine In")
                             {
                             command.Parameters.AddWithValue("@D", "Waiter");
+                                command.Parameters.AddWithValue("@J","Not Required");
                             }
                             else if(orderType=="Delivery")
-                            {
+                            {  
                                 command.Parameters.AddWithValue("@D", "Delivery Boy");
+                                command.Parameters.AddWithValue("@J",txtAddress.Text.ToString());
+
                             }
                             else
                             {
                                 command.Parameters.AddWithValue("@D", "Self Service");
+                                command.Parameters.AddWithValue("@J", "Not Required");
 
                             }
                             command.Parameters.AddWithValue("@E", "Paid");
                             command.Parameters.AddWithValue("@F", false);
                             command.Parameters.AddWithValue("@G", DateTime.Now);
                             command.Parameters.AddWithValue("@H", DateTime.Now);
-                            command.Parameters.AddWithValue("@I",textBox1.Text.ToString());
+                            command.Parameters.AddWithValue("@I",txtName.Text.ToString());
+                            string columnName = "Name";
+                            string valuesList = string.Join(",", dataGridView1.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells[columnName].Value?.ToString() ?? "")));
+                            command.Parameters.AddWithValue("@K", valuesList);
                             int rowsAffected = command.ExecuteNonQuery();
+                            button6_Click(null, null);
+
                         }
                         catch (Exception ex)
                         {
@@ -604,7 +609,6 @@ namespace Restuarant_App
                                 document.Add(P2);
                                 document.Close();
                                 MessageBox.Show("Order Punched and Bill saved successfully !");
-                                button6_Click(null, null);
 
                             }
                         }
@@ -615,10 +619,8 @@ namespace Restuarant_App
                         try
                         {
                             var con = Configuration.getInstance().getConnection();
-
-
                             // Insert data into menu table with the correct CategoryId
-                            string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I)";
+                            string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer,Address,Items) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I,@J,@K)";
                             SqlCommand command = new SqlCommand(insertQuery, con);
                             command.Parameters.AddWithValue("@A", dataGridView1.Rows.Count);
                             command.Parameters.AddWithValue("@B", orderType); // Set CategoryId here
@@ -626,22 +628,32 @@ namespace Restuarant_App
                             if (orderType == "Dine In")
                             {
                                 command.Parameters.AddWithValue("@D", "Waiter");
+                                command.Parameters.AddWithValue("@J", "Not Required");
+
                             }
                             else if (orderType == "Delivery")
                             {
                                 command.Parameters.AddWithValue("@D", "Delivery Boy");
+                                command.Parameters.AddWithValue("@J", txtAddress.Text.ToString());
+
                             }
                             else
                             {
                                 command.Parameters.AddWithValue("@D", "Self Service");
+                                command.Parameters.AddWithValue("@J", "Not Required");
 
                             }
                             command.Parameters.AddWithValue("@E", "Unpaid");
                             command.Parameters.AddWithValue("@F", true);
                             command.Parameters.AddWithValue("@G", DateTime.Now);
                             command.Parameters.AddWithValue("@H", DateTime.Now);
-                            command.Parameters.AddWithValue("@I", textBox1.Text.ToString());
+                            command.Parameters.AddWithValue("@I", txtAddress.Text.ToString());
+                            string columnName = "Name";
+                            string valuesList = string.Join(",", dataGridView1.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells[columnName].Value?.ToString() ?? "")));
+                            command.Parameters.AddWithValue("@K", valuesList);
                             int rowsAffected = command.ExecuteNonQuery();
+                            button6_Click(null, null);
+
                         }
                         catch (Exception ex)
                         {
@@ -658,14 +670,7 @@ namespace Restuarant_App
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar))
-            {
-                // Check if the entered character is not an alphabet
-                if (!char.IsLetter(e.KeyChar))
-                {
-                    e.Handled = true; // Block the character if it's not an alphabet
-                }
-            }
+            
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -683,7 +688,19 @@ namespace Restuarant_App
            
         }
 
-        private void textBox1_KeyPress_1(object sender, KeyPressEventArgs e)
+     
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
+
+        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar))
             {
@@ -693,6 +710,13 @@ namespace Restuarant_App
                     e.Handled = true; // Block the character if it's not an alphabet
                 }
             }
+            
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

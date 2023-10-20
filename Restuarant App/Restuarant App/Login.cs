@@ -85,15 +85,23 @@ namespace Restuarant_App
                                 else
                                 {
                                     reader.Close();
-                                    string query3 = "SELECT id FROM dbo.[user] WHERE email = @Email ";
+                                    string query3 = "SELECT id,address FROM dbo.[user] WHERE email = @Email ";
                                     var con3 = Configuration.getInstance().getConnection();
                                     SqlCommand command3 = new SqlCommand(query3, con3);
                                     command3.Parameters.AddWithValue("@Email", email); // replace with the name of your username input textbox
                                     int count3 = (int)command3.ExecuteScalar();
+                                    string userAddress = string.Empty;
+                                    using (SqlDataReader reader5 = command3.ExecuteReader())
+                                    {
+                                        if (reader5.Read())
+                                        {
+                                            userAddress = reader5["Address"].ToString();
+                                        }
+                                    }
                                     DateTime now = DateTime.Now;
                                     string loginTime = now.ToString("hh:mm:ss tt");
                                     this.Hide();
-                                    CustomerMain A = new CustomerMain(loginTime, userName, count3);
+                                    CustomerMain A = new CustomerMain(loginTime, userName, count3,userAddress);
                                     A.Show();
                                 }
                             }

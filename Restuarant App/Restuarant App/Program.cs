@@ -10,13 +10,13 @@ namespace Restuarant_App
     {
         /// <summary>
         /// The main entry point for the application.
-        /// </summary>
+        /// </summary>InvalidOperationException: 'Chart Area Axes - The chart area contains incompatible chart types. For example, bar charts and column charts cannot exist in the same chart area.'
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CustomerMain("","",0)) ;
+            Application.Run(new AdminMain("","")) ;
         }
     }
 }

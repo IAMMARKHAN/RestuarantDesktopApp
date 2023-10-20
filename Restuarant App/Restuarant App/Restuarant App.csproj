@@ -65,6 +65,7 @@
     <Compile Include="AdminMain.Designer.cs">
       <DependentUpon>AdminMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="CartItem.cs" />
     <Compile Include="Categories.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,12 +77,6 @@
     </Compile>
     <Compile Include="CCart.Designer.cs">
       <DependentUpon>CCart.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CDeals.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CDeals.Designer.cs">
-      <DependentUpon>CDeals.cs</DependentUpon>
     </Compile>
     <Compile Include="CMenu.cs">
       <SubType>Form</SubType>
@@ -283,9 +278,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CCart.resx">
       <DependentUpon>CCart.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CDeals.resx">
-      <DependentUpon>CDeals.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CMenu.resx">
       <DependentUpon>CMenu.cs</DependentUpon>
@@ -514,6 +506,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\142655-picture-feedback-free-download-png-hd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pngegg %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

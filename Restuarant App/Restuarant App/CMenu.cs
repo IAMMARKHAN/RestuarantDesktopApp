@@ -140,11 +140,34 @@ namespace Restuarant_App
                 // Check if the user clicked "Yes"
                 if (result == DialogResult.Yes)
                 {
+                    // Assuming you have a reference to CCart.cs
+                    // You can add a row to dataGridView1 in CCart.cs like this:
+
+                    // Create a new row for dataGridView1
+                    DataGridViewRow newRow = new DataGridViewRow();
+                    DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
+                    string idColumnName = "Id";
+                    string nameColumnName = "Name";
+                    string priceColumnName = "Price";
+                    string sizeColumnName = "Size";
+
+
+                    int idValue = Convert.ToInt32(row.Cells[idColumnName].Value);
+                    string nameValue = row.Cells[nameColumnName].Value.ToString();
+                    int priceValue = Convert.ToInt32(row.Cells[priceColumnName].Value);
+                    string sizeValue = row.Cells[sizeColumnName].Value.ToString();
+                    CCart.cartItems.Add(new CartItem
+                    {
+                        Id =idValue,
+                        Name = nameValue,
+                        Price = priceValue,
+                        Size = sizeValue
+                    });
+                    MessageBox.Show("Added Successfully !", "Info", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 }
 
-                }
+            }
         }
-
         private void CMenu_Load(object sender, EventArgs e)
         {
             try

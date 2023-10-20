@@ -23,13 +23,15 @@ namespace Restuarant_App
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
-        {
-            // Line Chart (chartLine)
-            chartLine.Titles.Add("Table Reservation");
+        {  // Line Chart (chartLine)
+            chartLine.Titles.Add("");
             chartLine.ChartAreas[0].AxisX.Title = "Reservation Date";
             chartLine.ChartAreas[0].AxisY.Title = "Total Reserved Table";
-            Series seriesLine = chartLine.Series.Add("Reservation");
-            seriesLine.ChartType = SeriesChartType.Bubble; // Change to Area
+            Series seriesLine = chartLine.Series.Add("");
+            seriesLine.ChartType = SeriesChartType.Point; // Use Point for Point chart
+            seriesLine.MarkerStyle = MarkerStyle.Circle; // Set the marker style to a circle
+            seriesLine.MarkerSize = 20; // Set the marker size to make it larger
+            seriesLine.Color = Color.Red; // Set the marker color to red
 
             // Database connection
             var con2 = Configuration.getInstance().getConnection();
@@ -42,8 +44,6 @@ namespace Restuarant_App
             try
             {
                 SqlDataReader reader = cmd2.ExecuteReader();
-
-                // Populate the chart with data from the database
                 while (reader.Read())
                 {
                     DateTime date = reader.GetDateTime(0);
@@ -59,25 +59,20 @@ namespace Restuarant_App
                 Console.WriteLine("Error: " + ex.Message);
             }
 
-            // Database connection
             var con = Configuration.getInstance().getConnection();
 
             string sqlQuery = "SELECT CONVERT(DATE, CreatedAt) AS OrderDate, COUNT(*) AS OrderCount FROM orders GROUP BY CONVERT(DATE, CreatedAt) ORDER BY OrderDate";
-
-            // Create a SqlCommand and execute the query
             SqlCommand cmd = new SqlCommand(sqlQuery, con);
-
             try
             {
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 // Bar Chart (chartBar)
-                chartBar.Titles.Add("Orders Per Day");
+                chartBar.Titles.Add("");
                 chartBar.ChartAreas[0].AxisX.Title = "Order Punch Date";
                 chartBar.ChartAreas[0].AxisY.Title = "Orders Count";
                 Series seriesBar = chartBar.Series.Add("Orders");
                 seriesBar.ChartType = SeriesChartType.Area;
-
                 // Populate the chart with data from the database
                 while (reader.Read())
                 {
@@ -99,14 +94,12 @@ namespace Restuarant_App
 
             staff = GetStaffCount();
             order = GetOrdersCount();
-            table=GetTableCount();
-            category=GetCategoriesCount();
-            label6.Text=category.ToString();
-            label7.Text=table.ToString();
-            label8.Text=staff.ToString();
-            label5.Text=order.ToString();
-
-
+            table = GetTableCount();
+            category = GetCategoriesCount();
+            label6.Text = category.ToString();
+            label7.Text = table.ToString();
+            label8.Text = staff.ToString();
+            label5.Text = order.ToString();
 
         }
         public int GetTableCount()

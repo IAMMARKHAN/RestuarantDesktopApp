@@ -33,6 +33,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button7 = new System.Windows.Forms.Button();
@@ -40,11 +41,9 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -113,6 +112,18 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(861, 52);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Bahnschrift Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(347, 6);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 39);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Home";
+            // 
             // button10
             // 
             this.button10.BackColor = System.Drawing.Color.Red;
@@ -134,7 +145,6 @@
             this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.pictureBox1);
@@ -151,7 +161,7 @@
             this.button7.ForeColor = System.Drawing.Color.White;
             this.button7.Image = global::Restuarant_App.Properties.Resources.profile_32_48;
             this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(7, 475);
+            this.button7.Location = new System.Drawing.Point(7, 424);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(177, 44);
             this.button7.TabIndex = 7;
@@ -166,7 +176,7 @@
             this.button6.ForeColor = System.Drawing.Color.White;
             this.button6.Image = global::Restuarant_App.Properties.Resources.cart_22_48;
             this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(7, 425);
+            this.button6.Location = new System.Drawing.Point(7, 374);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(177, 44);
             this.button6.TabIndex = 6;
@@ -181,7 +191,7 @@
             this.button5.ForeColor = System.Drawing.Color.White;
             this.button5.Image = global::Restuarant_App.Properties.Resources.popular_recommendation_48;
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(7, 375);
+            this.button5.Location = new System.Drawing.Point(7, 324);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(177, 44);
             this.button5.TabIndex = 5;
@@ -196,7 +206,7 @@
             this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Image = global::Restuarant_App.Properties.Resources.orders_3_48;
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(7, 325);
+            this.button4.Location = new System.Drawing.Point(7, 274);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(177, 44);
             this.button4.TabIndex = 4;
@@ -211,28 +221,13 @@
             this.button3.ForeColor = System.Drawing.Color.White;
             this.button3.Image = global::Restuarant_App.Properties.Resources.table_13_48;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(7, 275);
+            this.button3.Location = new System.Drawing.Point(7, 225);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(177, 44);
             this.button3.TabIndex = 3;
             this.button3.Text = "Reserve";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(130)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Image = global::Restuarant_App.Properties.Resources.fire_20_48;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(7, 225);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(177, 44);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Deals";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -269,18 +264,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Bahnschrift Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(347, 6);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 39);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Home";
             // 
             // CustomerMain
             // 
@@ -319,7 +302,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;

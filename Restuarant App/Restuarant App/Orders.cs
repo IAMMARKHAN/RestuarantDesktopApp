@@ -24,6 +24,7 @@ namespace Restuarant_App
         {
             PopulateGrid();
 
+
         }
         public void PopulateGrid()
         {
@@ -36,19 +37,18 @@ namespace Restuarant_App
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
-            
                 dataGridView1.DataSource = dataTable;
+
+                
             }
             catch (Exception ex)
             {
                 LogExceptionToDatabase(ex);
                 MessageBox.Show("Error: " + ex.Message);
             }
-
-
-
         }
-        
+
+
         private void LogExceptionToDatabase(Exception ex)
         {
             var con = Configuration.getInstance().getConnection();
@@ -58,7 +58,6 @@ namespace Restuarant_App
             command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
             command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
             command.Parameters.AddWithValue("@LogTime", DateTime.Now);
-
             try
             {
                 command.ExecuteNonQuery();
@@ -70,7 +69,6 @@ namespace Restuarant_App
             }
         }
 
-        // Helper function to extract calling method name from stack trace
         private string GetCallingMethodName()
         {
             var frames = new StackTrace(true).GetFrames();
@@ -141,6 +139,20 @@ namespace Restuarant_App
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                // Check if the current cell's column is "Status" and its value is "Unpaid".
+                if (dataGridView1.Columns[e.ColumnIndex].Name == "Status" && e.Value.ToString() == "Unpaid")
+                {
+                    // Set the background color to red for the entire row.
+                    e.CellStyle.BackColor = Color.Red;
+                    e.CellStyle.ForeColor = Color.White; // You can set text color as well.
+                }
+            }
         }
     }
 }

@@ -51,7 +51,6 @@ D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.AdminMain.resources
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Categories.resources
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CCart.resources
-D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CDeals.resources
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CMenu.resources
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.COrders.resources
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CProfile.resources

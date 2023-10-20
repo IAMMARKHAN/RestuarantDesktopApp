@@ -15,14 +15,15 @@ namespace Restuarant_App
         public string loginTime;
         public string name;
         public int cid;
+        public string address;
 
-
-        public CustomerMain(string time,string name,int cid)
+        public CustomerMain(string time,string name,int cid,string Addres)
         {
             InitializeComponent();
             this.loginTime = time;
             this.name = name;
             this.cid= cid;
+            this.address = Addres;
         }
         public void addControls(Form F)
         {
@@ -34,7 +35,6 @@ namespace Restuarant_App
         }
         private void CustomerMain_Load(object sender, EventArgs e)
         {
-            button2.FlatAppearance.BorderSize = 0;
             button3.FlatAppearance.BorderSize = 0;
             button4.FlatAppearance.BorderSize = 0;
             button5.FlatAppearance.BorderSize = 0;
@@ -54,7 +54,6 @@ namespace Restuarant_App
 
         private void button2_Click(object sender, EventArgs e)
         {
-            addControls(new CDeals());
 
         }
 
@@ -68,6 +67,8 @@ namespace Restuarant_App
         private void button4_Click(object sender, EventArgs e)
         {
             addControls(new COrders());
+            label3.Text = "Order";
+
 
         }
 
@@ -81,7 +82,8 @@ namespace Restuarant_App
 
         private void button6_Click(object sender, EventArgs e)
         {
-            addControls(new CCart());
+            addControls(new CCart(name,address));
+            label3.Text = "Cart";
 
         }
 

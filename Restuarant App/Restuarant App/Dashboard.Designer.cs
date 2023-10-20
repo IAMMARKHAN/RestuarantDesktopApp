@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -271,17 +271,17 @@
             // chartLine
             // 
             this.chartLine.BackColor = System.Drawing.Color.Transparent;
-            chartArea7.Name = "ChartArea1";
-            this.chartLine.ChartAreas.Add(chartArea7);
+            chartArea1.Name = "ChartArea1";
+            this.chartLine.ChartAreas.Add(chartArea1);
             this.chartLine.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend7.Name = "Legend1";
-            this.chartLine.Legends.Add(legend7);
+            legend1.Name = "Legend1";
+            this.chartLine.Legends.Add(legend1);
             this.chartLine.Location = new System.Drawing.Point(0, 0);
             this.chartLine.Name = "chartLine";
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.chartLine.Series.Add(series7);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartLine.Series.Add(series1);
             this.chartLine.Size = new System.Drawing.Size(394, 282);
             this.chartLine.TabIndex = 0;
             this.chartLine.Text = "chart2";
@@ -299,17 +299,17 @@
             // chartBar
             // 
             this.chartBar.BackColor = System.Drawing.Color.Transparent;
-            chartArea8.Name = "ChartArea1";
-            this.chartBar.ChartAreas.Add(chartArea8);
+            chartArea2.Name = "ChartArea1";
+            this.chartBar.ChartAreas.Add(chartArea2);
             this.chartBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend8.Name = "Legend1";
-            this.chartBar.Legends.Add(legend8);
+            legend2.Name = "Legend1";
+            this.chartBar.Legends.Add(legend2);
             this.chartBar.Location = new System.Drawing.Point(0, 0);
             this.chartBar.Name = "chartBar";
-            series8.ChartArea = "ChartArea1";
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.chartBar.Series.Add(series8);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartBar.Series.Add(series2);
             this.chartBar.Size = new System.Drawing.Size(394, 282);
             this.chartBar.TabIndex = 0;
             this.chartBar.Text = "chart1";
