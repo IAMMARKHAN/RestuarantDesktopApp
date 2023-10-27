@@ -24,7 +24,7 @@ namespace Restuarant_App
 
         private void Categories_Load(object sender, EventArgs e)
         {
-            PopulateDataGridView(); // Call this method to populate the DataGridView
+            PopulateDataGridView(); 
         }
         public void PopulateDataGridView()
         {
