@@ -113,6 +113,26 @@ namespace Restuarant_App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _5a830307abc3d121aba71223 {
+            get {
+                object obj = ResourceManager.GetObject("5a830307abc3d121aba71223", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _774684_pdf_document_extension_file_format_icon {
+            get {
+                object obj = ResourceManager.GetObject("774684_pdf_document_extension_file_format_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap app_34_48 {
             get {
                 object obj = ResourceManager.GetObject("app-34-48", resourceCulture);
@@ -146,6 +166,16 @@ namespace Restuarant_App.Properties {
         internal static System.Drawing.Bitmap category_18_48 {
             get {
                 object obj = ResourceManager.GetObject("category-18-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap create_account {
+            get {
+                object obj = ResourceManager.GetObject("create-account", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -237,6 +267,26 @@ namespace Restuarant_App.Properties {
         internal static System.Drawing.Bitmap good_food {
             get {
                 object obj = ResourceManager.GetObject("good food", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap history_36_256 {
+            get {
+                object obj = ResourceManager.GetObject("history-36-256", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap history_36_48 {
+            get {
+                object obj = ResourceManager.GetObject("history-36-48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -396,9 +446,29 @@ namespace Restuarant_App.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap profile {
+            get {
+                object obj = ResourceManager.GetObject("profile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap profile_32_48 {
             get {
                 object obj = ResourceManager.GetObject("profile-32-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap restaurant_icon_png_4895 {
+            get {
+                object obj = ResourceManager.GetObject("restaurant-icon-png-4895", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

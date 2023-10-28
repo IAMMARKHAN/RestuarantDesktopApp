@@ -66,8 +66,8 @@ namespace Restuarant_App
 
         private void button4_Click(object sender, EventArgs e)
         {
-            addControls(new COrders());
-            label3.Text = "Order";
+            addControls(new COrders(name));
+            label3.Text = "Orders History";
 
 
         }

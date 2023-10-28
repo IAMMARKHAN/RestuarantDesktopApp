@@ -510,5 +510,26 @@
   <ItemGroup>
     <None Include="Resources\pngegg %281%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\774684_pdf_document_extension_file_format_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\create-account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restaurant-icon-png-4895.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5a830307abc3d121aba71223.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\history-36-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\history-36-256.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
