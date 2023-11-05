@@ -295,7 +295,7 @@ namespace Restuarant_App
             var con = Configuration.getInstance().getConnection();
             DataTable staffData = new DataTable();
 
-            string query = "SELECT * FROM dbo.[orders]";
+            string query = "SELECT Quantity,Type,Items,Amount,Status,Active,CreatedAt,Customer,Address FROM dbo.[orders]";
             SqlCommand cmd = new SqlCommand(query, con);
 
             try
@@ -386,7 +386,7 @@ namespace Restuarant_App
             var con = Configuration.getInstance().getConnection();
             DataTable staffData = new DataTable();
 
-            string query = "SELECT * FROM dbo.[orders] WHERE Type = 'Dine In'";
+            string query = "SELECT Quantity,Type,Items,Amount,Staff,Status,CreatedAt,Customer,Address FROM dbo.[orders] WHERE Type = 'Dine In'";
             SqlCommand cmd = new SqlCommand(query, con);
 
             try

@@ -35,8 +35,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -53,9 +53,9 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.88889F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.66667F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.22222F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.77778F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.77778F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.444445F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel2.TabIndex = 2;
             this.tableLayoutPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel2_Paint);
@@ -70,13 +70,13 @@
             this.tableLayoutPanel3.Controls.Add(this.button1, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.button3, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 115);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 110);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.83278F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.16722F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(794, 240);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(794, 299);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // button4
@@ -87,9 +87,9 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(3, 123);
+            this.button4.Location = new System.Drawing.Point(3, 152);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(389, 114);
+            this.button4.Size = new System.Drawing.Size(389, 144);
             this.button4.TabIndex = 10;
             this.button4.TabStop = false;
             this.button4.Text = "Menu List Report";
@@ -104,9 +104,9 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button2.Location = new System.Drawing.Point(398, 123);
+            this.button2.Location = new System.Drawing.Point(398, 152);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(393, 114);
+            this.button2.Size = new System.Drawing.Size(393, 144);
             this.button2.TabIndex = 8;
             this.button2.TabStop = false;
             this.button2.Text = "Dine In Orders Report";
@@ -123,7 +123,7 @@
             this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(389, 114);
+            this.button1.Size = new System.Drawing.Size(389, 143);
             this.button1.TabIndex = 7;
             this.button1.TabStop = false;
             this.button1.Text = "Orders History Report";
@@ -140,7 +140,7 @@
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button3.Location = new System.Drawing.Point(398, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(393, 114);
+            this.button3.Size = new System.Drawing.Size(393, 143);
             this.button3.TabIndex = 9;
             this.button3.TabStop = false;
             this.button3.Text = "Total Staff Report";
@@ -161,22 +161,9 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 106);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(794, 101);
             this.tableLayoutPanel1.TabIndex = 2;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Impact", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(130)))));
-            this.label3.Location = new System.Drawing.Point(275, 23);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(341, 45);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Generate Pdf Reports";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox2
             // 
@@ -184,10 +171,23 @@
             this.pictureBox2.Image = global::Restuarant_App.Properties.Resources._774684_pdf_document_extension_file_format_icon;
             this.pictureBox2.Location = new System.Drawing.Point(175, 3);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(81, 85);
+            this.pictureBox2.Size = new System.Drawing.Size(81, 95);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 3;
             this.pictureBox2.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Impact", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(130)))));
+            this.label3.Location = new System.Drawing.Point(275, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(341, 45);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Generate Pdf Reports";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Reports
             // 
