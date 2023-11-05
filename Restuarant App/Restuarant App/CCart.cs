@@ -53,8 +53,7 @@ namespace Restuarant_App
             dataGridView2.Rows.Clear(); 
             foreach (var item in cartItems)
             {
-                // Add a row to the DataGridView
-                dataGridView2.Rows.Add(item.Id, item.Name, item.Price, item.Size);
+                dataGridView2.Rows.Add(item.Id,item.Name, item.Price, item.Size);
             }
         }
 
@@ -106,9 +105,10 @@ namespace Restuarant_App
                                         document.Add(new Paragraph("\n"));
                                         document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
                                         document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
-                                        document.Add(new Paragraph("Report Type: Order Bill"));
-                                        document.Add(new Paragraph("Status: Un Paid"));
-                                        document.Add(new Paragraph("User : Customer"));
+                                        document.Add(new Paragraph("Report Type: Order Invoice"));
+                                        document.Add(new Paragraph("Status: Unpaid"));
+                                        document.Add(new Paragraph("User Type: Customer"));
+                                        
 
                                         document.Add(new Paragraph("\n"));
                                         // Create a table for the DataGridView content

@@ -104,5 +104,10 @@ namespace Restuarant_App
             addControls(new Home());
             label3.Text= "Home";
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
