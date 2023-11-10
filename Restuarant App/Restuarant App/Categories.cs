@@ -52,8 +52,8 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
             command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
             command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
-            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
-            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); 
+            command.Parameters.AddWithValue("@FileName", GetFileName()); 
             command.Parameters.AddWithValue("@LogTime", DateTime.Now);
 
             try
@@ -62,24 +62,20 @@ namespace Restuarant_App
             }
             catch (Exception logEx)
             {
-                // Handle any exceptions that may occur during the logging operation (optional)
                 Console.WriteLine("Error while logging exception: " + logEx.Message);
             }
         }
 
-        // Helper function to extract calling method name from stack trace
         private string GetCallingMethodName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 return frames[3].GetMethod().Name;
             }
             return "Unknown";
         }
 
-        // Helper function to extract file name from stack trace
         private string GetFileName()
         {
             var frames = new StackTrace(true).GetFrames();
@@ -132,14 +128,11 @@ namespace Restuarant_App
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Check if the delete button is clicked (assuming the column name is "DELETE")
             if (e.ColumnIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "DELETE")
             {
-                // Assuming you have an ID column in your DataGridView (change the column index accordingly)
-                int rowIndex = e.RowIndex; // Get the clicked row index
+                int rowIndex = e.RowIndex;
                 int idToDelete = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["Id"].Value);
 
-                // Ask for confirmation
                 DialogResult result = MessageBox.Show("Are you sure you want to in-active this?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
@@ -157,7 +150,6 @@ namespace Restuarant_App
                         }
                         else
                         {
-                            // Handle the case where the record was not found in the database
                             MessageBox.Show("Record Not Found or Not Updated.");
                         }
                     }
@@ -176,7 +168,7 @@ namespace Restuarant_App
 
             if (e.ColumnIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "EDIT")
             {
-                int rowIndex = e.RowIndex; // Get the clicked row index
+                int rowIndex = e.RowIndex;
                 string name = Convert.ToString(dataGridView1.Rows[rowIndex].Cells["Name"].Value);
                 string type = Convert.ToString(dataGridView1.Rows[rowIndex].Cells["Type"].Value);
                 int id = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["Id"].Value);

@@ -48,7 +48,6 @@ namespace Restuarant_App._DL
             }
             catch (Exception ex)
             {
-                // Handle exceptions here
                 throw;
             }
             finally

@@ -69,7 +69,7 @@ namespace Restuarant_App
                         string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer,Address,Items) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I,@J,@K)";
                         SqlCommand command = new SqlCommand(insertQuery, con);
                         command.Parameters.AddWithValue("@A", dataGridView2.Rows.Count);
-                        command.Parameters.AddWithValue("@B", "Delivery"); // Set CategoryId here
+                        command.Parameters.AddWithValue("@B", "Delivery"); 
                         command.Parameters.AddWithValue("@C", label7.Text);
                         command.Parameters.AddWithValue("@D", "Delivery Boy");
                         command.Parameters.AddWithValue("@E", "Unpaid");
@@ -93,12 +93,9 @@ namespace Restuarant_App
                                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                                     {
                                         savePath = saveFileDialog.FileName;
-                                        // Get the desktop directory path
                                         Document document = new Document();
-                                        // Create a PDF document
                                         PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                                         document.Open();
-                                        // Add header information to the PDF
                                         Paragraph title = new Paragraph("Restaurant Management System");
                                         title.Alignment = Element.ALIGN_CENTER;
                                         document.Add(title);
@@ -108,10 +105,8 @@ namespace Restuarant_App
                                         document.Add(new Paragraph("Report Type: Order Invoice"));
                                         document.Add(new Paragraph("Status: Unpaid"));
                                         document.Add(new Paragraph("User Type: Customer"));
-                                        
-
+                                       
                                         document.Add(new Paragraph("\n"));
-                                        // Create a table for the DataGridView content
                                         PdfPTable table = new PdfPTable(dataGridView2.Columns.Count);
                                         for (int i = 0; i < dataGridView2.Columns.Count; i++)
                                         {
@@ -121,7 +116,6 @@ namespace Restuarant_App
                                             });
                                         }
 
-                                        // Add DataGridView content to the table
                                         foreach (DataGridViewRow row in dataGridView2.Rows)
                                         {
                                             for (int i = 0; i < dataGridView2.Columns.Count; i++)
@@ -133,9 +127,7 @@ namespace Restuarant_App
                                             }
                                         }
 
-                                        // Add the table to the PDF document
                                         document.Add(table);
-                                        // Add total, tax, and net total information to the PDF
                                         document.Add(new Paragraph("\n"));
                                         Paragraph P = new Paragraph($"Total: {label5.Text}");
                                         document.Add(P);

@@ -25,7 +25,7 @@ namespace Restuarant_App
         {
             foreach (Form openForm in Application.OpenForms)
             {
-                if (openForm != this) // Exclude the current form (the one with the button)
+                if (openForm != this) 
                 {
                     openForm.Hide();
                 }

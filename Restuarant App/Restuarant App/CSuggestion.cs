@@ -44,10 +44,10 @@ namespace Restuarant_App
                 string query = "INSERT INTO suggestion (CustomerId, Suggesstion, CreatedAt, UpdatedAt) VALUES (@CustomerId, @Suggestion, @CreatedAt, @UpdatedAt);";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(query, con);
-                command.Parameters.AddWithValue("@CustomerId", S.CustomerId); // replace with the name of your username input textbox
+                command.Parameters.AddWithValue("@CustomerId", S.CustomerId);
                 command.Parameters.AddWithValue("@Suggestion", S.SuggestionText);
-                command.Parameters.AddWithValue("@CreatedAt", S.CreatedAt); // replace with the name of your password input textbox
-                command.Parameters.AddWithValue("@UpdatedAt", S.UpdatedAt); // replace with the name of your password input textbox
+                command.Parameters.AddWithValue("@CreatedAt", S.CreatedAt); 
+                command.Parameters.AddWithValue("@UpdatedAt", S.UpdatedAt); 
                 command.ExecuteNonQuery();
                 MessageBox.Show("Thank You ! Your Suggestion Recorded !");
                 richTextBox1.Text = "";
@@ -69,7 +69,7 @@ namespace Restuarant_App
         {
             MessageBox.Show("We are really sorry to hear this ! Give us another chance");
             btnClick = 1;
-            timer1.Interval = 100; // You can adjust the interval as needed
+            timer1.Interval = 100; 
             timer1.Start();
 
         }
@@ -78,7 +78,7 @@ namespace Restuarant_App
         {
             MessageBox.Show("Thang You ! We will try to improve");
             btnClick = 1;
-            timer1.Interval = 100; // You can adjust the interval as needed
+            timer1.Interval = 100; 
             timer1.Start();
 
 
@@ -88,7 +88,7 @@ namespace Restuarant_App
         {
             MessageBox.Show("Thang You ! Good to know this");
             btnClick = 1;
-            timer1.Interval = 100; // You can adjust the interval as needed
+            timer1.Interval = 100; 
             timer1.Start();
 
 
@@ -98,7 +98,7 @@ namespace Restuarant_App
         {
             MessageBox.Show("Thank you ! We are glad to serve you ");
             btnClick = 1;
-            timer1.Interval = 100; // You can adjust the interval as needed
+            timer1.Interval = 100; 
             timer1.Start();
 
         }

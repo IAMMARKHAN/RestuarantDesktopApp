@@ -41,7 +41,6 @@ namespace Restuarant_App
             this.Hide();
             ForgotPassword S = new ForgotPassword();
             S.Show();
-            //Screen Show
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -55,8 +54,8 @@ namespace Restuarant_App
                     string query = "SELECT COUNT(*) FROM dbo.[user] WHERE email = @Email AND password = @Password";
                     var con = Configuration.getInstance().getConnection();
                     SqlCommand command = new SqlCommand(query, con);
-                    command.Parameters.AddWithValue("@Email", email); // replace with the name of your username input textbox
-                    command.Parameters.AddWithValue("@Password", password); // replace with the name of your password input textbox
+                    command.Parameters.AddWithValue("@Email", email);
+                    command.Parameters.AddWithValue("@Password", password); 
                     int count = (int)command.ExecuteScalar();
 
                     if (count > 0)
@@ -88,7 +87,7 @@ namespace Restuarant_App
                                     string query3 = "SELECT id,address FROM dbo.[user] WHERE email = @Email ";
                                     var con3 = Configuration.getInstance().getConnection();
                                     SqlCommand command3 = new SqlCommand(query3, con3);
-                                    command3.Parameters.AddWithValue("@Email", email); // replace with the name of your username input textbox
+                                    command3.Parameters.AddWithValue("@Email", email); 
                                     int count3 = (int)command3.ExecuteScalar();
                                     string userAddress = string.Empty;
                                     using (SqlDataReader reader5 = command3.ExecuteReader())
@@ -130,8 +129,8 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
             command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
             command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
-            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
-            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); 
+            command.Parameters.AddWithValue("@FileName", GetFileName()); 
             command.Parameters.AddWithValue("@LogTime", DateTime.Now);
 
             try
@@ -140,30 +139,25 @@ namespace Restuarant_App
             }
             catch (Exception logEx)
             {
-                // Handle any exceptions that may occur during the logging operation (optional)
                 Console.WriteLine("Error while logging exception: " + logEx.Message);
             }
         }
 
-        // Helper function to extract calling method name from stack trace
         private string GetCallingMethodName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 return frames[3].GetMethod().Name;
             }
             return "Unknown";
         }
 
-        // Helper function to extract file name from stack trace
         private string GetFileName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 var fileName = frames[3].GetFileName();
                 if (fileName != null)
                 {

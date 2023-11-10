@@ -41,7 +41,7 @@ namespace Restuarant_App
             if (comboBox1.SelectedIndex >= 0 && comboBox2.SelectedIndex>=0 && dateTimePicker1.Checked)
             {
                 var con = Configuration.getInstance().getConnection();
-                string query = "SELECT COUNT(*) FROM dbo.[tables] WHERE Seats = @A AND Located = @B"; // Replace 'user' with your table name
+                string query = "SELECT COUNT(*) FROM dbo.[tables] WHERE Seats = @A AND Located = @B"; 
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@A", comboBox2.Text);
                 command.Parameters.AddWithValue("@B", comboBox1.Text);
@@ -68,9 +68,9 @@ namespace Restuarant_App
                         string query22 = "INSERT INTO tableReservation (CustomerId, TableId,Active, CreatedAt, UpdatedAt,Date,Persons) VALUES (@CustomerId, @Suggestion,@Suggestion1, @CreatedAt, @UpdatedAt,@Ad,@F);";
                         var con22 = Configuration.getInstance().getConnection();
                         SqlCommand command22 = new SqlCommand(query22, con22);
-                        command22.Parameters.AddWithValue("@CustomerId", T.CustomerId); // replace with the name of your username input textbox
+                        command22.Parameters.AddWithValue("@CustomerId", T.CustomerId);
                         command22.Parameters.AddWithValue("@Suggestion", T.TableId);
-                        command22.Parameters.AddWithValue("@CreatedAt", T.CreatedAt); // replace with the name of your password input textbox
+                        command22.Parameters.AddWithValue("@CreatedAt", T.CreatedAt); 
                         command22.Parameters.AddWithValue("@UpdatedAt", T.UpdatedAt);
                         command22.Parameters.AddWithValue("@Ad", T.Date);
                         command22.Parameters.AddWithValue("@F", T.Persons);

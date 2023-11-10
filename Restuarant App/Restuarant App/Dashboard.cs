@@ -23,22 +23,21 @@ namespace Restuarant_App
         }
 
         private void Dashboard_Load(object sender, EventArgs e)
-        {  // Line Chart (chartLine)
+        { 
+
             chartLine.Titles.Add("");
             chartLine.ChartAreas[0].AxisX.Title = "Reservation Date";
             chartLine.ChartAreas[0].AxisY.Title = "Total Reserved Table";
             Series seriesLine = chartLine.Series.Add("");
-            seriesLine.ChartType = SeriesChartType.Point; // Use Point for Point chart
-            seriesLine.MarkerStyle = MarkerStyle.Circle; // Set the marker style to a circle
-            seriesLine.MarkerSize = 20; // Set the marker size to make it larger
-            seriesLine.Color = Color.Red; // Set the marker color to red
+            seriesLine.ChartType = SeriesChartType.Point; 
+            seriesLine.MarkerStyle = MarkerStyle.Circle; 
+            seriesLine.MarkerSize = 20; 
+            seriesLine.Color = Color.Red; 
 
-            // Database connection
             var con2 = Configuration.getInstance().getConnection();
 
             string sqlQuery1 = "SELECT CreatedAt, COUNT(*) AS ReservationCount FROM tableReservation GROUP BY CreatedAt ORDER BY CreatedAt";
 
-            // Create a SqlCommand and execute the query
             SqlCommand cmd2 = new SqlCommand(sqlQuery1, con2);
 
             try
@@ -55,7 +54,6 @@ namespace Restuarant_App
             }
             catch (Exception ex)
             {
-                // Handle any exceptions here
                 Console.WriteLine("Error: " + ex.Message);
             }
 
@@ -67,13 +65,11 @@ namespace Restuarant_App
             {
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                // Bar Chart (chartBar)
                 chartBar.Titles.Add("");
                 chartBar.ChartAreas[0].AxisX.Title = "Order Punch Date";
                 chartBar.ChartAreas[0].AxisY.Title = "Orders Count";
                 Series seriesBar = chartBar.Series.Add("Orders");
                 seriesBar.ChartType = SeriesChartType.Area;
-                // Populate the chart with data from the database
                 while (reader.Read())
                 {
                     DateTime date = reader.GetDateTime(0);
@@ -86,7 +82,6 @@ namespace Restuarant_App
             }
             catch (Exception ex)
             {
-                // Handle any exceptions here
                 Console.WriteLine("Error: " + ex.Message);
             }
 
@@ -108,7 +103,7 @@ namespace Restuarant_App
             {
 
                 var con = Configuration.getInstance().getConnection();
-                string query = "SELECT COUNT(*) FROM dbo.[tables]"; // Replace 'user' with your table name
+                string query = "SELECT COUNT(*) FROM dbo.[tables]"; 
                 SqlCommand command = new SqlCommand(query, con);
                 int userCount = Convert.ToInt32(command.ExecuteScalar());
                 return userCount;
@@ -130,7 +125,7 @@ namespace Restuarant_App
             {
 
             var con = Configuration.getInstance().getConnection();
-            string query = "SELECT COUNT(*) FROM dbo.[categories]"; // Replace 'user' with your table name
+            string query = "SELECT COUNT(*) FROM dbo.[categories]"; 
             SqlCommand command = new SqlCommand(query, con);
             int userCount = Convert.ToInt32(command.ExecuteScalar());
             return userCount;
@@ -150,7 +145,7 @@ namespace Restuarant_App
             {
 
             var con = Configuration.getInstance().getConnection();
-            string query = "SELECT COUNT(*) FROM dbo.[staff]"; // Replace 'user' with your table name
+            string query = "SELECT COUNT(*) FROM dbo.[staff]"; 
             SqlCommand command = new SqlCommand(query, con);
             int userCount = Convert.ToInt32(command.ExecuteScalar());
             return userCount;
@@ -171,8 +166,8 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
             command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
             command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
-            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
-            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); 
+            command.Parameters.AddWithValue("@FileName", GetFileName()); 
             command.Parameters.AddWithValue("@LogTime", DateTime.Now);
 
             try
@@ -182,30 +177,25 @@ namespace Restuarant_App
             catch (Exception logEx)
             {
                 
-                // Handle any exceptions that may occur during the logging operation (optional)
                 Console.WriteLine("Error while logging exception: " + logEx.Message);
             }
         }
 
-        // Helper function to extract calling method name from stack trace
         private string GetCallingMethodName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 return frames[3].GetMethod().Name;
             }
             return "Unknown";
         }
 
-        // Helper function to extract file name from stack trace
         private string GetFileName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 var fileName = frames[3].GetFileName();
                 if (fileName != null)
                 {
@@ -219,7 +209,7 @@ namespace Restuarant_App
         {
 
             var con = Configuration.getInstance().getConnection();
-            string query = "SELECT COUNT(*) FROM dbo.[orders]"; // Replace 'user' with your table name
+            string query = "SELECT COUNT(*) FROM dbo.[orders]";
             SqlCommand command = new SqlCommand(query, con);
             int userCount = Convert.ToInt32(command.ExecuteScalar());
             return userCount;

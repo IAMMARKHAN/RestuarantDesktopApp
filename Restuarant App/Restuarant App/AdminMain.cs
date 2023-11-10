@@ -26,7 +26,6 @@ namespace Restuarant_App
 
         private void AdminMain_Load(object sender, EventArgs e)
         {
-            //Remove Borders of the Buttons
             button2.FlatAppearance.BorderSize = 0;
             button3.FlatAppearance.BorderSize = 0;
             button4.FlatAppearance.BorderSize = 0;

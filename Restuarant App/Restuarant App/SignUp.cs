@@ -109,8 +109,8 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
             command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
             command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
-            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
-            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); 
+            command.Parameters.AddWithValue("@FileName", GetFileName());
             command.Parameters.AddWithValue("@LogTime", DateTime.Now);
 
             try
@@ -119,30 +119,25 @@ namespace Restuarant_App
             }
             catch (Exception logEx)
             {
-                // Handle any exceptions that may occur during the logging operation (optional)
                 Console.WriteLine("Error while logging exception: " + logEx.Message);
             }
         }
 
-        // Helper function to extract calling method name from stack trace
         private string GetCallingMethodName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 return frames[3].GetMethod().Name;
             }
             return "Unknown";
         }
 
-        // Helper function to extract file name from stack trace
         private string GetFileName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 var fileName = frames[3].GetFileName();
                 if (fileName != null)
                 {
@@ -153,7 +148,6 @@ namespace Restuarant_App
         }
         private bool IsValidEmail(string email)
         {
-            // Use a regular expression to validate the email address
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             return Regex.IsMatch(email, pattern);
         }
@@ -166,11 +160,10 @@ namespace Restuarant_App
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@Email", email);
                 int count = (int)command.ExecuteScalar();
-                return count > 0; // Return true if the email exists, false otherwise
+                return count > 0;
             }
             catch (Exception ex)
             {
-                // Handle exceptions here, e.g., log the error
                 LogExceptionToDatabase(ex);
                 return false;
             }

@@ -66,11 +66,10 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand(query, con);
             command.Parameters.AddWithValue("@categoryName", buttonText);
             command.Parameters.AddWithValue("@B", true);
-            object result = command.ExecuteScalar(); // Retrieve a single value (the ID)
+            object result = command.ExecuteScalar(); 
             if (result != null)
             {
-                int categoryId = Convert.ToInt32(result); // Convert the result to an integer
-                                                          // You can use the categoryId for further processing
+                int categoryId = Convert.ToInt32(result); 
                 PopulateDataGridView1(categoryId);
             }
 
@@ -85,11 +84,10 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand(query, con);
             command.Parameters.AddWithValue("@categoryName", buttonText);
             command.Parameters.AddWithValue("@B", true);
-            object result = command.ExecuteScalar(); // Retrieve a single value (the ID)
+            object result = command.ExecuteScalar();
             if (result != null)
             {
-                int categoryId = Convert.ToInt32(result); // Convert the result to an integer
-                                                          // You can use the categoryId for further processing
+                int categoryId = Convert.ToInt32(result); 
                 PopulateDataGridView1(categoryId);
             }
         }
@@ -103,11 +101,10 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand(query, con);
             command.Parameters.AddWithValue("@categoryName", buttonText);
             command.Parameters.AddWithValue("@B", true);
-            object result = command.ExecuteScalar(); // Retrieve a single value (the ID)
+            object result = command.ExecuteScalar();
             if (result != null)
             {
-                int categoryId = Convert.ToInt32(result); // Convert the result to an integer
-                                                          // You can use the categoryId for further processing
+                int categoryId = Convert.ToInt32(result);
                 PopulateDataGridView1(categoryId);
             }
         }
@@ -121,11 +118,10 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand(query, con);
             command.Parameters.AddWithValue("@categoryName", buttonText);
             command.Parameters.AddWithValue("@B", true);
-            object result = command.ExecuteScalar(); // Retrieve a single value (the ID)
+            object result = command.ExecuteScalar(); 
             if (result != null)
             {
-                int categoryId = Convert.ToInt32(result); // Convert the result to an integer
-                                                          // You can use the categoryId for further processing
+                int categoryId = Convert.ToInt32(result); 
                 PopulateDataGridView1(categoryId);
             }
         }
@@ -137,13 +133,8 @@ namespace Restuarant_App
             {
                 DialogResult result = MessageBox.Show("Add This Item To Cart ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                // Check if the user clicked "Yes"
                 if (result == DialogResult.Yes)
                 {
-                    // Assuming you have a reference to CCart.cs
-                    // You can add a row to dataGridView1 in CCart.cs like this:
-
-                    // Create a new row for dataGridView1
                     DataGridViewRow newRow = new DataGridViewRow();
                     DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
                     string idColumnName = "Id";

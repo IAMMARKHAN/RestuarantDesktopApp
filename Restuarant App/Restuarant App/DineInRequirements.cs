@@ -49,10 +49,8 @@ namespace Restuarant_App
                 SqlCommand command = new SqlCommand(query, con);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    // Clear existing items in the ComboBox
                     comboBox1.Items.Clear();
 
-                    // Loop through the result set and add items to the ComboBox
                     while (reader.Read())
                     {
                         comboBox1.Items.Add(reader["Id"].ToString());
@@ -65,7 +63,6 @@ namespace Restuarant_App
                 command2.Parameters.AddWithValue("@c", "Waiter");
                 using (SqlDataReader reader2 = command2.ExecuteReader())
                 {
-                    // Clear existing items in the ComboBox
                     comboBox2.Items.Clear();
 
                     while (reader2.Read())
@@ -90,8 +87,8 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
             command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
             command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
-            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
-            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); 
+            command.Parameters.AddWithValue("@FileName", GetFileName()); 
             command.Parameters.AddWithValue("@LogTime", DateTime.Now);
 
             try
@@ -100,30 +97,25 @@ namespace Restuarant_App
             }
             catch (Exception logEx)
             {
-                // Handle any exceptions that may occur during the logging operation (optional)
                 Console.WriteLine("Error while logging exception: " + logEx.Message);
             }
         }
 
-        // Helper function to extract calling method name from stack trace
         private string GetCallingMethodName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 return frames[3].GetMethod().Name;
             }
             return "Unknown";
         }
 
-        // Helper function to extract file name from stack trace
         private string GetFileName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 var fileName = frames[3].GetFileName();
                 if (fileName != null)
                 {

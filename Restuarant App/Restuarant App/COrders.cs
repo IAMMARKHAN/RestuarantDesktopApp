@@ -26,7 +26,7 @@ namespace Restuarant_App
         {
             try
             {
-                string query = "SELECT * FROM orders Where Customer=@A";
+                string query = "SELECT  Id,Quantity,Type,Items,Amount,Staff,Status,CreatedAt,Customer,Address FROM orders Where Customer=@A";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@A", cid);
@@ -44,6 +44,11 @@ namespace Restuarant_App
         }
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

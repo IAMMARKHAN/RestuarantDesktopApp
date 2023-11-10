@@ -25,10 +25,8 @@ namespace Restuarant_App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Display a confirmation message box
             DialogResult result = MessageBox.Show("Are you sure you want to print this report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            // Check if the user clicked "Yes"
             if (result == DialogResult.Yes)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -155,10 +153,7 @@ namespace Restuarant_App
 
         private void button4_Click(object sender, EventArgs e)
         {
-            // Display a confirmation message box
             DialogResult result = MessageBox.Show("Are you sure you want to print this report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            // Check if the user clicked "Yes"
             if (result == DialogResult.Yes)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -221,7 +216,6 @@ namespace Restuarant_App
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // Display a confirmation message box
             DialogResult result = MessageBox.Show("Are you sure you want to print this report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
@@ -282,7 +276,6 @@ namespace Restuarant_App
             }
             else
             {
-                // User clicked "No" or closed the message box
             }
         }
 
@@ -318,8 +311,8 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
             command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
             command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
-            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
-            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); 
+            command.Parameters.AddWithValue("@FileName", GetFileName()); 
             command.Parameters.AddWithValue("@LogTime", DateTime.Now);
 
             try
@@ -328,30 +321,25 @@ namespace Restuarant_App
             }
             catch (Exception logEx)
             {
-                // Handle any exceptions that may occur during the logging operation (optional)
                 Console.WriteLine("Error while logging exception: " + logEx.Message);
             }
         }
 
-        // Helper function to extract calling method name from stack trace
         private string GetCallingMethodName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 return frames[3].GetMethod().Name;
             }
             return "Unknown";
         }
 
-        // Helper function to extract file name from stack trace
         private string GetFileName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 var fileName = frames[3].GetFileName();
                 if (fileName != null)
                 {

@@ -38,10 +38,8 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand(query, con);
             using (SqlDataReader reader = command.ExecuteReader())
             {
-                // Clear existing items in the ComboBox
                 comboBox1.Items.Clear();
 
-                // Loop through the result set and add items to the ComboBox
                 while (reader.Read())
                 {
                     comboBox1.Items.Add(reader["Name"].ToString());
@@ -60,10 +58,8 @@ namespace Restuarant_App
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
-            // Set the initial directory (optional)
             openFileDialog.InitialDirectory = @"C:\Users\YourUsername\Desktop";
 
-            // Filter to only show image files
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp|All Files|*.*";
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -72,20 +68,11 @@ namespace Restuarant_App
 
                 try
                 {
-                    // Read the selected image file into a byte array
                     imgData = File.ReadAllBytes(filePath);
-
-                    // Store the byte array or use it as needed
-                    // For example, you can save it to a database, display it, etc.
-
-                    // Display the file path in textbox3.Text (optional)
                     textBox3.Text = filePath;
-
-                    // You now have the image data in the 'imageData' byte array
                 }
                 catch (Exception ex)
                 {
-                    // Handle any exceptions that may occur during file reading
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
@@ -95,7 +82,7 @@ namespace Restuarant_App
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != (char)Keys.Space && e.KeyChar != (char)Keys.Back)
             {
-                e.Handled = true; // Block the input
+                e.Handled = true; 
             }
         }
 
@@ -118,8 +105,8 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
             command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
             command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
-            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
-            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); 
+            command.Parameters.AddWithValue("@FileName", GetFileName()); 
             command.Parameters.AddWithValue("@LogTime", DateTime.Now);
 
             try
@@ -128,30 +115,25 @@ namespace Restuarant_App
             }
             catch (Exception logEx)
             {
-                // Handle any exceptions that may occur during the logging operation (optional)
                 Console.WriteLine("Error while logging exception: " + logEx.Message);
             }
         }
 
-        // Helper function to extract calling method name from stack trace
         private string GetCallingMethodName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 return frames[3].GetMethod().Name;
             }
             return "Unknown";
         }
 
-        // Helper function to extract file name from stack trace
         private string GetFileName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 var fileName = frames[3].GetFileName();
                 if (fileName != null)
                 {
@@ -192,11 +174,11 @@ namespace Restuarant_App
 
             SqlCommand command = new SqlCommand("UPDATE menu SET Name = @NewName, CategoryId = @CategoryId, Price = @Price, Size = @Size, Image = @Image, Active = @Active, UpdatedAt = @UpdatedAt WHERE Id = @Id", con);
             command.Parameters.AddWithValue("@NewName", M.Name);
-            command.Parameters.AddWithValue("@CategoryId", M.CategoryId); // Set CategoryId here
+            command.Parameters.AddWithValue("@CategoryId", M.CategoryId); 
             command.Parameters.AddWithValue("@Price", M.Price);
             command.Parameters.AddWithValue("@Size", M.Size);
             command.Parameters.AddWithValue("@Image", M.ImageData);
-            command.Parameters.AddWithValue("@Active", M.Active); // Assuming Active is a boolean column
+            command.Parameters.AddWithValue("@Active", M.Active); 
             command.Parameters.AddWithValue("@UpdatedAt", M.UpdatedAt);
             command.Parameters.AddWithValue("@Id", id);
 

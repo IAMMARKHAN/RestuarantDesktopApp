@@ -36,7 +36,6 @@ namespace Restuarant_App
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //Code Logic
             int entered = int.Parse(textBox2.Text);
             if(entered==code)
             {
@@ -53,12 +52,10 @@ namespace Restuarant_App
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Allow only digits and control characters (e.g., backspace)
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }
-            // Ensure that the total length is not more than 4 characters
             if (textBox2.Text.Length >= 4 && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;

@@ -33,14 +33,13 @@ namespace Restuarant_App
         }
         private void button3_Click(object sender, EventArgs e)
         {
-            //All Login
             if(textBox2.Text !="")
             {
                 string updateCommandText = "UPDATE dbo.[user] SET password = @NewPassword WHERE email = @Email";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(updateCommandText, con);
-                command.Parameters.AddWithValue("@Email", email); // replace with the name of your username input textbox
-                command.Parameters.AddWithValue("@NewPassword", textBox2.Text); // replace with the name of your password input textbox
+                command.Parameters.AddWithValue("@Email", email); 
+                command.Parameters.AddWithValue("@NewPassword", textBox2.Text); 
                 int count = command.ExecuteNonQuery();
                 if (count > 0)
                 {

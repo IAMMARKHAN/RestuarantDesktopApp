@@ -33,7 +33,6 @@ namespace Restuarant_App
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
-                // Bind the DataTable to the DataGridView
                 dataGridView1.DataSource = dataTable;
             }
             catch (Exception ex)
@@ -58,7 +57,7 @@ namespace Restuarant_App
         {
             if (e.ColumnIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "Remove")
             {
-                int rowIndex = e.RowIndex; // Get the clicked row index
+                int rowIndex = e.RowIndex; 
                 int id = Convert.ToInt32(dataGridView1.Rows[rowIndex].Cells["Id"].Value);
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand("UPDATE tableReservation SET Active = 0 WHERE Id = @ID", con);
@@ -79,8 +78,6 @@ namespace Restuarant_App
                             SqlDataAdapter adapter1 = new SqlDataAdapter(command1);
                             DataTable dataTable1 = new DataTable();
                             adapter1.Fill(dataTable1);
-
-                            // Bind the DataTable to the DataGridView
                             dataGridView1.DataSource = dataTable1;
                         }
                         catch (Exception ex)

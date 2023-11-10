@@ -52,7 +52,6 @@ namespace Restuarant_App
 
         public void PopulateDataGridView()
         {
-            // Replace with your connection string
 
             try
             {
@@ -111,14 +110,13 @@ namespace Restuarant_App
                 }
                 else
                 {
-                    // Handle the case where the record with the specified ID was not found.
                     return (null, 0);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
-                return (null, 0); // Return null values to indicate an error occurred
+                return (null, 0); 
             }
         }
 
@@ -152,11 +150,11 @@ namespace Restuarant_App
             {
                 var con = Configuration.getInstance().getConnection();
 
-                string query = "SELECT Name FROM dbo.[categories]"; // Remove "TOP 1" to fetch all records
+                string query = "SELECT Name FROM dbo.[categories]"; 
                 SqlCommand command = new SqlCommand(query, con);
                 SqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read()) // Loop through all records
+                while (reader.Read()) 
                 {
                     string categoryName = reader["Name"].ToString();
                     CreateButton(categoryName);
@@ -181,10 +179,7 @@ namespace Restuarant_App
                 BackColor = System.Drawing.Color.FromArgb(50, 55, 140)
             };
             button.FlatAppearance.BorderSize = 0;
-            // Add an event handler for the button click event, if needed
-            // button.Click += YourButtonClickHandler;
             button.Click += Button_Click;
-            // Add the button to TableLayoutPanel1
             tableLayoutPanel1.Controls.Add(button);
         }
         private void Button_Click(object sender, EventArgs e)
@@ -197,10 +192,10 @@ namespace Restuarant_App
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@categoryName", buttonText);
             command.Parameters.AddWithValue("@B", true);
-            object result = command.ExecuteScalar(); // Retrieve a single value (the ID)
+            object result = command.ExecuteScalar(); 
                 if (result != null)
                 {
-                    int categoryId = Convert.ToInt32(result); // Convert the result to an integer
+                    int categoryId = Convert.ToInt32(result); 
                     PopulateDataGridView1(categoryId);
                 }
               
@@ -238,7 +233,7 @@ namespace Restuarant_App
         {
             if (e.ColumnIndex >= 0 && dataGridView2.Columns[e.ColumnIndex].Name == "Add")
             {
-                int rowIndex = e.RowIndex; // Get the clicked row index
+                int rowIndex = e.RowIndex; 
                 int idToDelete = Convert.ToInt32(dataGridView2.Rows[rowIndex].Cells["Id"].Value);
                 int category = Convert.ToInt32(dataGridView2.Rows[rowIndex].Cells["CategoryId"].Value);
                 DialogResult result = MessageBox.Show("Add This Item ? ", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -251,7 +246,7 @@ namespace Restuarant_App
                     {
                         string itemName = itemData.Name;
                         int itemPrice = itemData.Price;
-                        dataGridView1.Rows.Add(itemName,cat,'1' ,itemPrice); // Assuming 1 as quantity
+                        dataGridView1.Rows.Add(itemName,cat,'1' ,itemPrice); 
                         label5.Text = (int.Parse(label5.Text) + itemPrice).ToString();
                         decimal tax = (decimal.Parse(label5.Text) ) * 0.16m;
                         label7.Text = (int.Parse(label5.Text) + tax).ToString();
@@ -322,8 +317,7 @@ namespace Restuarant_App
             button1.BackColor = Color.White;
             button1.ForeColor = Color.FromArgb(50, 55, 130);
 
-            // Reset the appearance of the other buttons
-            // Reset the appearance of the other buttons
+       
             button2.BackColor = Color.FromArgb(50, 55, 130); ;
             button2.ForeColor = Color.White;
             button3.BackColor = Color.FromArgb(50, 55, 130); ;
@@ -338,7 +332,6 @@ namespace Restuarant_App
             button3.BackColor = Color.White;
             button3.ForeColor = Color.FromArgb(50, 55, 130);
 
-            // Reset the appearance of the other buttons
             button1.BackColor = Color.FromArgb(50, 55, 130); ;
             button1.ForeColor = Color.White;
             button2.BackColor = Color.FromArgb(50, 55, 130); ;
@@ -350,8 +343,8 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand("INSERT INTO ErrorLog (ErrorMessage, StackTrace, FunctionName, FileName, LogTime) VALUES (@ErrorMessage, @StackTrace, @FunctionName, @FileName, @LogTime)", con);
             command.Parameters.AddWithValue("@ErrorMessage", ex.Message);
             command.Parameters.AddWithValue("@StackTrace", ex.StackTrace);
-            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); // Get calling method name
-            command.Parameters.AddWithValue("@FileName", GetFileName()); // Get file name
+            command.Parameters.AddWithValue("@FunctionName", GetCallingMethodName()); 
+            command.Parameters.AddWithValue("@FileName", GetFileName());
             command.Parameters.AddWithValue("@LogTime", DateTime.Now);
 
             try
@@ -360,30 +353,25 @@ namespace Restuarant_App
             }
             catch (Exception logEx)
             {
-                // Handle any exceptions that may occur during the logging operation (optional)
                 Console.WriteLine("Error while logging exception: " + logEx.Message);
             }
         }
 
-        // Helper function to extract calling method name from stack trace
         private string GetCallingMethodName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 return frames[3].GetMethod().Name;
             }
             return "Unknown";
         }
 
-        // Helper function to extract file name from stack trace
         private string GetFileName()
         {
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 var fileName = frames[3].GetFileName();
                 if (fileName != null)
                 {
@@ -437,12 +425,9 @@ namespace Restuarant_App
                             if (saveFileDialog.ShowDialog() == DialogResult.OK)
                             {
                                 savePath = saveFileDialog.FileName;
-                                // Get the desktop directory path
                                 Document document = new Document();
-                                // Create a PDF document
                                 PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                                 document.Open();
-                                // Add header information to the PDF
                                 Paragraph title = new Paragraph("Restaurant Management System");
                                 title.Alignment = Element.ALIGN_CENTER;
                                 document.Add(title);
@@ -454,7 +439,6 @@ namespace Restuarant_App
                                 document.Add(new Paragraph("Printed By: Manager"));
 
                                 document.Add(new Paragraph("\n"));
-                                // Create a table for the DataGridView content
                                 PdfPTable table = new PdfPTable(dataGridView1.Columns.Count);
                                 for (int i = 0; i < dataGridView1.Columns.Count; i++)
                                 {
@@ -464,7 +448,6 @@ namespace Restuarant_App
                                     });
                                 }
 
-                                // Add DataGridView content to the table
                                 foreach (DataGridViewRow row in dataGridView1.Rows)
                                 {
                                     for (int i = 0; i < dataGridView1.Columns.Count; i++)
@@ -476,9 +459,7 @@ namespace Restuarant_App
                                     }
                                 }
 
-                                // Add the table to the PDF document
                                 document.Add(table);
-                                // Add total, tax, and net total information to the PDF
                                 document.Add(new Paragraph("\n"));
                                 Paragraph P = new Paragraph($"Total: {label5.Text}");
                                 document.Add(P);
@@ -502,11 +483,10 @@ namespace Restuarant_App
                             var con = Configuration.getInstance().getConnection();
                            
 
-                            // Insert data into menu table with the correct CategoryId
                             string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer,Address,Items) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I,@J,@K)";
                             SqlCommand command = new SqlCommand(insertQuery, con);
                             command.Parameters.AddWithValue("@A", dataGridView1.Rows.Count);
-                            command.Parameters.AddWithValue("@B", orderType); // Set CategoryId here
+                            command.Parameters.AddWithValue("@B", orderType); 
                             command.Parameters.AddWithValue("@C", label7.Text);
                             if(orderType=="Dine In")
                             {
@@ -552,7 +532,6 @@ namespace Restuarant_App
                 {
                     string savePath;
 
-                    // Show the Save File Dialog to get the file path
                     using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
                         saveFileDialog.Filter = "PDF Files|*.pdf";
@@ -561,12 +540,9 @@ namespace Restuarant_App
                             if (saveFileDialog.ShowDialog() == DialogResult.OK)
                             {
                                 savePath = saveFileDialog.FileName;
-                                // Get the desktop directory path
                                 Document document = new Document();
-                                // Create a PDF document
                                 PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                                 document.Open();
-                                // Add header information to the PDF
                                 Paragraph title = new Paragraph("Restaurant Management System");
                                 title.Alignment = Element.ALIGN_CENTER;
                                 document.Add(title);
@@ -577,7 +553,6 @@ namespace Restuarant_App
                                 document.Add(new Paragraph("Status: UnPaid"));
                                 document.Add(new Paragraph("Printed By: Manager"));
                                 document.Add(new Paragraph("\n"));
-                                // Create a table for the DataGridView content
                                 PdfPTable table = new PdfPTable(dataGridView1.Columns.Count);
                                 for (int i = 0; i < dataGridView1.Columns.Count; i++)
                                 {
@@ -586,7 +561,6 @@ namespace Restuarant_App
                                         HorizontalAlignment = Element.ALIGN_CENTER
                                     });
                                 }
-                                // Add DataGridView content to the table
                                 foreach (DataGridViewRow row in dataGridView1.Rows)
                                 {
                                     for (int i = 0; i < dataGridView1.Columns.Count; i++)
@@ -597,9 +571,7 @@ namespace Restuarant_App
                                         });
                                     }
                                 }
-                                // Add the table to the PDF document
                                 document.Add(table);
-                                // Add total, tax, and net total information to the PDF
                                 document.Add(new Paragraph("\n"));
                                 Paragraph P = new Paragraph($"Total: {label5.Text}");
                                 document.Add(P);
@@ -619,7 +591,6 @@ namespace Restuarant_App
                         try
                         {
                             var con = Configuration.getInstance().getConnection();
-                            // Insert data into menu table with the correct CategoryId
                             string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer,Address,Items) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I,@J,@K)";
                             SqlCommand command = new SqlCommand(insertQuery, con);
                             command.Parameters.AddWithValue("@A", dataGridView1.Rows.Count);
@@ -704,10 +675,9 @@ namespace Restuarant_App
         {
             if (!char.IsControl(e.KeyChar))
             {
-                // Check if the entered character is not an alphabet
                 if (!char.IsLetter(e.KeyChar))
                 {
-                    e.Handled = true; // Block the character if it's not an alphabet
+                    e.Handled = true; 
                 }
             }
             
