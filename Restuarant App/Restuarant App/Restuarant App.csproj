@@ -53,6 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="-BL\CategoriesBL.cs" />
+    <Compile Include="-BL\MenuBL.cs" />
+    <Compile Include="-BL\OrdersBL.cs" />
+    <Compile Include="-BL\StaffBL.cs" />
+    <Compile Include="-BL\SuggestionBL.cs" />
+    <Compile Include="-BL\TableReservationBL.cs" />
+    <Compile Include="-BL\TablesBL.cs" />
+    <Compile Include="-BL\UsersBL.cs" />
+    <Compile Include="-DL\DineInDL.cs" />
+    <Compile Include="-DL\MenuDL.cs" />
+    <Compile Include="-DL\OrderDL.cs" />
+    <Compile Include="-DL\StaffDL.cs" />
     <Compile Include="Account.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -531,5 +543,6 @@
   <ItemGroup>
     <None Include="Resources\history-36-256.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

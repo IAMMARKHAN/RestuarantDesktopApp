@@ -31,15 +31,12 @@ namespace Restuarant_App
             dataGridView1.DataSource = null;   
                 try
                 {
-
-                        string query = "SELECT * FROM categories";
+                string query = "SELECT * FROM categories";
                     var con = Configuration.getInstance().getConnection();
                     SqlCommand command = new SqlCommand(query, con);
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
-
-                    // Bind the DataTable to the DataGridView
                     dataGridView1.DataSource = dataTable;
                 }
                 catch (Exception ex)
@@ -88,7 +85,6 @@ namespace Restuarant_App
             var frames = new StackTrace(true).GetFrames();
             if (frames != null && frames.Length >= 3)
             {
-                // Index 3 represents the calling method in the stack trace
                 var fileName = frames[3].GetFileName();
                 if (fileName != null)
                 {
@@ -197,7 +193,7 @@ namespace Restuarant_App
 
         }
 
-        private void tableLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
+        private void tableLayoutPanel1_Paint_1(object sender, PaintEventArgs e  )
         {
 
         }

@@ -1,4 +1,5 @@
 ﻿using db2021finalprojectg_9;
+using Restuarant_App._BL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,13 +40,14 @@ namespace Restuarant_App
         {
             if(richTextBox1.Text.Length > 0)
             {
+            SuggestionBL S = new SuggestionBL(cid,richTextBox1.Text,DateTime.Now,DateTime.Now);
                 string query = "INSERT INTO suggestion (CustomerId, Suggesstion, CreatedAt, UpdatedAt) VALUES (@CustomerId, @Suggestion, @CreatedAt, @UpdatedAt);";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(query, con);
-                command.Parameters.AddWithValue("@CustomerId", cid); // replace with the name of your username input textbox
-                command.Parameters.AddWithValue("@Suggestion", richTextBox1.Text);
-                command.Parameters.AddWithValue("@CreatedAt", DateTime.Now); // replace with the name of your password input textbox
-                command.Parameters.AddWithValue("@UpdatedAt", DateTime.Now); // replace with the name of your password input textbox
+                command.Parameters.AddWithValue("@CustomerId", S.CustomerId); // replace with the name of your username input textbox
+                command.Parameters.AddWithValue("@Suggestion", S.SuggestionText);
+                command.Parameters.AddWithValue("@CreatedAt", S.CreatedAt); // replace with the name of your password input textbox
+                command.Parameters.AddWithValue("@UpdatedAt", S.UpdatedAt); // replace with the name of your password input textbox
                 command.ExecuteNonQuery();
                 MessageBox.Show("Thank You ! Your Suggestion Recorded !");
                 richTextBox1.Text = "";

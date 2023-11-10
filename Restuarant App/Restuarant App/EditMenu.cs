@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using db2021finalprojectg_9;
 using System.Data.SqlClient;
+using Restuarant_App._BL;
 
 namespace Restuarant_App
 {
@@ -184,20 +185,19 @@ namespace Restuarant_App
 
             var con = Configuration.getInstance().getConnection();
 
-            // Find CategoryId based on type from categories table
-            SqlCommand findCategoryIdCommand = new SqlCommand("SELECT Id FROM categories WHERE Name = @Type", con);
+                SqlCommand findCategoryIdCommand = new SqlCommand("SELECT Id FROM categories WHERE Name = @Type", con);
             findCategoryIdCommand.Parameters.AddWithValue("@Type", type);
             int categoryId = (int)findCategoryIdCommand.ExecuteScalar();
+             MenuBL M = new MenuBL(name, categoryId, price, size, img, true, DateTime.Now, DateTime.Now);
 
-            // Update menu table with the found CategoryId
             SqlCommand command = new SqlCommand("UPDATE menu SET Name = @NewName, CategoryId = @CategoryId, Price = @Price, Size = @Size, Image = @Image, Active = @Active, UpdatedAt = @UpdatedAt WHERE Id = @Id", con);
-            command.Parameters.AddWithValue("@NewName", name);
-            command.Parameters.AddWithValue("@CategoryId", categoryId); // Set CategoryId here
-            command.Parameters.AddWithValue("@Price", price);
-            command.Parameters.AddWithValue("@Size", size);
-            command.Parameters.AddWithValue("@Image", img);
-            command.Parameters.AddWithValue("@Active", true); // Assuming Active is a boolean column
-            command.Parameters.AddWithValue("@UpdatedAt", DateTime.Now);
+            command.Parameters.AddWithValue("@NewName", M.Name);
+            command.Parameters.AddWithValue("@CategoryId", M.CategoryId); // Set CategoryId here
+            command.Parameters.AddWithValue("@Price", M.Price);
+            command.Parameters.AddWithValue("@Size", M.Size);
+            command.Parameters.AddWithValue("@Image", M.ImageData);
+            command.Parameters.AddWithValue("@Active", M.Active); // Assuming Active is a boolean column
+            command.Parameters.AddWithValue("@UpdatedAt", M.UpdatedAt);
             command.Parameters.AddWithValue("@Id", id);
 
             int rowsAffected = command.ExecuteNonQuery();

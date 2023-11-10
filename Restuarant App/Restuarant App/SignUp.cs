@@ -1,4 +1,5 @@
 ﻿using db2021finalprojectg_9;
+using Restuarant_App._BL;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,7 +37,6 @@ namespace Restuarant_App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //From Textboxes Into Variables
             string name = textBox2.Text.Trim();
             string email = textBox1.Text.Trim();
             string password = textBox4.Text;
@@ -73,7 +73,7 @@ namespace Restuarant_App
         }
         private int InsertUserData(string name, string email, string password, string address, string contact)
         {
-
+            UsersBL U = new UsersBL(name,email, password,address,contact,"customer",true,DateTime.Now,DateTime.Now);
             try
             {
                 if (EmailExistsInDatabase(email))
@@ -83,16 +83,15 @@ namespace Restuarant_App
                 string insertQuery = "INSERT INTO dbo.[user] (name, email, password, address, contact, role,active,createdAt,updatedAt) VALUES (@Name, @Email, @Password, @Address, @Contact, @Role,@F,@G,@H)";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(insertQuery, con);
-                command.Parameters.AddWithValue("@Name", name);
-                command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@Password", password);
-                command.Parameters.AddWithValue("@Address", address);
-                command.Parameters.AddWithValue("@Contact", contact);
-                command.Parameters.AddWithValue("@F", true);
-                command.Parameters.AddWithValue("@G", DateTime.Now);
-                command.Parameters.AddWithValue("@H", DateTime.Now);
-
-                command.Parameters.AddWithValue("@Role", "customer");
+                command.Parameters.AddWithValue("@Name", U.Name);
+                command.Parameters.AddWithValue("@Email", U.Email);
+                command.Parameters.AddWithValue("@Password", U.Password);
+                command.Parameters.AddWithValue("@Address", U.Address);
+                command.Parameters.AddWithValue("@Contact", U.Contact);
+                command.Parameters.AddWithValue("@F", U.Active);
+                command.Parameters.AddWithValue("@G", U.CreatedAt);
+                command.Parameters.AddWithValue("@H", U.UpdatedAt);
+                command.Parameters.AddWithValue("@Role", U.Role);
                 int rowsAffected = command.ExecuteNonQuery();
                 return rowsAffected ;
             }

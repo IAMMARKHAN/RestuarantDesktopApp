@@ -1,4 +1,5 @@
 ﻿using db2021finalprojectg_9;
+using Restuarant_App._BL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -120,15 +121,16 @@ namespace Restuarant_App
         }
         private int UpdateUserData(string name, string email)
         {
+            CategoriesBL C = new CategoriesBL(name, email, true, DateTime.Now, DateTime.Now);
             try
             {
 
             var con = Configuration.getInstance().getConnection();
             SqlCommand command = new SqlCommand("UPDATE categories SET name = @NewName, type = @NewType,Active=@A,UpdatedAt=@B  WHERE id = @Id", con);
-            command.Parameters.AddWithValue("@NewName", name);
-            command.Parameters.AddWithValue("@NewType", email);
-            command.Parameters.AddWithValue("@A", "True");
-            command.Parameters.AddWithValue("@B", DateTime.Now);
+            command.Parameters.AddWithValue("@NewName", C.Name);
+            command.Parameters.AddWithValue("@NewType", C.Type);
+            command.Parameters.AddWithValue("@A", C.Active);
+            command.Parameters.AddWithValue("@B", C.UpdatedAt);
 
             command.Parameters.AddWithValue("@Id", id);
             

@@ -1,4 +1,5 @@
 ﻿using db2021finalprojectg_9;
+using Restuarant_App._BL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Restuarant_App
 {
@@ -125,17 +127,19 @@ namespace Restuarant_App
         }
         private int UpdateUserData(string name,string type,double cont)
         {
+            StaffBL S = new StaffBL(name, type, cont, true, DateTime.Now, DateTime.Now);
+
             try
             {
 
             var con = Configuration.getInstance().getConnection();
             SqlCommand command = new SqlCommand("UPDATE staff SET Name = @NewName, Type = @NewType,Contact=@Con,UpdatedAt=@CC,Active=@ff WHERE Id = @Id", con);
-            command.Parameters.AddWithValue("@NewName", name);
-            command.Parameters.AddWithValue("@NewType", type);
-            command.Parameters.AddWithValue("@Con", cont);
+            command.Parameters.AddWithValue("@NewName", S.Name);
+            command.Parameters.AddWithValue("@NewType", S.Type);
+            command.Parameters.AddWithValue("@Con", S.Contact);
             command.Parameters.AddWithValue("@Id", id);
-            command.Parameters.AddWithValue("@CC", DateTime.Now);
-            command.Parameters.AddWithValue("@ff", true);
+            command.Parameters.AddWithValue("@CC", S.UpdatedAt);
+            command.Parameters.AddWithValue("@ff", S.Active);
 
             int rowsAffected = command.ExecuteNonQuery();
             if (rowsAffected > 0)

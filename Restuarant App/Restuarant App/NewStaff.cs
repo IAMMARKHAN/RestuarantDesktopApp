@@ -1,4 +1,5 @@
 ﻿using db2021finalprojectg_9;
+using Restuarant_App._BL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -116,17 +117,18 @@ namespace Restuarant_App
         private int InsertUserData(string name, string email,double cont)
         {
 
+            StaffBL S = new StaffBL(name,email,cont,true,DateTime.Now,DateTime.Now);
             try
             {
                 string insertQuery = "INSERT INTO dbo.[staff] (Name,Type,Contact,Active,CreatedAt,UpdatedAt) VALUES (@Name, @Email,@Con,@A,@B,@C)";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(insertQuery, con);
-                command.Parameters.AddWithValue("@Name", name);
-                command.Parameters.AddWithValue("@Email", email);
-                command.Parameters.AddWithValue("@Con", cont);
-                command.Parameters.AddWithValue("@A", true);
-                command.Parameters.AddWithValue("@B", DateTime.Now);
-                command.Parameters.AddWithValue("@C", DateTime.Now);
+                command.Parameters.AddWithValue("@Name", S.Name);
+                command.Parameters.AddWithValue("@Email", S.Type);
+                command.Parameters.AddWithValue("@Con", S.Contact);
+                command.Parameters.AddWithValue("@A", S.Active);
+                command.Parameters.AddWithValue("@B", S.CreatedAt);
+                command.Parameters.AddWithValue("@C", S.UpdatedAt);
 
                 int rowsAffected = command.ExecuteNonQuery();
                 return rowsAffected;

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Restuarant_App._BL;
 
 namespace Restuarant_App
 {
@@ -49,17 +50,17 @@ namespace Restuarant_App
 
         private int InsertUserData(string name, string email)
         {
-
+            CategoriesBL C = new CategoriesBL(name, email, true, DateTime.Now, DateTime.Now);
             try
             {   
                 string insertQuery = "INSERT INTO dbo.[categories] (name,type,active,createdAt,updatedAt) VALUES (@Name, @Email,@A,@B,@C)";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(insertQuery, con);
-                command.Parameters.AddWithValue("@Name", name);
-                command.Parameters.AddWithValue("@Email",email);
-                command.Parameters.AddWithValue("@A", "True");
-                command.Parameters.AddWithValue("@B", DateTime.Now);
-                command.Parameters.AddWithValue("@C", DateTime.Now);
+                command.Parameters.AddWithValue("@Name", C.Name);
+                command.Parameters.AddWithValue("@Email",C.Type);
+                command.Parameters.AddWithValue("@A", C.Active);
+                command.Parameters.AddWithValue("@B", C.CreatedAt);
+                command.Parameters.AddWithValue("@C", C.UpdatedAt);
                 int rowsAffected = command.ExecuteNonQuery();
                 return rowsAffected;
             }

@@ -58,7 +58,7 @@ namespace Restuarant_App
                     timeAndDayTable.AddCell(dayCell);
                     document.Add(timeAndDayTable);
                     document.Add(new Paragraph("\n"));
-                    DataTable staffData = FetchStaffTableDataFromDatabase2();
+                    DataTable staffData = FetchOrderTableDataFromDatabase();
                     if (staffData != null && staffData.Rows.Count > 0)
                     {
                         PdfPTable table = new PdfPTable(staffData.Columns.Count);
@@ -188,7 +188,7 @@ namespace Restuarant_App
                     timeAndDayTable.AddCell(dayCell);
                     document.Add(timeAndDayTable);
                     document.Add(new Paragraph("\n"));
-                    DataTable staffData = FetchStaffTableDataFromDatabase1();
+                    DataTable staffData = FetchMenuTableDataFromDatabase();
                     if (staffData != null && staffData.Rows.Count > 0)
                     {
                         PdfPTable table = new PdfPTable(staffData.Columns.Count);
@@ -252,7 +252,7 @@ namespace Restuarant_App
                     timeAndDayTable.AddCell(dayCell);
                     document.Add(timeAndDayTable);
                     document.Add(new Paragraph("\n"));
-                    DataTable staffData = FetchStaffTableDataFromDatabase3();
+                    DataTable staffData = FetchDineInTableDataFromDatabase();
                     if (staffData != null && staffData.Rows.Count > 0)
                     {
                         PdfPTable table = new PdfPTable(staffData.Columns.Count);
@@ -290,7 +290,7 @@ namespace Restuarant_App
         {
 
         }
-        private DataTable FetchStaffTableDataFromDatabase2()
+        private DataTable FetchOrderTableDataFromDatabase()
         {
             var con = Configuration.getInstance().getConnection();
             DataTable staffData = new DataTable();
@@ -381,7 +381,7 @@ namespace Restuarant_App
                 return null;
             }
         }
-        private DataTable FetchStaffTableDataFromDatabase3()
+        private DataTable FetchDineInTableDataFromDatabase()
         {
             var con = Configuration.getInstance().getConnection();
             DataTable staffData = new DataTable();
@@ -402,7 +402,7 @@ namespace Restuarant_App
                 return null;
             }
         }
-        private DataTable FetchStaffTableDataFromDatabase1()
+        private DataTable FetchMenuTableDataFromDatabase()
         {
             var con = Configuration.getInstance().getConnection();
             DataTable staffData = new DataTable();

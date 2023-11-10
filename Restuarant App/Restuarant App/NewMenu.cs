@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Diagnostics;
+using Restuarant_App._BL;
 
 namespace Restuarant_App
 {
@@ -36,25 +37,23 @@ namespace Restuarant_App
         private int InsertUserData(string name, string type, int price,string size,byte[] img)
         {
 
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand findCategoryIdCommand = new SqlCommand("SELECT Id FROM categories WHERE Name = @Type", con);
+            findCategoryIdCommand.Parameters.AddWithValue("@Type", type);
+            int categoryId = (int)findCategoryIdCommand.ExecuteScalar();
+            MenuBL M = new MenuBL(name,categoryId,price,size,img,true,DateTime.Now,DateTime.Now);
             try
             {
-                // Find CategoryId based on type from categories table
-                var con = Configuration.getInstance().getConnection();
-                SqlCommand findCategoryIdCommand = new SqlCommand("SELECT Id FROM categories WHERE Name = @Type", con);
-                findCategoryIdCommand.Parameters.AddWithValue("@Type", type);
-                int categoryId = (int)findCategoryIdCommand.ExecuteScalar();
-
-                // Insert data into menu table with the correct CategoryId
                 string insertQuery = "INSERT INTO dbo.[menu] (Name, CategoryId, Price, Size, Image, Active, CreatedAt, UpdatedAt) VALUES (@Name, @CategoryId, @Con, @A, @B, @Ac, @Cr, @Ur)";
                 SqlCommand command = new SqlCommand(insertQuery, con);
-                command.Parameters.AddWithValue("@Name", name);
-                command.Parameters.AddWithValue("@CategoryId", categoryId); // Set CategoryId here
-                command.Parameters.AddWithValue("@Con", price);
-                command.Parameters.AddWithValue("@A", size);
-                command.Parameters.AddWithValue("@B", img);
-                command.Parameters.AddWithValue("@Ac", true);
-                command.Parameters.AddWithValue("@Cr", DateTime.Now);
-                command.Parameters.AddWithValue("@Ur", DateTime.Now);
+                command.Parameters.AddWithValue("@Name", M.Name);
+                command.Parameters.AddWithValue("@CategoryId", M.CategoryId); // Set CategoryId here
+                command.Parameters.AddWithValue("@Con", M.Price);
+                command.Parameters.AddWithValue("@A", M.Size);
+                command.Parameters.AddWithValue("@B", M.ImageData);
+                command.Parameters.AddWithValue("@Ac", M.Active);
+                command.Parameters.AddWithValue("@Cr", M.CategoryId);
+                command.Parameters.AddWithValue("@Ur", M.UpdatedAt);
                 int rowsAffected = command.ExecuteNonQuery();
                 return rowsAffected;
             }

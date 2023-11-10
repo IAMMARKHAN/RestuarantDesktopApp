@@ -1,4 +1,5 @@
 ﻿using db2021finalprojectg_9;
+using Restuarant_App._BL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Restuarant_App
 {
@@ -99,17 +101,19 @@ namespace Restuarant_App
         }
         private int UpdateUserData(int seats, string type)
         {
+            TablesBL T = new TablesBL(seats, type, true, DateTime.Now, DateTime.Now);
+
             try
             {
 
 
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand("UPDATE tables SET Seats = @NewName, Located = @NewType, UpdatedAt=@g,Active=@gd WHERE Id = @Id", con);
-                command.Parameters.AddWithValue("@NewName", seats);
-                command.Parameters.AddWithValue("@NewType", type);
+                command.Parameters.AddWithValue("@NewName", T.Seats);
+                command.Parameters.AddWithValue("@NewType", T.Located);
                 command.Parameters.AddWithValue("@Id", id);
-                command.Parameters.AddWithValue("@g", DateTime.Now);
-                command.Parameters.AddWithValue("@gd", true);
+                command.Parameters.AddWithValue("@g", T.UpdatedAt);
+                command.Parameters.AddWithValue("@gd", T.Active);
 
 
                 int rowsAffected = command.ExecuteNonQuery();

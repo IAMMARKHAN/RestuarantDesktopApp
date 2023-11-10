@@ -112,7 +112,7 @@
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.BackColor = System.Drawing.Color.Silver;
+            this.tableLayoutPanel3.BackColor = System.Drawing.Color.Gainsboro;
             this.tableLayoutPanel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.tableLayoutPanel3.ColumnCount = 3;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.07692F));
@@ -140,6 +140,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.118644F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(614, 297);
             this.tableLayoutPanel3.TabIndex = 0;
+            this.tableLayoutPanel3.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel3_Paint);
             // 
             // button1
             // 
@@ -185,11 +186,11 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Impact", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(31, 138);
+            this.label3.Location = new System.Drawing.Point(17, 138);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 34);
+            this.label3.Size = new System.Drawing.Size(107, 34);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Seats";
+            this.label3.Text = "Persons";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // comboBox2
