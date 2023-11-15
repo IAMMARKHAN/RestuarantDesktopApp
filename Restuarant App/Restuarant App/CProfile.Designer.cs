@@ -308,7 +308,7 @@
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Impact", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(130)))));
+            this.label9.ForeColor = System.Drawing.Color.Crimson;
             this.label9.Location = new System.Drawing.Point(320, 25);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(298, 45);

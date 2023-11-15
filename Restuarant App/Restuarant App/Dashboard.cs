@@ -16,7 +16,7 @@ namespace Restuarant_App
 {
     public partial class Dashboard : Form
     {
-        int staff, category, table, order;
+        int staff, category, table, order,menu;
         public Dashboard()
         {
             InitializeComponent();
@@ -91,10 +91,12 @@ namespace Restuarant_App
             order = GetOrdersCount();
             table = GetTableCount();
             category = GetCategoriesCount();
-            label6.Text = category.ToString();
+            menu=GetMenuCount();
+            label9.Text = category.ToString();
             label7.Text = table.ToString();
             label8.Text = staff.ToString();
             label5.Text = order.ToString();
+            label6.Text = menu.ToString();
 
         }
         public int GetTableCount()
@@ -129,6 +131,27 @@ namespace Restuarant_App
             SqlCommand command = new SqlCommand(query, con);
             int userCount = Convert.ToInt32(command.ExecuteScalar());
             return userCount;
+            }
+            catch (Exception ex)
+            {
+                LogExceptionToDatabase(ex);
+                MessageBox.Show("Error Loading");
+            }
+            return 0;
+
+
+        }
+        public int GetMenuCount()
+        {
+
+            try
+            {
+
+                var con = Configuration.getInstance().getConnection();
+                string query = "SELECT COUNT(*) FROM dbo.[menu]";
+                SqlCommand command = new SqlCommand(query, con);
+                int userCount = Convert.ToInt32(command.ExecuteScalar());
+                return userCount;
             }
             catch (Exception ex)
             {
@@ -216,6 +239,7 @@ namespace Restuarant_App
 
 
         }
+
         private void label8_Click(object sender, EventArgs e)
         {
 

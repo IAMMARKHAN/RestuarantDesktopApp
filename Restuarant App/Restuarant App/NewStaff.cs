@@ -96,7 +96,7 @@ namespace Restuarant_App
             }
             string name = textBox2.Text.Trim();
             string type = comboBox1.Text.ToString();
-            double cont = double.Parse(textBox1.Text);
+            string cont = textBox1.Text.ToString();
 
             int check = InsertUserData(name,type,cont);
             if (check > 0)
@@ -109,7 +109,7 @@ namespace Restuarant_App
                 MessageBox.Show("Error Adding Data!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private int InsertUserData(string name, string email,double cont)
+        private int InsertUserData(string name, string email,string cont)
         {
 
             StaffBL S = new StaffBL(name,email,cont,true,DateTime.Now,DateTime.Now);

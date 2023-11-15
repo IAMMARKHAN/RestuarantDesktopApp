@@ -203,7 +203,11 @@
             "1",
             "2",
             "3",
-            "4"});
+            "4",
+            "6",
+            "8",
+            "10",
+            "12"});
             this.comboBox2.Location = new System.Drawing.Point(144, 141);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(440, 21);

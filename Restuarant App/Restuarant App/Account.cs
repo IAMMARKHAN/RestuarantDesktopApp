@@ -171,8 +171,12 @@ namespace Restuarant_App
             if (check > 0)
             {
                 MessageBox.Show("Account Created Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                textBox4.Text = "";
+                textBox5.Text = "";
+               
             }
             else
             {

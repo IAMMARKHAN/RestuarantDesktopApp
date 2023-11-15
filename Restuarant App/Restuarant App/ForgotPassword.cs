@@ -155,7 +155,7 @@ namespace Restuarant_App
                     using (MailMessage message = new MailMessage(smtpUsername, to))
                     {
                         message.Subject = "Verification Code";
-                        message.Body = $"Your Verification Code Is: {code}";
+                        message.Body = $"Hey! Your 4-digit Verification Code Is: {code}, Enter The Provided Code to Recover Your Account.";
                         client.Send(message);
                     }
                 }

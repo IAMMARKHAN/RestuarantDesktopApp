@@ -34,7 +34,7 @@ namespace Restuarant_App._DL
                         Id = Convert.ToInt32(reader["Id"]),
                         Name = reader["Name"].ToString(),
                         Type = reader["Type"].ToString(),
-                        Contact = Convert.ToDouble(reader["Contact"]),
+                        Contact = reader["Contact"].ToString(),
                         Active = Convert.ToBoolean(reader["Active"]),
                         CreatedAt = Convert.ToDateTime(reader["CreatedAt"]),
                         UpdatedAt = Convert.ToDateTime(reader["UpdatedAt"])

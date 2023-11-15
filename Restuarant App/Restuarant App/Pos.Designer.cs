@@ -531,7 +531,7 @@
             this.Controls.Add(this.tableLayoutPanel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MinimumSize = new System.Drawing.Size(800, 521);
-            this.Name = "Pos";
+           // this.Name = "Pos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

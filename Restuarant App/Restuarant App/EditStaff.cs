@@ -65,7 +65,7 @@ namespace Restuarant_App
                 MessageBox.Show("Please Enter All Fields !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            double d=double.Parse(textBox1.Text);
+            string d=textBox1.Text.ToString();
             int check = UpdateUserData(textBox2.Text,comboBox1.Text.ToString(),d);
             if (check > 0)
             {
@@ -120,7 +120,7 @@ namespace Restuarant_App
             }
             return "Unknown";
         }
-        private int UpdateUserData(string name,string type,double cont)
+        private int UpdateUserData(string name,string type,string cont)
         {
             StaffBL S = new StaffBL(name, type, cont, true, DateTime.Now, DateTime.Now);
 
