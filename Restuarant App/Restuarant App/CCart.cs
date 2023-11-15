@@ -47,6 +47,11 @@ namespace Restuarant_App
             cartItems.Clear();
             label5.Text = 0.ToString();
             label7.Text = 0.ToString();
+            radioButton1.Checked = false;
+            label9.Text = "Cash On Delivery";
+            radioButton2.Checked = false;
+
+
         }
         public void PopulateCartItems(List<CartItem> cartItems)
         {
@@ -57,110 +62,231 @@ namespace Restuarant_App
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        public void PaymentSuccessfull()
         {
-            if(dataGridView2.Rows.Count>0) {
-                DialogResult result = MessageBox.Show("Confirm Order ? Payable Amount: " +label7.Text, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(result==DialogResult.Yes)
-                {                  
-                    try
+            try
+            {
+                var con = Configuration.getInstance().getConnection();
+                string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer,Address,Items) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I,@J,@K)";
+                SqlCommand command = new SqlCommand(insertQuery, con);
+                command.Parameters.AddWithValue("@A", dataGridView2.Rows.Count);
+                command.Parameters.AddWithValue("@B", "Delivery");
+                command.Parameters.AddWithValue("@C", label7.Text);
+                command.Parameters.AddWithValue("@D", "Delivery Boy");
+                command.Parameters.AddWithValue("@E", "Unpaid");
+                command.Parameters.AddWithValue("@F", true);
+                command.Parameters.AddWithValue("@G", DateTime.Now);
+                command.Parameters.AddWithValue("@H", DateTime.Now);
+                command.Parameters.AddWithValue("@I", name);
+                command.Parameters.AddWithValue("@J", address);
+                string columnName = "Name";
+                string valuesList = string.Join(",", dataGridView2.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells[columnName].Value?.ToString() ?? "")));
+                command.Parameters.AddWithValue("@K", valuesList);
+                int rowsAffected = command.ExecuteNonQuery();
+                try
+                {
+                    string savePath;
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                     {
-                        var con = Configuration.getInstance().getConnection();
-                        string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer,Address,Items) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I,@J,@K)";
-                        SqlCommand command = new SqlCommand(insertQuery, con);
-                        command.Parameters.AddWithValue("@A", dataGridView2.Rows.Count);
-                        command.Parameters.AddWithValue("@B", "Delivery"); 
-                        command.Parameters.AddWithValue("@C", label7.Text);
-                        command.Parameters.AddWithValue("@D", "Delivery Boy");
-                        command.Parameters.AddWithValue("@E", "Unpaid");
-                        command.Parameters.AddWithValue("@F", true);
-                        command.Parameters.AddWithValue("@G", DateTime.Now);
-                        command.Parameters.AddWithValue("@H", DateTime.Now);
-                        command.Parameters.AddWithValue("@I", name);
-                        command.Parameters.AddWithValue("@J", address);
-                        string columnName = "Name";
-                        string valuesList = string.Join(",", dataGridView2.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells[columnName].Value?.ToString() ?? "")));
-                        command.Parameters.AddWithValue("@K", valuesList);
-                        int rowsAffected = command.ExecuteNonQuery();
+                        saveFileDialog.Filter = "PDF Files|*.pdf";
                         try
                         {
-                            string savePath;
-                            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                            if (saveFileDialog.ShowDialog() == DialogResult.OK)
                             {
-                                saveFileDialog.Filter = "PDF Files|*.pdf";
-                                try
+                                savePath = saveFileDialog.FileName;
+                                Document document = new Document();
+                                PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
+                                document.Open();
+                                Paragraph title = new Paragraph("Restaurant Management System");
+                                title.Alignment = Element.ALIGN_CENTER;
+                                document.Add(title);
+                                document.Add(new Paragraph("\n"));
+                                document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
+                                document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
+                                document.Add(new Paragraph("Report Type: Order Invoice"));
+                                document.Add(new Paragraph("Status: Unpaid"));
+                                document.Add(new Paragraph("User Type: Customer"));
+
+                                document.Add(new Paragraph("\n"));
+                                PdfPTable table = new PdfPTable(dataGridView2.Columns.Count);
+                                for (int i = 0; i < dataGridView2.Columns.Count; i++)
                                 {
-                                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                    table.AddCell(new PdfPCell(new Phrase(dataGridView2.Columns[i].HeaderText))
                                     {
-                                        savePath = saveFileDialog.FileName;
-                                        Document document = new Document();
-                                        PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
-                                        document.Open();
-                                        Paragraph title = new Paragraph("Restaurant Management System");
-                                        title.Alignment = Element.ALIGN_CENTER;
-                                        document.Add(title);
-                                        document.Add(new Paragraph("\n"));
-                                        document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
-                                        document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
-                                        document.Add(new Paragraph("Report Type: Order Invoice"));
-                                        document.Add(new Paragraph("Status: Unpaid"));
-                                        document.Add(new Paragraph("User Type: Customer"));
-                                       
-                                        document.Add(new Paragraph("\n"));
-                                        PdfPTable table = new PdfPTable(dataGridView2.Columns.Count);
-                                        for (int i = 0; i < dataGridView2.Columns.Count; i++)
+                                        HorizontalAlignment = Element.ALIGN_CENTER
+                                    });
+                                }
+
+                                foreach (DataGridViewRow row in dataGridView2.Rows)
+                                {
+                                    for (int i = 0; i < dataGridView2.Columns.Count; i++)
+                                    {
+                                        table.AddCell(new PdfPCell(new Phrase(row.Cells[i].Value.ToString()))
                                         {
-                                            table.AddCell(new PdfPCell(new Phrase(dataGridView2.Columns[i].HeaderText))
-                                            {
-                                                HorizontalAlignment = Element.ALIGN_CENTER
-                                            });
-                                        }
-
-                                        foreach (DataGridViewRow row in dataGridView2.Rows)
-                                        {
-                                            for (int i = 0; i < dataGridView2.Columns.Count; i++)
-                                            {
-                                                table.AddCell(new PdfPCell(new Phrase(row.Cells[i].Value.ToString()))
-                                                {
-                                                    HorizontalAlignment = Element.ALIGN_CENTER
-                                                });
-                                            }
-                                        }
-
-                                        document.Add(table);
-                                        document.Add(new Paragraph("\n"));
-                                        Paragraph P = new Paragraph($"Total: {label5.Text}");
-                                        document.Add(P);
-                                        Paragraph P1 = new Paragraph("Tax: 16%");
-                                        document.Add(P1);
-                                        Paragraph P2 = new Paragraph($"Net Total: {label7.Text}");
-                                        document.Add(P2);
-                                        document.Close();
-                                        MessageBox.Show("Order Placed and Bill Saved Successfully !");
-
+                                            HorizontalAlignment = Element.ALIGN_CENTER
+                                        });
                                     }
                                 }
-                                catch (Exception ex)
-                                {
-                                    MessageBox.Show(ex.Message);
-                                }
+
+                                document.Add(table);
+                                document.Add(new Paragraph("\n"));
+                                Paragraph P = new Paragraph($"Total: {label5.Text}");
+                                document.Add(P);
+                                Paragraph P1 = new Paragraph("Tax: 16%");
+                                document.Add(P1);
+                                Paragraph P2 = new Paragraph($"Net Total: {label7.Text}");
+                                document.Add(P2);
+                                document.Close();
+                                MessageBox.Show("Order Placed and Bill Saved Successfully !");
+
                             }
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show(ex.Message);
                         }
-                        cartItems.Clear();
-                        label5.Text = 0.ToString();
-                        label7.Text = 0.ToString();
-                        dataGridView2.Rows.Clear();
-
                     }
-                    catch (Exception ex)
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                cartItems.Clear();
+                label5.Text = 0.ToString();
+                label7.Text = 0.ToString();
+                dataGridView2.Rows.Clear();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            if(dataGridView2.Rows.Count>0 ) {
+                if (radioButton1.Checked == true || radioButton2.Checked == true)
+                {
+                    DialogResult result = MessageBox.Show("Confirm Order ? Payable Amount: " + label7.Text, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
                     {
-                        MessageBox.Show(ex.Message);
-                    }
+                        if(radioButton1.Checked==true)
+                        {
+                            try
+                            {
+                                var con = Configuration.getInstance().getConnection();
+                                string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer,Address,Items) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I,@J,@K)";
+                                SqlCommand command = new SqlCommand(insertQuery, con);
+                                command.Parameters.AddWithValue("@A", dataGridView2.Rows.Count);
+                                command.Parameters.AddWithValue("@B", "Delivery");
+                                command.Parameters.AddWithValue("@C", label7.Text);
+                                command.Parameters.AddWithValue("@D", "Delivery Boy");
+                                command.Parameters.AddWithValue("@E", "Unpaid");
+                                command.Parameters.AddWithValue("@F", true);
+                                command.Parameters.AddWithValue("@G", DateTime.Now);
+                                command.Parameters.AddWithValue("@H", DateTime.Now);
+                                command.Parameters.AddWithValue("@I", name);
+                                command.Parameters.AddWithValue("@J", address);
+                                string columnName = "Name";
+                                string valuesList = string.Join(",", dataGridView2.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells[columnName].Value?.ToString() ?? "")));
+                                command.Parameters.AddWithValue("@K", valuesList);
+                                int rowsAffected = command.ExecuteNonQuery();
+                                try
+                                {
+                                    string savePath;
+                                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                                    {
+                                        saveFileDialog.Filter = "PDF Files|*.pdf";
+                                        try
+                                        {
+                                            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                                            {
+                                                savePath = saveFileDialog.FileName;
+                                                Document document = new Document();
+                                                PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
+                                                document.Open();
+                                                Paragraph title = new Paragraph("Restaurant Management System");
+                                                title.Alignment = Element.ALIGN_CENTER;
+                                                document.Add(title);
+                                                document.Add(new Paragraph("\n"));
+                                                document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
+                                                document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
+                                                document.Add(new Paragraph("Report Type: Order Invoice"));
+                                                document.Add(new Paragraph("Status: Unpaid"));
+                                                document.Add(new Paragraph("User Type: Customer"));
 
+                                                document.Add(new Paragraph("\n"));
+                                                PdfPTable table = new PdfPTable(dataGridView2.Columns.Count);
+                                                for (int i = 0; i < dataGridView2.Columns.Count; i++)
+                                                {
+                                                    table.AddCell(new PdfPCell(new Phrase(dataGridView2.Columns[i].HeaderText))
+                                                    {
+                                                        HorizontalAlignment = Element.ALIGN_CENTER
+                                                    });
+                                                }
+
+                                                foreach (DataGridViewRow row in dataGridView2.Rows)
+                                                {
+                                                    for (int i = 0; i < dataGridView2.Columns.Count; i++)
+                                                    {
+                                                        table.AddCell(new PdfPCell(new Phrase(row.Cells[i].Value.ToString()))
+                                                        {
+                                                            HorizontalAlignment = Element.ALIGN_CENTER
+                                                        });
+                                                    }
+                                                }
+
+                                                document.Add(table);
+                                                document.Add(new Paragraph("\n"));
+                                                Paragraph P = new Paragraph($"Total: {label5.Text}");
+                                                document.Add(P);
+                                                Paragraph P1 = new Paragraph("Tax: 16%");
+                                                document.Add(P1);
+                                                Paragraph P2 = new Paragraph($"Net Total: {label7.Text}");
+                                                document.Add(P2);
+                                                document.Close();
+                                                MessageBox.Show("Order Placed and Bill Saved Successfully !");
+
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            MessageBox.Show(ex.Message);
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.Message);
+                                }
+                                cartItems.Clear();
+                                label5.Text = 0.ToString();
+                                label7.Text = 0.ToString();
+                                dataGridView2.Rows.Clear();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                            }
+
+
+                        }
+                        else
+                        {
+                            Payment M = new Payment();
+                            M.Show();
+
+                        }
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Select Payment Method !");
                 }
             }
             else
@@ -188,6 +314,25 @@ namespace Restuarant_App
             label5.Text = totalPrice.ToString();
             decimal tax = (decimal.Parse(label5.Text)) * 0.16m;
             label7.Text = (int.Parse(label5.Text) + tax).ToString();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton1.Checked==true)
+            {
+                radioButton2.Checked =false;
+                label9.Text = "Cash On Delivery";
+
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked == true)
+            {
+                radioButton1.Checked = false;
+                label9.Text = "Online Payment";
+            }
         }
     }
 }
