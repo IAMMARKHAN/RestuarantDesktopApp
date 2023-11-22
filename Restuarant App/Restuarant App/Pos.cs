@@ -272,6 +272,8 @@ namespace Restuarant_App
             button3.ForeColor = Color.White;
             label5.Text = "0";
             label7.Text = "0";
+            label12.Text = "0";
+            textBox1.Text = "";
             orderType = "";
             txtAddress.Text = "";
             txtName.Text = "";
@@ -382,7 +384,7 @@ namespace Restuarant_App
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            bool c1 =false, c2=false, c3=false;
+            bool c1 = false, c2 = false, c3 = false, c4 = false;
             if (orderType == "")
             {
                 MessageBox.Show("Please Select The Order Type !");
@@ -408,8 +410,16 @@ namespace Restuarant_App
             {
                 c3 = true;
             }
-    
-            if (c1 == true && c2 == true && c3 == true)
+            if (textBox1.Text=="")
+            {
+                MessageBox.Show("Enter Paid Amount !");
+            }
+            else
+            {
+                c4 = true;
+            }
+
+            if (c1 == true && c2 == true && c3 == true && c4==true)
             {
                 DialogResult result = MessageBox.Show("Printing Bill ! Is It Paid ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -686,6 +696,25 @@ namespace Restuarant_App
 
         private void label9_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void textBox1_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Length != 0 && label7.Text!="0")
+            {
+                decimal remain = decimal.Parse(textBox1.Text) - decimal.Parse(label7.Text);
+               
+                label12.Text = remain.ToString();
+            }
 
         }
     }

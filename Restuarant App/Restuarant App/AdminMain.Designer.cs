@@ -37,6 +37,7 @@
             this.centerPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -64,7 +65,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(190, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(861, 52);
+            this.panel1.Size = new System.Drawing.Size(922, 52);
             this.panel1.TabIndex = 8;
             // 
             // tableLayoutPanel2
@@ -72,7 +73,7 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.641975F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 91.35802F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 61F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             this.tableLayoutPanel2.Controls.Add(this.button10, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.label3, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -80,7 +81,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(861, 52);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(922, 52);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // button10
@@ -88,9 +89,9 @@
             this.button10.BackColor = System.Drawing.Color.Crimson;
             this.button10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(802, 3);
+            this.button10.Location = new System.Drawing.Point(856, 3);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(56, 46);
+            this.button10.Size = new System.Drawing.Size(63, 46);
             this.button10.TabIndex = 0;
             this.button10.Text = "X";
             this.button10.UseVisualStyleBackColor = false;
@@ -102,7 +103,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Bahnschrift Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(396, 6);
+            this.label3.Location = new System.Drawing.Point(425, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 39);
             this.label3.TabIndex = 21;
@@ -111,6 +112,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(89)))));
+            this.panel2.Controls.Add(this.button12);
             this.panel2.Controls.Add(this.button11);
             this.panel2.Controls.Add(this.button9);
             this.panel2.Controls.Add(this.button8);
@@ -126,7 +128,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(190, 643);
+            this.panel2.Size = new System.Drawing.Size(190, 696);
             this.panel2.TabIndex = 7;
             // 
             // label1
@@ -146,7 +148,7 @@
             this.centerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.centerPanel.Location = new System.Drawing.Point(190, 52);
             this.centerPanel.Name = "centerPanel";
-            this.centerPanel.Size = new System.Drawing.Size(861, 591);
+            this.centerPanel.Size = new System.Drawing.Size(922, 644);
             this.centerPanel.TabIndex = 9;
             // 
             // tableLayoutPanel1
@@ -159,8 +161,8 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 591F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(861, 591);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 644F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(922, 644);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox2
@@ -169,11 +171,26 @@
             this.pictureBox2.Image = global::Restuarant_App.Properties.Resources.Restaurant_logo_with_chef_drawing_template_on_transparent_background_PNG;
             this.pictureBox2.Location = new System.Drawing.Point(3, 3);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(855, 585);
+            this.pictureBox2.Size = new System.Drawing.Size(916, 638);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // button12
+            // 
+            this.button12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(55)))), ((int)(((byte)(130)))));
+            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button12.ForeColor = System.Drawing.Color.White;
+            this.button12.Image = global::Restuarant_App.Properties.Resources.icons8_feedback_48;
+            this.button12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button12.Location = new System.Drawing.Point(7, 645);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(177, 40);
+            this.button12.TabIndex = 11;
+            this.button12.Text = "Feedback";
+            this.button12.UseVisualStyleBackColor = false;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button11
             // 
@@ -339,7 +356,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1051, 643);
+            this.ClientSize = new System.Drawing.Size(1112, 696);
             this.Controls.Add(this.centerPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
@@ -383,5 +400,6 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
     }
 }

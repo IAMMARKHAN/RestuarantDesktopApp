@@ -35,6 +35,7 @@ namespace Restuarant_App
             button8.FlatAppearance.BorderSize = 0;
             button9.FlatAppearance.BorderSize = 0;
             button10.FlatAppearance.BorderSize = 0;
+            button12.FlatAppearance.BorderSize = 0;
             button11.FlatAppearance.BorderSize = 0;
             button1.FlatAppearance.BorderSize = 0;
             addControls(new Home());
@@ -133,6 +134,12 @@ namespace Restuarant_App
         {
             addControls(new Account());
             label3.Text="Add Admin Account";
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            addControls(new Feeback());
+            label3.Text = "Feedback";
         }
     }
 }

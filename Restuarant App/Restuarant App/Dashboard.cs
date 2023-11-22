@@ -36,7 +36,7 @@ namespace Restuarant_App
 
             var con2 = Configuration.getInstance().getConnection();
 
-            string sqlQuery1 = "SELECT CreatedAt, COUNT(*) AS ReservationCount FROM tableReservation GROUP BY CreatedAt ORDER BY CreatedAt";
+            string sqlQuery1 = "SELECT Top 5 CreatedAt, COUNT(*) AS ReservationCount FROM tableReservation GROUP BY CreatedAt ORDER BY CreatedAt";
 
             SqlCommand cmd2 = new SqlCommand(sqlQuery1, con2);
 
@@ -59,7 +59,7 @@ namespace Restuarant_App
 
             var con = Configuration.getInstance().getConnection();
 
-            string sqlQuery = "SELECT CONVERT(DATE, CreatedAt) AS OrderDate, COUNT(*) AS OrderCount FROM orders GROUP BY CONVERT(DATE, CreatedAt) ORDER BY OrderDate";
+            string sqlQuery = "SELECT Top 5 CONVERT(DATE, CreatedAt) AS OrderDate, COUNT(*) AS OrderCount FROM orders GROUP BY CONVERT(DATE, CreatedAt) ORDER BY OrderDate";
             SqlCommand cmd = new SqlCommand(sqlQuery, con);
             try
             {

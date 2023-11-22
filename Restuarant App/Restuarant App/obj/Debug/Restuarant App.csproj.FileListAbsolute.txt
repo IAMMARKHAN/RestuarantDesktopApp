@@ -95,3 +95,14 @@ D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.DineInRequirements.resources
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Reservation.resources
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Payment.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.Feeback.resources
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\Newtonsoft.Json.dll
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\Stripe.net.dll
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\Newtonsoft.Json.xml
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\Stripe.net.xml
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\System.Threading.Tasks.Extensions.xml

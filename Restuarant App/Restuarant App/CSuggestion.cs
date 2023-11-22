@@ -41,13 +41,14 @@ namespace Restuarant_App
             if(richTextBox1.Text.Length > 0)
             {
             SuggestionBL S = new SuggestionBL(cid,richTextBox1.Text,DateTime.Now,DateTime.Now);
-                string query = "INSERT INTO suggestion (CustomerId, Suggesstion, CreatedAt, UpdatedAt) VALUES (@CustomerId, @Suggestion, @CreatedAt, @UpdatedAt);";
+                string query = "INSERT INTO suggestion (CustomerId, Suggesstion, CreatedAt, UpdatedAt,CustomerName) VALUES (@CustomerId, @Suggestion, @CreatedAt, @UpdatedAt,@Name);";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@CustomerId", S.CustomerId);
                 command.Parameters.AddWithValue("@Suggestion", S.SuggestionText);
                 command.Parameters.AddWithValue("@CreatedAt", S.CreatedAt); 
-                command.Parameters.AddWithValue("@UpdatedAt", S.UpdatedAt); 
+                command.Parameters.AddWithValue("@UpdatedAt", S.UpdatedAt);
+                command.Parameters.AddWithValue("@Name", name);
                 command.ExecuteNonQuery();
                 MessageBox.Show("Thank You ! Your Suggestion Recorded !");
                 richTextBox1.Text = "";

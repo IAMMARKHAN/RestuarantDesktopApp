@@ -138,7 +138,13 @@ namespace Restuarant_App
                                 document.Add(P2);
                                 document.Close();
                                 MessageBox.Show("Order Placed and Bill Saved Successfully !");
-
+                                dataGridView2.Rows.Clear();
+                                cartItems.Clear();
+                                label5.Text = 0.ToString();
+                                label7.Text = 0.ToString();
+                                radioButton1.Checked = false;
+                                label9.Text = "Cash On Delivery";
+                                radioButton2.Checked = false;
                             }
                         }
                         catch (Exception ex)
@@ -249,6 +255,13 @@ namespace Restuarant_App
                                                 document.Add(P2);
                                                 document.Close();
                                                 MessageBox.Show("Order Placed and Bill Saved Successfully !");
+                                                dataGridView2.Rows.Clear();
+                                                cartItems.Clear();
+                                                label5.Text = 0.ToString();
+                                                label7.Text = 0.ToString();
+                                                radioButton1.Checked = false;
+                                                label9.Text = "Cash On Delivery";
+                                                radioButton2.Checked = false;
 
                                             }
                                         }
@@ -272,12 +285,11 @@ namespace Restuarant_App
                             {
                                 MessageBox.Show(ex.Message);
                             }
-
-
                         }
                         else
                         {
-                            Payment M = new Payment();
+                            decimal amount = decimal.Parse(label7.Text);
+                            Payment M = new Payment(amount);
                             M.Show();
 
                         }
@@ -299,7 +311,6 @@ namespace Restuarant_App
         {
 
         }
-
         private void CCart_Load(object sender, EventArgs e)
         {
             PopulateCartItems(cartItems);
@@ -333,6 +344,11 @@ namespace Restuarant_App
                 radioButton1.Checked = false;
                 label9.Text = "Online Payment";
             }
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
