@@ -106,3 +106,4 @@ D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\Stripe.net.xml
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\SEMESTER 5\SE LAB\Developer\Project\Git Project\Restuarant App\Restuarant App\obj\Debug\Restuarant_App.CFavourites.resources

@@ -28,6 +28,7 @@ namespace Restuarant_App
         {
             textBox1.Text = name;
             dateTimePicker1.Checked = false;
+            button1.FlatAppearance.BorderSize = 0;
 
         }
 

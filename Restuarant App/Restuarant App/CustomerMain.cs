@@ -41,6 +41,8 @@ namespace Restuarant_App
             button6.FlatAppearance.BorderSize = 0;
             button7.FlatAppearance.BorderSize = 0;
             button10.FlatAppearance.BorderSize = 0;
+            button2.FlatAppearance.BorderSize = 0;
+
 
             button1.FlatAppearance.BorderSize = 0;
         }
@@ -108,6 +110,12 @@ namespace Restuarant_App
         private void pictureBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            addControls(new CFavourites());
+            label3.Text = "My Favourites";
         }
     }
 }

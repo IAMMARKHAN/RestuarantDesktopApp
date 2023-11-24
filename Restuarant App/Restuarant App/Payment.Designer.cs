@@ -217,7 +217,6 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(316, 20);
             this.textBox4.TabIndex = 3;
-            this.textBox4.Text = "04/25";
             this.textBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox4_KeyPress);
             // 
             // label5
@@ -262,7 +261,6 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(315, 20);
             this.textBox3.TabIndex = 1;
-            this.textBox3.Text = "124";
             this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // tableLayoutPanel6
@@ -297,7 +295,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(315, 20);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "Ammar";
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // tableLayoutPanel5
@@ -322,7 +319,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(314, 20);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "1111222233334444";
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label2

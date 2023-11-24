@@ -30,27 +30,27 @@
         {
             this.panel3 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.button10 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,6 +76,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(861, 549);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox2.Image = global::Restuarant_App.Properties.Resources.Restaurant_logo_with_chef_drawing_template_on_transparent_background_PNG;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(855, 543);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // panel1
             // 
@@ -146,28 +158,20 @@
             this.panel2.Size = new System.Drawing.Size(190, 601);
             this.panel2.TabIndex = 10;
             // 
-            // label1
+            // button2
             // 
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(3, 99);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 44);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Restuarant Management System";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Image = global::Restuarant_App.Properties.Resources.Restaurant_logo_with_chef_drawing_template_on_transparent_background_PNG;
-            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(855, 543);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Image = global::Restuarant_App.Properties.Resources.icons8_favourite_50;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(7, 379);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(177, 48);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "Favourites";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // button7
             // 
@@ -176,9 +180,9 @@
             this.button7.ForeColor = System.Drawing.Color.White;
             this.button7.Image = global::Restuarant_App.Properties.Resources.profile_32_48;
             this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(7, 477);
+            this.button7.Location = new System.Drawing.Point(7, 487);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(177, 44);
+            this.button7.Size = new System.Drawing.Size(177, 46);
             this.button7.TabIndex = 7;
             this.button7.Text = "Profile";
             this.button7.UseVisualStyleBackColor = false;
@@ -191,9 +195,9 @@
             this.button6.ForeColor = System.Drawing.Color.White;
             this.button6.Image = global::Restuarant_App.Properties.Resources.cart_22_48;
             this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(7, 374);
+            this.button6.Location = new System.Drawing.Point(7, 433);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(177, 44);
+            this.button6.Size = new System.Drawing.Size(177, 47);
             this.button6.TabIndex = 6;
             this.button6.Text = "Cart";
             this.button6.UseVisualStyleBackColor = false;
@@ -206,9 +210,9 @@
             this.button5.ForeColor = System.Drawing.Color.White;
             this.button5.Image = global::Restuarant_App.Properties.Resources.popular_recommendation_48;
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(7, 324);
+            this.button5.Location = new System.Drawing.Point(7, 325);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(177, 44);
+            this.button5.Size = new System.Drawing.Size(177, 48);
             this.button5.TabIndex = 5;
             this.button5.Text = "Suggestion";
             this.button5.UseVisualStyleBackColor = false;
@@ -221,9 +225,9 @@
             this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Image = global::Restuarant_App.Properties.Resources.orders_3_48;
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(7, 274);
+            this.button4.Location = new System.Drawing.Point(7, 272);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(177, 44);
+            this.button4.Size = new System.Drawing.Size(177, 47);
             this.button4.TabIndex = 4;
             this.button4.Text = "Orders";
             this.button4.UseVisualStyleBackColor = false;
@@ -236,7 +240,7 @@
             this.button3.ForeColor = System.Drawing.Color.White;
             this.button3.Image = global::Restuarant_App.Properties.Resources.table_13_48;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(7, 225);
+            this.button3.Location = new System.Drawing.Point(7, 222);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(177, 44);
             this.button3.TabIndex = 3;
@@ -251,13 +255,24 @@
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Image = global::Restuarant_App.Properties.Resources.food_17_48;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(7, 175);
+            this.button1.Location = new System.Drawing.Point(7, 165);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(177, 44);
+            this.button1.Size = new System.Drawing.Size(177, 50);
             this.button1.TabIndex = 1;
             this.button1.Text = "Menu";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(3, 99);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(187, 44);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Restuarant Management System";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
@@ -268,20 +283,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Image = global::Restuarant_App.Properties.Resources.profile_32_48;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(7, 425);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(177, 44);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Add Somthing";
-            this.button2.UseVisualStyleBackColor = false;
             // 
             // CustomerMain
             // 
@@ -300,11 +301,11 @@
             this.Load += new System.EventHandler(this.CustomerMain_Load);
             this.panel3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

@@ -189,5 +189,11 @@ namespace Restuarant_App
         {
 
         }
+
+        private void Account_Load(object sender, EventArgs e)
+        {
+            button5.FlatAppearance.BorderSize = 0;
+
+        }
     }
 }

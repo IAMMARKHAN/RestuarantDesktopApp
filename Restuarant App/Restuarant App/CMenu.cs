@@ -149,7 +149,34 @@ namespace Restuarant_App
                     string sizeValue = row.Cells[sizeColumnName].Value.ToString();
                     CCart.cartItems.Add(new CartItem
                     {
-                        Id =idValue,
+                        Id = idValue,
+                        Name = nameValue,
+                        Price = priceValue,
+                        Size = sizeValue
+                    });
+                    MessageBox.Show("Added Successfully !", "Info", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                }
+
+            }
+            if (e.ColumnIndex >= 0 && dataGridView2.Columns[e.ColumnIndex].Name == "Favourite")
+            {
+                DialogResult result = MessageBox.Show("Add This To Favourites ?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    DataGridViewRow newRow = new DataGridViewRow();
+                    DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
+                    string idColumnName = "Id";
+                    string nameColumnName = "Name";
+                    string priceColumnName = "Price";
+                    string sizeColumnName = "Size";
+                    int idValue = Convert.ToInt32(row.Cells[idColumnName].Value);
+                    string nameValue = row.Cells[nameColumnName].Value.ToString();
+                    int priceValue = Convert.ToInt32(row.Cells[priceColumnName].Value);
+                    string sizeValue = row.Cells[sizeColumnName].Value.ToString();
+                    CFavourites.cartItems.Add(new CartItem
+                    {
+                        Id = idValue,
                         Name = nameValue,
                         Price = priceValue,
                         Size = sizeValue

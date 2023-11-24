@@ -111,6 +111,12 @@
     <Compile Include="CCart.Designer.cs">
       <DependentUpon>CCart.cs</DependentUpon>
     </Compile>
+    <Compile Include="CFavourites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CFavourites.Designer.cs">
+      <DependentUpon>CFavourites.cs</DependentUpon>
+    </Compile>
     <Compile Include="CMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CCart.resx">
       <DependentUpon>CCart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFavourites.resx">
+      <DependentUpon>CFavourites.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CMenu.resx">
       <DependentUpon>CMenu.cs</DependentUpon>
@@ -599,6 +608,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-feedback-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\favourite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\favorite %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookmark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-favourite-60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-favourite-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-favourite-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-favorite-100.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
