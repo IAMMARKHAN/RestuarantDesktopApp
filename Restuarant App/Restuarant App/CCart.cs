@@ -16,12 +16,16 @@ using System.Xml.Linq;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.IO;
+using Stripe.Radar;
+using iTextSharp.text.pdf.draw;
 
 namespace Restuarant_App
 {
     public partial class CCart : Form
     {
-        public  static List<CartItem> cartItems = new List<CartItem>();
+        public string vvaluesList;
+
+        public static List<CartItem> cartItems = new List<CartItem>();
         public string name;
         public string address ;
 
@@ -62,26 +66,24 @@ namespace Restuarant_App
             }
         }
 
-        public void PaymentSuccessfull()
+        public void PaymentSuccessfull(int quantity,string amount,string list, CCart C)
         {
             try
             {
                 var con = Configuration.getInstance().getConnection();
                 string insertQuery = "INSERT INTO dbo.[orders] (Quantity,Type,Amount,Staff,Status,Active,CreatedAt, UpdatedAt,Customer,Address,Items) VALUES (@A, @B, @C, @D, @E, @F, @G, @H,@I,@J,@K)";
                 SqlCommand command = new SqlCommand(insertQuery, con);
-                command.Parameters.AddWithValue("@A", dataGridView2.Rows.Count);
+                command.Parameters.AddWithValue("@A", quantity);
                 command.Parameters.AddWithValue("@B", "Delivery");
-                command.Parameters.AddWithValue("@C", label7.Text);
+                command.Parameters.AddWithValue("@C", amount);
                 command.Parameters.AddWithValue("@D", "Delivery Boy");
-                command.Parameters.AddWithValue("@E", "Unpaid");
-                command.Parameters.AddWithValue("@F", true);
+                command.Parameters.AddWithValue("@E", "Paid");
+                command.Parameters.AddWithValue("@F", false);
                 command.Parameters.AddWithValue("@G", DateTime.Now);
                 command.Parameters.AddWithValue("@H", DateTime.Now);
                 command.Parameters.AddWithValue("@I", name);
                 command.Parameters.AddWithValue("@J", address);
-                string columnName = "Name";
-                string valuesList = string.Join(",", dataGridView2.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells[columnName].Value?.ToString() ?? "")));
-                command.Parameters.AddWithValue("@K", valuesList);
+                command.Parameters.AddWithValue("@K", list);
                 int rowsAffected = command.ExecuteNonQuery();
                 try
                 {
@@ -97,54 +99,58 @@ namespace Restuarant_App
                                 Document document = new Document();
                                 PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                                 document.Open();
-                                Paragraph title = new Paragraph("Restaurant Management System");
+                                Paragraph restaurantInfo = new Paragraph();
+                                restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("D:\\SEMESTER 5\\SE LAB\\Developer\\Project\\Git Project\\Restuarant App\\Restuarant App\\Resources\\Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png");
+                                logo.ScalePercent(2f);
+                                restaurantInfo.Add(logo);
+                                restaurantInfo.Alignment=Element.ALIGN_CENTER;
+                                document.Add(restaurantInfo);
+                                document.Add(new Paragraph("\n"));
+                                LineSeparator line = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                document.Add(line);
+                                Paragraph restaurantName = new Paragraph("Restaurant Management System");
+                                restaurantName.Alignment = Element.ALIGN_CENTER;
+                                restaurantName.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+                                document.Add(restaurantName);
+
+                                Paragraph title = new Paragraph("Where Food Dreams Come True !");
                                 title.Alignment = Element.ALIGN_CENTER;
+                                title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY);
                                 document.Add(title);
+                                Paragraph restaurantAddress = new Paragraph("Johar Town, A-3 Block, Lahore");
+                                restaurantAddress.Alignment = Element.ALIGN_CENTER;
+                                restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+                                document.Add(restaurantAddress);
+                                Paragraph heading = new Paragraph("Customer Order Report");
+                                heading.Alignment = Element.ALIGN_CENTER;
+                                heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
+                                document.Add(heading);
+                                document.Add(new Paragraph("\n"));
+                                LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                document.Add(line1);
+
                                 document.Add(new Paragraph("\n"));
                                 document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
                                 document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
                                 document.Add(new Paragraph("Report Type: Order Invoice"));
-                                document.Add(new Paragraph("Status: Unpaid"));
-                                document.Add(new Paragraph("User Type: Customer"));
+                                document.Add(new Paragraph("Status: Paid"));
+                                document.Add(new Paragraph("Generated By: Customer"));
 
                                 document.Add(new Paragraph("\n"));
-                                PdfPTable table = new PdfPTable(dataGridView2.Columns.Count);
-                                for (int i = 0; i < dataGridView2.Columns.Count; i++)
+                                if (double.TryParse(amount, out double amountValue))
                                 {
-                                    table.AddCell(new PdfPCell(new Phrase(dataGridView2.Columns[i].HeaderText))
-                                    {
-                                        HorizontalAlignment = Element.ALIGN_CENTER
-                                    });
+                                    double taxRate = 0.16;
+                                    double tax = amountValue * taxRate;
+                                    double netTotal = amountValue + tax;
+                                    document.Add(new Paragraph($"Total: {amount}"));
+                                    document.Add(new Paragraph($"Tax ({taxRate * 100}%): {tax.ToString("F2")}"));
+                                    document.Add(new Paragraph($"Net Total: {netTotal.ToString("F2")}"));
                                 }
-
-                                foreach (DataGridViewRow row in dataGridView2.Rows)
-                                {
-                                    for (int i = 0; i < dataGridView2.Columns.Count; i++)
-                                    {
-                                        table.AddCell(new PdfPCell(new Phrase(row.Cells[i].Value.ToString()))
-                                        {
-                                            HorizontalAlignment = Element.ALIGN_CENTER
-                                        });
-                                    }
-                                }
-
-                                document.Add(table);
-                                document.Add(new Paragraph("\n"));
-                                Paragraph P = new Paragraph($"Total: {label5.Text}");
-                                document.Add(P);
-                                Paragraph P1 = new Paragraph("Tax: 16%");
-                                document.Add(P1);
-                                Paragraph P2 = new Paragraph($"Net Total: {label7.Text}");
-                                document.Add(P2);
                                 document.Close();
+                                C.button1_Click(null,null);
                                 MessageBox.Show("Order Placed and Bill Saved Successfully !");
-                                dataGridView2.Rows.Clear();
-                                cartItems.Clear();
-                                label5.Text = 0.ToString();
-                                label7.Text = 0.ToString();
-                                radioButton1.Checked = false;
-                                label9.Text = "Cash On Delivery";
-                                radioButton2.Checked = false;
+                       
                             }
                         }
                         catch (Exception ex)
@@ -179,6 +185,7 @@ namespace Restuarant_App
                     DialogResult result = MessageBox.Show("Confirm Order ? Payable Amount: " + label7.Text, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
+                        string valuesList ="";
                         if(radioButton1.Checked==true)
                         {
                             try
@@ -196,8 +203,8 @@ namespace Restuarant_App
                                 command.Parameters.AddWithValue("@H", DateTime.Now);
                                 command.Parameters.AddWithValue("@I", name);
                                 command.Parameters.AddWithValue("@J", address);
-                                string columnName = "Name";
-                                string valuesList = string.Join(",", dataGridView2.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells[columnName].Value?.ToString() ?? "")));
+                                string columnName = "Column1";
+                                 valuesList = string.Join(",", dataGridView2.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells[columnName].Value?.ToString() ?? "")));
                                 command.Parameters.AddWithValue("@K", valuesList);
                                 int rowsAffected = command.ExecuteNonQuery();
                                 try
@@ -214,15 +221,43 @@ namespace Restuarant_App
                                                 Document document = new Document();
                                                 PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                                                 document.Open();
-                                                Paragraph title = new Paragraph("Restaurant Management System");
+                                                Paragraph restaurantInfo = new Paragraph();
+                                                restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                                                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("D:\\SEMESTER 5\\SE LAB\\Developer\\Project\\Git Project\\Restuarant App\\Restuarant App\\Resources\\Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png");
+                                                logo.ScalePercent(2f);
+                                                restaurantInfo.Add(logo);
+                                                restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                                                document.Add(restaurantInfo);
+                                                document.Add(new Paragraph("\n"));
+                                                LineSeparator line = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                                document.Add(line);
+                                                Paragraph restaurantName = new Paragraph("Restaurant Management System");
+                                                restaurantName.Alignment = Element.ALIGN_CENTER;
+                                                restaurantName.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+                                                document.Add(restaurantName);
+
+                                                Paragraph title = new Paragraph("Where Food Dreams Come True !");
                                                 title.Alignment = Element.ALIGN_CENTER;
+                                                title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY);
                                                 document.Add(title);
+                                                Paragraph restaurantAddress = new Paragraph("Johar Town, A-3 Block, Lahore");
+                                                restaurantAddress.Alignment = Element.ALIGN_CENTER;
+                                                restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+                                                document.Add(restaurantAddress);
+                                                Paragraph heading = new Paragraph("Customer Order Report");
+                                                heading.Alignment = Element.ALIGN_CENTER;
+                                                heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
+                                                document.Add(heading);
+                                                document.Add(new Paragraph("\n"));
+                                                LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                                document.Add(line1);
+
                                                 document.Add(new Paragraph("\n"));
                                                 document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
                                                 document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
                                                 document.Add(new Paragraph("Report Type: Order Invoice"));
-                                                document.Add(new Paragraph("Status: Unpaid"));
-                                                document.Add(new Paragraph("User Type: Customer"));
+                                                document.Add(new Paragraph("Status: UnPaid"));
+                                                document.Add(new Paragraph("Generated By: Customer"));
 
                                                 document.Add(new Paragraph("\n"));
                                                 PdfPTable table = new PdfPTable(dataGridView2.Columns.Count);
@@ -289,7 +324,9 @@ namespace Restuarant_App
                         else
                         {
                             decimal amount = decimal.Parse(label7.Text);
-                            Payment M = new Payment(amount);
+                            string columnName = "Column1";
+                            string valuesList1 = string.Join(",", dataGridView2.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells[columnName].Value?.ToString() ?? "")));
+                            Payment M = new Payment(name,address, dataGridView2.Rows.Count,label7.Text,valuesList1,this);
                             M.Show();
 
                         }
@@ -325,6 +362,8 @@ namespace Restuarant_App
             label5.Text = totalPrice.ToString();
             decimal tax = (decimal.Parse(label5.Text)) * 0.16m;
             label7.Text = (int.Parse(label5.Text) + tax).ToString();
+            vvaluesList = string.Join(",", dataGridView2.Rows.Cast<DataGridViewRow>().Select(row => "1 " + (row.Cells["Column1"].Value?.ToString() ?? "")));
+
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)

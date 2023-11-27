@@ -16,10 +16,18 @@ namespace Restuarant_App
     public partial class Payment : Form
     {
         decimal amount;
-        public Payment(decimal A)
+        string name, address,ammount,list;
+        int quantity;
+        CCart C;
+        public Payment(string name,string address, int quantity ,string amount,string list, CCart C)
         {
-            InitializeComponent();      
-            this.amount = A;
+            InitializeComponent();
+            this.name = name;
+            this.quantity = quantity;
+            this.ammount= amount;
+            this.list= list;
+            this.address = address;
+            this.C= C;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -118,6 +126,9 @@ namespace Restuarant_App
                             if (charge.Paid)
                             {
                                 MessageBox.Show("Test Payment Successful!");
+                                this.Hide();
+                                CCart C = new CCart(name,address);
+                                C.PaymentSuccessfull(quantity,ammount, list,C);
                             }
                             else
                             {

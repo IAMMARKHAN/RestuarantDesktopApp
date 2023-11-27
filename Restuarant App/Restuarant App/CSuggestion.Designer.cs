@@ -205,7 +205,7 @@
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.Color.Green;
+            this.button3.BackColor = System.Drawing.Color.DarkSlateBlue;
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Impact", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

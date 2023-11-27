@@ -112,7 +112,7 @@ namespace Restuarant_App
         private void button3_Click(object sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
-            string buttonText = "Spanish";
+            string buttonText = "Continental";
             var con = Configuration.getInstance().getConnection();
             string query = "SELECT Id FROM categories WHERE Name = @categoryName";
             SqlCommand command = new SqlCommand(query, con);

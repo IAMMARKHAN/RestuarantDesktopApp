@@ -18,6 +18,7 @@ using System.Windows.Forms;
 using iTextSharp.text;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Crypto.Engines;
+using iTextSharp.text.pdf.draw;
 
 namespace Restuarant_App
 {
@@ -55,7 +56,7 @@ namespace Restuarant_App
 
             try
             {
-                string query = "SELECT Id, Name, CategoryId, Price, Size, Active FROM menu Where Active=@A";
+                string query = "SELECT Id, Name, CategoryId, Price, Size FROM menu Where Active=@A";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(query, con);
                 command.Parameters.AddWithValue("@A", true);
@@ -438,13 +439,41 @@ namespace Restuarant_App
                                 Document document = new Document();
                                 PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                                 document.Open();
-                                Paragraph title = new Paragraph("Restaurant Management System");
+                                Paragraph restaurantInfo = new Paragraph();
+                                restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("D:\\SEMESTER 5\\SE LAB\\Developer\\Project\\Git Project\\Restuarant App\\Restuarant App\\Resources\\Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png");
+                                logo.ScalePercent(2f);
+                                restaurantInfo.Add(logo);
+                                restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                                document.Add(restaurantInfo);
+                                document.Add(new Paragraph("\n"));
+                                LineSeparator line = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                document.Add(line);
+                                Paragraph restaurantName = new Paragraph("Restaurant Management System");
+                                restaurantName.Alignment = Element.ALIGN_CENTER;
+                                restaurantName.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+                                document.Add(restaurantName);
+
+                                Paragraph title = new Paragraph("Where Food Dreams Come True !");
                                 title.Alignment = Element.ALIGN_CENTER;
+                                title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY);
                                 document.Add(title);
+                                Paragraph restaurantAddress = new Paragraph("Johar Town, A-3 Block, Lahore");
+                                restaurantAddress.Alignment = Element.ALIGN_CENTER;
+                                restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+                                document.Add(restaurantAddress);
+                                Paragraph heading = new Paragraph("Order History Report");
+                                heading.Alignment = Element.ALIGN_CENTER;
+                                heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
+                                document.Add(heading);
+                                document.Add(new Paragraph("\n"));
+                                LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                document.Add(line1);
+
                                 document.Add(new Paragraph("\n"));
                                 document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
                                 document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
-                                document.Add(new Paragraph("Report Type: Bill"));
+                                document.Add(new Paragraph("Report Type: Order Invoice"));
                                 document.Add(new Paragraph("Status: Paid"));
                                 document.Add(new Paragraph("Printed By: Manager"));
 
@@ -553,15 +582,44 @@ namespace Restuarant_App
                                 Document document = new Document();
                                 PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                                 document.Open();
-                                Paragraph title = new Paragraph("Restaurant Management System");
+                                Paragraph restaurantInfo = new Paragraph();
+                                restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                                iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("D:\\SEMESTER 5\\SE LAB\\Developer\\Project\\Git Project\\Restuarant App\\Restuarant App\\Resources\\Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png");
+                                logo.ScalePercent(2f);
+                                restaurantInfo.Add(logo);
+                                restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                                document.Add(restaurantInfo);
+                                document.Add(new Paragraph("\n"));
+                                LineSeparator line = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                document.Add(line);
+                                Paragraph restaurantName = new Paragraph("Restaurant Management System");
+                                restaurantName.Alignment = Element.ALIGN_CENTER;
+                                restaurantName.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+                                document.Add(restaurantName);
+
+                                Paragraph title = new Paragraph("Where Food Dreams Come True !");
                                 title.Alignment = Element.ALIGN_CENTER;
+                                title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY);
                                 document.Add(title);
+                                Paragraph restaurantAddress = new Paragraph("Johar Town, A-3 Block, Lahore");
+                                restaurantAddress.Alignment = Element.ALIGN_CENTER;
+                                restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+                                document.Add(restaurantAddress);
+                                Paragraph heading = new Paragraph("Order History Report");
+                                heading.Alignment = Element.ALIGN_CENTER;
+                                heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
+                                document.Add(heading);
+                                document.Add(new Paragraph("\n"));
+                                LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                document.Add(line1);
+
                                 document.Add(new Paragraph("\n"));
                                 document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
                                 document.Add(new Paragraph($"Time: {DateTime.Now.ToShortTimeString()}"));
-                                document.Add(new Paragraph("Report Type: Bill"));
-                                document.Add(new Paragraph("Status: UnPaid"));
+                                document.Add(new Paragraph("Report Type: Order Invoice"));
+                                document.Add(new Paragraph("Status: Paid"));
                                 document.Add(new Paragraph("Printed By: Manager"));
+
                                 document.Add(new Paragraph("\n"));
                                 PdfPTable table = new PdfPTable(dataGridView1.Columns.Count);
                                 for (int i = 0; i < dataGridView1.Columns.Count; i++)

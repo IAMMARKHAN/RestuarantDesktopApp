@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using db2021finalprojectg_9;
 using System.Diagnostics;
+using iTextSharp.text.pdf.draw;
 
 namespace Restuarant_App
 {
@@ -39,52 +40,92 @@ namespace Restuarant_App
                     Document document = new Document();
                     PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                     document.Open();
-                    Paragraph title = new Paragraph("Restaurant Management System");
+                    Paragraph restaurantInfo = new Paragraph();
+                    restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                    iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("D:\\SEMESTER 5\\SE LAB\\Developer\\Project\\Git Project\\Restuarant App\\Restuarant App\\Resources\\Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png");
+                    logo.ScalePercent(2f);
+                    restaurantInfo.Add(logo);
+                    restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(restaurantInfo);
+                    document.Add(new Paragraph("\n"));
+                    LineSeparator line = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                    document.Add(line);
+                    Paragraph restaurantName = new Paragraph("Restaurant Management System");
+                    restaurantName.Alignment = Element.ALIGN_CENTER;
+                    restaurantName.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+                    document.Add(restaurantName);
+
+                    Paragraph title = new Paragraph("Where Food Dreams Come True !");
                     title.Alignment = Element.ALIGN_CENTER;
+                    title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY);
                     document.Add(title);
+                    Paragraph restaurantAddress = new Paragraph("Johar Town, A-3 Block, Lahore");
+                    restaurantAddress.Alignment = Element.ALIGN_CENTER;
+                    restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+                    document.Add(restaurantAddress);
                     Paragraph heading = new Paragraph("Order History Report");
                     heading.Alignment = Element.ALIGN_CENTER;
+                    heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
                     document.Add(heading);
                     document.Add(new Paragraph("\n"));
-                    PdfPTable timeAndDayTable = new PdfPTable(2);
-                    timeAndDayTable.WidthPercentage = 100;
-                    PdfPCell timeCell = new PdfPCell(new Phrase($"Time: {DateTime.Now.ToString("hh:mm tt")}"));
-                    timeCell.HorizontalAlignment = Element.ALIGN_LEFT;
-                    timeAndDayTable.AddCell(timeCell);
-                    PdfPCell dayCell = new PdfPCell(new Phrase($"Day: {DateTime.Now.ToString("dddd, MMMM dd, yyyy")}"));
-                    dayCell.HorizontalAlignment = Element.ALIGN_RIGHT;
-                    timeAndDayTable.AddCell(dayCell);
-                    document.Add(timeAndDayTable);
+                    LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                    document.Add(line1);
                     document.Add(new Paragraph("\n"));
-                    DataTable staffData = FetchOrderTableDataFromDatabase();
-                    if (staffData != null && staffData.Rows.Count > 0)
+
+
+                    Paragraph timeAndDayParagraph = new Paragraph();
+                    timeAndDayParagraph.Alignment = Element.ALIGN_CENTER;
+
+                    Chunk timeChunk = new Chunk($"Time: {DateTime.Now.ToString("hh:mm tt")}");
+                    timeAndDayParagraph.Add(timeChunk);
+
+                    Chunk separatorChunk = new Chunk("   |   ", FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.DARK_GRAY));
+                    separatorChunk.SetAnchor(new Uri("about:blank")); 
+                    timeAndDayParagraph.Add(separatorChunk);
+
+                    Chunk dayChunk = new Chunk($"Day: {DateTime.Now.ToString("dddd, MMMM dd, yyyy")}");
+                    timeAndDayParagraph.Add(dayChunk);
+
+                    document.Add(timeAndDayParagraph);
+                    document.Add(new Paragraph("\n"));
+
+
+
+
+
+                    DataTable orderData = FetchOrderTableDataFromDatabase();
+                    if (orderData != null && orderData.Rows.Count > 0)
                     {
-                        PdfPTable table = new PdfPTable(staffData.Columns.Count);
+                        PdfPTable table = new PdfPTable(orderData.Columns.Count);
                         table.WidthPercentage = 100;
-                        foreach (DataColumn column in staffData.Columns)
+
+                        foreach (DataColumn column in orderData.Columns)
                         {
                             PdfPCell headerCell = new PdfPCell(new Phrase(column.ColumnName));
-                            headerCell.BackgroundColor = BaseColor.DARK_GRAY;
+                            headerCell.BackgroundColor = BaseColor.LIGHT_GRAY;
                             table.AddCell(headerCell);
                         }
-                        foreach (DataRow row in staffData.Rows)
+
+                        foreach (DataRow row in orderData.Rows)
                         {
                             foreach (object item in row.ItemArray)
                             {
                                 table.AddCell(item.ToString());
                             }
                         }
+
                         document.Add(table);
                         document.Close();
-                        MessageBox.Show("Pdf Saved Successfully !", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Pdf Saved Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
-                        MessageBox.Show("No Data Found !", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("No Data Found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
-            
+
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -102,23 +143,55 @@ namespace Restuarant_App
                     Document document = new Document();
                     PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                     document.Open();
-                    Paragraph title = new Paragraph("Restaurant Management System");
+                    Paragraph restaurantInfo = new Paragraph();
+                    restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                    iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("D:\\SEMESTER 5\\SE LAB\\Developer\\Project\\Git Project\\Restuarant App\\Restuarant App\\Resources\\Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png");
+                    logo.ScalePercent(2f);
+                    restaurantInfo.Add(logo);
+                    restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(restaurantInfo);
+                    document.Add(new Paragraph("\n"));
+                    LineSeparator line = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                    document.Add(line);
+                    Paragraph restaurantName = new Paragraph("Restaurant Management System");
+                    restaurantName.Alignment = Element.ALIGN_CENTER;
+                    restaurantName.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+                    document.Add(restaurantName);
+
+                    Paragraph title = new Paragraph("Where Food Dreams Come True !");
                     title.Alignment = Element.ALIGN_CENTER;
+                    title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY);
                     document.Add(title);
-                    Paragraph heading = new Paragraph("Active Staff Report");
+                    Paragraph restaurantAddress = new Paragraph("Johar Town, A-3 Block, Lahore");
+                    restaurantAddress.Alignment = Element.ALIGN_CENTER;
+                    restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+                    document.Add(restaurantAddress);
+                    Paragraph heading = new Paragraph("Order History Report");
                     heading.Alignment = Element.ALIGN_CENTER;
+                    heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
                     document.Add(heading);
                     document.Add(new Paragraph("\n"));
-                    PdfPTable timeAndDayTable = new PdfPTable(2);
-                    timeAndDayTable.WidthPercentage = 100;
-                    PdfPCell timeCell = new PdfPCell(new Phrase($"Time: {DateTime.Now.ToString("hh:mm tt")}"));
-                    timeCell.HorizontalAlignment = Element.ALIGN_LEFT;
-                    timeAndDayTable.AddCell(timeCell);
-                    PdfPCell dayCell = new PdfPCell(new Phrase($"Day: {DateTime.Now.ToString("dddd, MMMM dd, yyyy")}"));
-                    dayCell.HorizontalAlignment = Element.ALIGN_RIGHT;
-                    timeAndDayTable.AddCell(dayCell);
-                    document.Add(timeAndDayTable);
+                    LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                    document.Add(line1);
                     document.Add(new Paragraph("\n"));
+
+
+                    Paragraph timeAndDayParagraph = new Paragraph();
+                    timeAndDayParagraph.Alignment = Element.ALIGN_CENTER;
+
+                    Chunk timeChunk = new Chunk($"Time: {DateTime.Now.ToString("hh:mm tt")}");
+                    timeAndDayParagraph.Add(timeChunk);
+
+                    Chunk separatorChunk = new Chunk("   |   ", FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.DARK_GRAY));
+                    separatorChunk.SetAnchor(new Uri("about:blank"));
+                    timeAndDayParagraph.Add(separatorChunk);
+
+                    Chunk dayChunk = new Chunk($"Day: {DateTime.Now.ToString("dddd, MMMM dd, yyyy")}");
+                    timeAndDayParagraph.Add(dayChunk);
+
+                    document.Add(timeAndDayParagraph);
+                    document.Add(new Paragraph("\n"));
+
                     DataTable staffData = FetchStaffTableDataFromDatabase();
                     if (staffData != null && staffData.Rows.Count > 0)
                     {
@@ -154,6 +227,7 @@ namespace Restuarant_App
         private void button4_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure you want to print this report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
             if (result == DialogResult.Yes)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -166,41 +240,82 @@ namespace Restuarant_App
                     Document document = new Document();
                     PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                     document.Open();
-                    Paragraph title = new Paragraph("Restaurant Management System");
+                    Paragraph restaurantInfo = new Paragraph();
+                    restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                    iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("D:\\SEMESTER 5\\SE LAB\\Developer\\Project\\Git Project\\Restuarant App\\Restuarant App\\Resources\\Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png");
+                    logo.ScalePercent(2f);
+                    restaurantInfo.Add(logo);
+                    restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(restaurantInfo);
+                    document.Add(new Paragraph("\n"));
+                    LineSeparator line = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                    document.Add(line);
+                    Paragraph restaurantName = new Paragraph("Restaurant Management System");
+                    restaurantName.Alignment = Element.ALIGN_CENTER;
+                    restaurantName.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+                    document.Add(restaurantName);
+
+                    Paragraph title = new Paragraph("Where Food Dreams Come True !");
                     title.Alignment = Element.ALIGN_CENTER;
+                    title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY);
                     document.Add(title);
-                    Paragraph heading = new Paragraph("Active Menu Report");
+                    Paragraph restaurantAddress = new Paragraph("Johar Town, A-3 Block, Lahore");
+                    restaurantAddress.Alignment = Element.ALIGN_CENTER;
+                    restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+                    document.Add(restaurantAddress);
+                    Paragraph heading = new Paragraph("Order History Report");
                     heading.Alignment = Element.ALIGN_CENTER;
+                    heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
                     document.Add(heading);
                     document.Add(new Paragraph("\n"));
-                    PdfPTable timeAndDayTable = new PdfPTable(2);
-                    timeAndDayTable.WidthPercentage = 100;
-                    PdfPCell timeCell = new PdfPCell(new Phrase($"Time: {DateTime.Now.ToString("hh:mm tt")}"));
-                    timeCell.HorizontalAlignment = Element.ALIGN_LEFT;
-                    timeAndDayTable.AddCell(timeCell);
-                    PdfPCell dayCell = new PdfPCell(new Phrase($"Day: {DateTime.Now.ToString("dddd, MMMM dd, yyyy")}"));
-                    dayCell.HorizontalAlignment = Element.ALIGN_RIGHT;
-                    timeAndDayTable.AddCell(dayCell);
-                    document.Add(timeAndDayTable);
+                    LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                    document.Add(line1);
                     document.Add(new Paragraph("\n"));
-                    DataTable staffData = FetchMenuTableDataFromDatabase();
-                    if (staffData != null && staffData.Rows.Count > 0)
+
+
+                    Paragraph timeAndDayParagraph = new Paragraph();
+                    timeAndDayParagraph.Alignment = Element.ALIGN_CENTER;
+
+                    Chunk timeChunk = new Chunk($"Time: {DateTime.Now.ToString("hh:mm tt")}");
+                    timeAndDayParagraph.Add(timeChunk);
+
+                    Chunk separatorChunk = new Chunk("   |   ", FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.DARK_GRAY));
+                    separatorChunk.SetAnchor(new Uri("about:blank"));
+                    timeAndDayParagraph.Add(separatorChunk);
+
+                    Chunk dayChunk = new Chunk($"Day: {DateTime.Now.ToString("dddd, MMMM dd, yyyy")}");
+                    timeAndDayParagraph.Add(dayChunk);
+
+                    document.Add(timeAndDayParagraph);
+                    document.Add(new Paragraph("\n"));
+
+                    DataTable menuData = FetchMenuTableDataFromDatabase();
+                    if (menuData != null && menuData.Rows.Count > 0)
                     {
-                        PdfPTable table = new PdfPTable(staffData.Columns.Count);
+                        PdfPTable table = new PdfPTable(menuData.Columns.Count - 1); 
                         table.WidthPercentage = 100;
-                        foreach (DataColumn column in staffData.Columns)
+
+                        foreach (DataColumn column in menuData.Columns)
                         {
-                            PdfPCell headerCell = new PdfPCell(new Phrase(column.ColumnName));
-                            headerCell.BackgroundColor = BaseColor.DARK_GRAY;
-                            table.AddCell(headerCell);
-                        }
-                        foreach (DataRow row in staffData.Rows)
-                        {
-                            foreach (object item in row.ItemArray)
+                            if (column.ColumnName != "Image")  
                             {
-                                table.AddCell(item.ToString());
+                                PdfPCell headerCell = new PdfPCell(new Phrase(column.ColumnName));
+                                headerCell.BackgroundColor = BaseColor.DARK_GRAY;
+                                table.AddCell(headerCell);
                             }
                         }
+
+                        foreach (DataRow row in menuData.Rows)
+                        {
+                            foreach (DataColumn column in menuData.Columns)
+                            {
+                                if (column.ColumnName != "Image")  
+                                {
+                                    table.AddCell(row[column].ToString());
+                                }
+                            }
+                        }
+
                         document.Add(table);
                         document.Close();
                         MessageBox.Show("Pdf Saved Successfully !", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -211,12 +326,15 @@ namespace Restuarant_App
                     }
                 }
             }
-           
+
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Are you sure you want to print this report?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
             if (result == DialogResult.Yes)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -229,42 +347,108 @@ namespace Restuarant_App
                     Document document = new Document();
                     PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(savePath, FileMode.Create));
                     document.Open();
-                    Paragraph title = new Paragraph("Restaurant Management System");
+                    Paragraph restaurantInfo = new Paragraph();
+                    restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                    iTextSharp.text.Image logo = iTextSharp.text.Image.GetInstance("D:\\SEMESTER 5\\SE LAB\\Developer\\Project\\Git Project\\Restuarant App\\Restuarant App\\Resources\\Restaurant-logo-with-chef-drawing-template-on-transparent-background-PNG.png");
+                    logo.ScalePercent(2f);
+                    restaurantInfo.Add(logo);
+                    restaurantInfo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(restaurantInfo);
+                    document.Add(new Paragraph("\n"));
+                    LineSeparator line = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                    document.Add(line);
+                    Paragraph restaurantName = new Paragraph("Restaurant Management System");
+                    restaurantName.Alignment = Element.ALIGN_CENTER;
+                    restaurantName.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+                    document.Add(restaurantName);
+
+                    Paragraph title = new Paragraph("Where Food Dreams Come True !");
                     title.Alignment = Element.ALIGN_CENTER;
+                    title.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.DARK_GRAY);
                     document.Add(title);
-                    Paragraph heading = new Paragraph("Dine In History Report");
+                    Paragraph restaurantAddress = new Paragraph("Johar Town, A-3 Block, Lahore");
+                    restaurantAddress.Alignment = Element.ALIGN_CENTER;
+                    restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+                    document.Add(restaurantAddress);
+                    Paragraph heading = new Paragraph("Order History Report");
                     heading.Alignment = Element.ALIGN_CENTER;
+                    heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
                     document.Add(heading);
                     document.Add(new Paragraph("\n"));
-                    PdfPTable timeAndDayTable = new PdfPTable(2);
-                    timeAndDayTable.WidthPercentage = 100;
-                    PdfPCell timeCell = new PdfPCell(new Phrase($"Time: {DateTime.Now.ToString("hh:mm tt")}"));
-                    timeCell.HorizontalAlignment = Element.ALIGN_LEFT;
-                    timeAndDayTable.AddCell(timeCell);
-                    PdfPCell dayCell = new PdfPCell(new Phrase($"Day: {DateTime.Now.ToString("dddd, MMMM dd, yyyy")}"));
-                    dayCell.HorizontalAlignment = Element.ALIGN_RIGHT;
-                    timeAndDayTable.AddCell(dayCell);
-                    document.Add(timeAndDayTable);
+                    LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                    document.Add(line1);
                     document.Add(new Paragraph("\n"));
-                    DataTable staffData = FetchDineInTableDataFromDatabase();
-                    if (staffData != null && staffData.Rows.Count > 0)
+
+
+                    Paragraph timeAndDayParagraph = new Paragraph();
+                    timeAndDayParagraph.Alignment = Element.ALIGN_CENTER;
+
+                    Chunk timeChunk = new Chunk($"Time: {DateTime.Now.ToString("hh:mm tt")}");
+                    timeAndDayParagraph.Add(timeChunk);
+
+                    Chunk separatorChunk = new Chunk("   |   ", FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.DARK_GRAY));
+                    separatorChunk.SetAnchor(new Uri("about:blank"));
+                    timeAndDayParagraph.Add(separatorChunk);
+
+                    Chunk dayChunk = new Chunk($"Day: {DateTime.Now.ToString("dddd, MMMM dd, yyyy")}");
+                    timeAndDayParagraph.Add(dayChunk);
+
+                    document.Add(timeAndDayParagraph);
+                    document.Add(new Paragraph("\n"));
+
+
+                    DataTable ordersData = FetchOrdersTableDataFromDatabase();
+
+                    if (ordersData != null && ordersData.Rows.Count > 0)
                     {
-                        PdfPTable table = new PdfPTable(staffData.Columns.Count);
-                        table.WidthPercentage = 100;
-                        foreach (DataColumn column in staffData.Columns)
+                        Dictionary<DateTime, int> salesCountByDay = new Dictionary<DateTime, int>();
+
+                        foreach (DataRow orderRow in ordersData.Rows)
                         {
-                            PdfPCell headerCell = new PdfPCell(new Phrase(column.ColumnName));
-                            headerCell.BackgroundColor = BaseColor.DARK_GRAY;
-                            table.AddCell(headerCell);
-                        }
-                        foreach (DataRow row in staffData.Rows)
-                        {
-                            foreach (object item in row.ItemArray)
+                            if (orderRow["CreatedAt"] != DBNull.Value && orderRow["CreatedAt"] != null)
                             {
-                                table.AddCell(item.ToString());
+                                DateTime orderDate = ((DateTime)orderRow["CreatedAt"]).Date;
+
+                                if (salesCountByDay.ContainsKey(orderDate))
+                                    salesCountByDay[orderDate]++;
+                                else
+                                    salesCountByDay[orderDate] = 1;
                             }
                         }
-                        document.Add(table);
+
+                        PdfPTable salesTable = new PdfPTable(4);
+                        salesTable.WidthPercentage = 100;
+
+                        PdfPCell dateHeader = new PdfPCell(new Phrase("Date"));
+                        dateHeader.BackgroundColor = BaseColor.DARK_GRAY;
+                        salesTable.AddCell(dateHeader);
+
+                        PdfPCell dayHeader = new PdfPCell(new Phrase("Day"));
+                        dayHeader.BackgroundColor = BaseColor.DARK_GRAY;
+                        salesTable.AddCell(dayHeader);
+
+                        PdfPCell salesCountHeader = new PdfPCell(new Phrase("Sales Count"));
+                        salesCountHeader.BackgroundColor = BaseColor.DARK_GRAY;
+                        salesTable.AddCell(salesCountHeader);
+
+                        PdfPCell statusHeader = new PdfPCell(new Phrase("Status"));
+                        statusHeader.BackgroundColor = BaseColor.DARK_GRAY;
+                        salesTable.AddCell(statusHeader);
+
+                        foreach (var entry in salesCountByDay)
+                        {
+                            DateTime date = entry.Key;
+                            string day = date.ToString("dddd");
+                            int salesCount = entry.Value;
+                            string status = (salesCount > 5) ? "Productive Day" : "Average Day";
+
+                            salesTable.AddCell(date.ToString("yyyy-MM-dd"));
+                            salesTable.AddCell(day);
+                            salesTable.AddCell(salesCount.ToString());
+                            salesTable.AddCell(status);
+                        }
+
+                        document.Add(salesTable);
                         document.Close();
                         MessageBox.Show("Pdf Saved Successfully !", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -274,10 +458,33 @@ namespace Restuarant_App
                     }
                 }
             }
-            else
-            {
-            }
+
+
+
+
         }
+       
+
+        private DataTable FetchOrdersTableDataFromDatabase()
+        {
+            DataTable ordersData = new DataTable();
+
+            try
+            {
+                string query = "SELECT * FROM [restuarant].[dbo].[orders]";
+                var con = Configuration.getInstance().getConnection();
+                SqlCommand command = new SqlCommand(query, con);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(ordersData);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error fetching orders data: " + ex.Message);
+            }
+
+            return ordersData;
+        }
+
 
         private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {

@@ -92,7 +92,7 @@
             this.button4.Size = new System.Drawing.Size(389, 144);
             this.button4.TabIndex = 10;
             this.button4.TabStop = false;
-            this.button4.Text = "Menu List Report";
+            this.button4.Text = "Menu Items Report";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -109,7 +109,7 @@
             this.button2.Size = new System.Drawing.Size(393, 144);
             this.button2.TabIndex = 8;
             this.button2.TabStop = false;
-            this.button2.Text = "Dine In Orders Report";
+            this.button2.Text = "Daily Sales Report";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -143,7 +143,7 @@
             this.button3.Size = new System.Drawing.Size(393, 143);
             this.button3.TabIndex = 9;
             this.button3.TabStop = false;
-            this.button3.Text = "Total Staff Report";
+            this.button3.Text = "Working Staff Report";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 

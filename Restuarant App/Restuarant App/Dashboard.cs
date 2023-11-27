@@ -36,7 +36,7 @@ namespace Restuarant_App
 
             var con2 = Configuration.getInstance().getConnection();
 
-            string sqlQuery1 = "SELECT Top 5 CreatedAt, COUNT(*) AS ReservationCount FROM tableReservation GROUP BY CreatedAt ORDER BY CreatedAt";
+            string sqlQuery1 = "SELECT TOP 5 CreatedAt, COUNT(*) AS ReservationCount FROM tableReservation GROUP BY CreatedAt ORDER BY CreatedAt DESC";
 
             SqlCommand cmd2 = new SqlCommand(sqlQuery1, con2);
 
@@ -59,7 +59,7 @@ namespace Restuarant_App
 
             var con = Configuration.getInstance().getConnection();
 
-            string sqlQuery = "SELECT Top 5 CONVERT(DATE, CreatedAt) AS OrderDate, COUNT(*) AS OrderCount FROM orders GROUP BY CONVERT(DATE, CreatedAt) ORDER BY OrderDate";
+            string sqlQuery = "SELECT TOP 5 CONVERT(DATE, CreatedAt) AS OrderDate, COUNT(*) AS OrderCount FROM orders GROUP BY CONVERT(DATE, CreatedAt) ORDER BY OrderDate DESC";
             SqlCommand cmd = new SqlCommand(sqlQuery, con);
             try
             {
@@ -125,12 +125,12 @@ namespace Restuarant_App
 
             try
             {
+                var con = Configuration.getInstance().getConnection();
+                string query = "SELECT COUNT(*) FROM dbo.[orders] WHERE CONVERT(date, CreatedAt) = CONVERT(date, GETDATE())";
+                SqlCommand command = new SqlCommand(query, con);
+                int orderCount = Convert.ToInt32(command.ExecuteScalar());
+                return orderCount;
 
-            var con = Configuration.getInstance().getConnection();
-            string query = "SELECT COUNT(*) FROM dbo.[categories]"; 
-            SqlCommand command = new SqlCommand(query, con);
-            int userCount = Convert.ToInt32(command.ExecuteScalar());
-            return userCount;
             }
             catch (Exception ex)
             {
@@ -226,6 +226,16 @@ namespace Restuarant_App
                 }
             }
             return "Unknown";
+        }
+
+        private void tableLayoutPanel7_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel5_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         public int GetOrdersCount()

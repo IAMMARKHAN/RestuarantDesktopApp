@@ -39,19 +39,35 @@ namespace Restuarant_App
             dataGridView2.DataSource = null;
             try
             {
-                string query = "SELECT CustomerId,CustomerName,Suggesstion,CreatedAt FROM suggestion";
+                string query = "SELECT CustomerName, Suggesstion, CreatedAt FROM suggestion";
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand command = new SqlCommand(query, con);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
-                dataGridView2.DataSource = dataTable;
+                dataTable.Columns.Add("Date", typeof(DateTime));
+                dataTable.Columns.Add("Time", typeof(TimeSpan));
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    DateTime createdAt = Convert.ToDateTime(row["CreatedAt"]);
+                    row["Date"] = createdAt.Date;
+                    row["Time"] = createdAt.TimeOfDay;
+                }
 
+                dataTable.Columns.Remove("CreatedAt");
+
+                dataGridView2.DataSource = dataTable;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

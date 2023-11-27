@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace Restuarant_App
         {
             NewMenu M = new NewMenu();
             M.ShowDialog();
-            PopulateDataGridView();
+            RefreshDataGridView();
         }
         public void PopulateDataGridView()
         {
@@ -45,14 +46,48 @@ namespace Restuarant_App
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
                 dataGridView1.DataSource = dataTable;
+
+                dataGridView1.Columns["Image"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns["Image"].DefaultCellStyle.NullValue = null; 
+
+                dataGridView1.CellFormatting += (sender, e) =>
+                {
+                    if (dataGridView1.Columns[e.ColumnIndex].Name == "Image" && e.Value != DBNull.Value)
+                    {
+                        byte[] imageBytes = (byte[])e.Value;
+                        Image image = ConvertBytesToImage(imageBytes);
+                        e.Value = ResizeImage(image, dataGridView1.Columns["Image"].Width-18, dataGridView1.Rows[e.RowIndex].Height);
+                        e.FormattingApplied = true;
+                    }
+                };
             }
             catch (Exception ex)
             {
                 LogExceptionToDatabase(ex);
                 MessageBox.Show("Error: " + ex.Message);
             }
-
         }
+
+        private Image ConvertBytesToImage(byte[] imageBytes)
+        {
+            using (MemoryStream ms = new MemoryStream(imageBytes))
+            {
+                return Image.FromStream(ms);
+            }
+        }
+
+        private Image ResizeImage(Image originalImage, int newWidth, int newHeight)
+        {
+            Bitmap newImage = new Bitmap(newWidth, newHeight);
+            using (Graphics g = Graphics.FromImage(newImage))
+            {
+                g.DrawImage(originalImage, 0, 0, newWidth, newHeight);
+            }
+            return newImage;
+        }
+
+
+
 
         private void LogExceptionToDatabase(Exception ex)
         {
@@ -121,7 +156,7 @@ namespace Restuarant_App
                         int rowsAffected = command.ExecuteNonQuery();
                         if (rowsAffected > 0)
                         {
-                            PopulateDataGridView();
+                            RefreshDataGridView();                        
                         }
                         else
                         {
@@ -148,11 +183,33 @@ namespace Restuarant_App
                 string size = Convert.ToString(dataGridView1.Rows[rowIndex].Cells["Size"].Value);
                 EditMenu E = new EditMenu(name, category, id,price,size);
                 E.ShowDialog();
-                PopulateDataGridView();
+                RefreshDataGridView();
             }
         }
+        private void RefreshDataGridView()
+        {
+            dataGridView1.DataSource = null;
+            DataTable updatedDataTable = RetrieveUpdatedData();
+            dataGridView1.DataSource = updatedDataTable;
+        }
+        private DataTable RetrieveUpdatedData()
+        {
+            string query = "SELECT * FROM menu";
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand command = new SqlCommand(query, con);
+            SqlDataAdapter adapter = new SqlDataAdapter(command);
+            DataTable dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            return dataTable;
+        }
+
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
