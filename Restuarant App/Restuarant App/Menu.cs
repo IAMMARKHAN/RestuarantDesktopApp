@@ -191,6 +191,25 @@ namespace Restuarant_App
             dataGridView1.DataSource = null;
             DataTable updatedDataTable = RetrieveUpdatedData();
             dataGridView1.DataSource = updatedDataTable;
+            SetImageColumnProperties();
+        }
+        private void SetImageColumnProperties()
+        {
+            if (dataGridView1.Columns.Contains("Image"))
+            {
+                dataGridView1.Columns["Image"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.Columns["Image"].DefaultCellStyle.NullValue = null;
+
+                dataGridView1.CellFormatting += (sender, e) =>
+                {
+                    if (dataGridView1.Columns[e.ColumnIndex].Name == "Image" && e.Value != DBNull.Value)
+                    {
+                        Bitmap image = (Bitmap)e.Value;
+                        e.Value = ResizeImage(image, dataGridView1.Columns["Image"].Width - 18, dataGridView1.Rows[e.RowIndex].Height);
+                        e.FormattingApplied = true;
+                    }
+                };
+            }
         }
         private DataTable RetrieveUpdatedData()
         {

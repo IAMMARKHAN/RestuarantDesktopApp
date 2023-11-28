@@ -75,10 +75,12 @@ namespace Restuarant_App
                         command22.Parameters.AddWithValue("@UpdatedAt", T.UpdatedAt);
                         command22.Parameters.AddWithValue("@Ad", T.Date);
                         command22.Parameters.AddWithValue("@F", T.Persons);
-
                         command22.Parameters.AddWithValue("@Suggestion1", T.Active);
                         command22.ExecuteNonQuery();
                         MessageBox.Show("Your Reservation Confrimed !");
+                        comboBox1.SelectedIndex = -1;
+                        comboBox2.SelectedIndex = -1;
+                        dateTimePicker1.Value = DateTime.Now;
                     }
                 }
                 else
