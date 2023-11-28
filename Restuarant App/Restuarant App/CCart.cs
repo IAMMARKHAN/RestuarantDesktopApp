@@ -122,13 +122,14 @@ namespace Restuarant_App
                                 restaurantAddress.Alignment = Element.ALIGN_CENTER;
                                 restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
                                 document.Add(restaurantAddress);
+                                document.Add(new Paragraph("\n"));
+                                LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                document.Add(line1);
+                                document.Add(new Paragraph("\n"));
                                 Paragraph heading = new Paragraph("Customer Order Report");
                                 heading.Alignment = Element.ALIGN_CENTER;
                                 heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
                                 document.Add(heading);
-                                document.Add(new Paragraph("\n"));
-                                LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
-                                document.Add(line1);
 
                                 document.Add(new Paragraph("\n"));
                                 document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
@@ -244,13 +245,14 @@ namespace Restuarant_App
                                                 restaurantAddress.Alignment = Element.ALIGN_CENTER;
                                                 restaurantAddress.Font = FontFactory.GetFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
                                                 document.Add(restaurantAddress);
+                                                document.Add(new Paragraph("\n"));
+                                                LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
+                                                document.Add(line1);
+                                                document.Add(new Paragraph("\n"));
                                                 Paragraph heading = new Paragraph("Customer Order Report");
                                                 heading.Alignment = Element.ALIGN_CENTER;
                                                 heading.Font = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12, BaseColor.DARK_GRAY);
                                                 document.Add(heading);
-                                                document.Add(new Paragraph("\n"));
-                                                LineSeparator line1 = new LineSeparator(1f, 100f, BaseColor.GRAY, Element.ALIGN_CENTER, -1);
-                                                document.Add(line1);
 
                                                 document.Add(new Paragraph("\n"));
                                                 document.Add(new Paragraph($"Date: {DateTime.Today.ToShortDateString()}"));
